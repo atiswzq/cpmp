@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrOnlineAnsrMapper" >
+  <resultMap id="AnsrBaseResultMap" type="cn.cofco.cpmp.entity.SplrOnlineAnsr" >
+    <id column="MID" property="mid" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" 		property="splrId" 		jdbcType="DECIMAL" />
+    <result column="SPLR_NAM" 		property="splrNam" 		jdbcType="VARCHAR" />
+    <result column="PROJ_ID" 		property="projId" 		jdbcType="DECIMAL" />
+    <result column="PROJ_LEADER" 	property="projLeader" 	jdbcType="VARCHAR" />
+    <result column="LEADER_ID" 		property="leaderId" 	jdbcType="DECIMAL" />
+  	<result column="QUE_CONTENT" 	property="queContent" 	jdbcType="VARCHAR" />
+    <result column="QUE_TIME" 		property="queTime" 		jdbcType="TIMESTAMP" />
+    <result column="ANSR_CONTENT" 	property="ansrContent" 	jdbcType="VARCHAR" />
+    <result column="ANSR_TIME" 		property="ansrTime" 	jdbcType="TIMESTAMP" />
+    <result column="OPEN_FLG" 		property="openFlg" 		jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrOnlineAnsr" >
+    <selectKey resultType="java.lang.Long" keyProperty="mid" order="BEFORE" >
+      select SPLR_ONLINE_ANSR_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ONLINE_ANSR(MID,SPLR_ID,SPLR_NAM, PROJ_ID, PROJ_LEADER,
+    								  LEADER_ID, QUE_CONTENT, QUE_TIME, ANSR_CONTENT, ANSR_TIME, OPEN_FLG)
+    values (#{mid,jdbcType=DECIMAL},#{splrId,jdbcType=DECIMAL}, #{splrNam,jdbcType=VARCHAR},
+    	    #{projId,jdbcType=DECIMAL}, #{projLeader,jdbcType=VARCHAR},#{leaderId,jdbcType=DECIMAL},
+    	    #{queContent,jdbcType=VARCHAR}, #{queTime,jdbcType=TIMESTAMP}, #{ansrContent,jdbcType=VARCHAR}, 
+    	    #{ansrTime,jdbcType=TIMESTAMP}, #{openFlg,jdbcType=DECIMAL})
+  </insert>
+  
+  <select id="findAnsrByMid" parameterType="Long" resultMap = "AnsrBaseResultMap">
+  	select * from T_SPLR_ONLINE_ANSR where MID=#{mid}
+  </select>
+  
+  <select id="findQueByMidSplrIdProjId" parameterType="Map" resultMap = "AnsrBaseResultMap">
+  	select * from T_SPLR_ONLINE_ANSR where MID=#{mid} AND SPLR_ID=#{splrId} AND PROJ_ID=#{projId} AND QUE_TIME is not null
+  </select>
+  
+  <select id="findBySplrIdAndProjId" parameterType="Map" resultMap = "AnsrBaseResultMap">
+  	select * from T_SPLR_ONLINE_ANSR 
+  	where SPLR_ID=#{splrId} 
+  	AND PROJ_ID=#{projId} 
+  	AND ANSR_TIME is not null
+  	order by mid desc
+  	
+  </select>
+  
+  <update id="update" parameterType="cn.cofco.cpmp.entity.SplrOnlineAnsr">
+  	update T_SPLR_ONLINE_ANSR 
+  		set 
+  			SPLR_ID=#{splrId,jdbcType=DECIMAL},
+  			SPLR_NAM=#{splrNam,jdbcType=VARCHAR},
+  			PROJ_ID=#{projId,jdbcType=DECIMAL},
+  			PROJ_LEADER=#{projLeader,jdbcType=VARCHAR},
+  			LEADER_ID=#{leaderId,jdbcType=DECIMAL},
+  			QUE_CONTENT=#{queContent,jdbcType=VARCHAR},
+  			QUE_TIME=#{queTime,jdbcType=TIMESTAMP},
+  			ANSR_CONTENT=#{ansrContent,jdbcType=VARCHAR},
+  			ANSR_TIME=#{ansrTime,jdbcType=TIMESTAMP},
+  			OPEN_FLG=#{openFlg,jdbcType=DECIMAL}
+  		where MID=#{mid,jdbcType=DECIMAL}
+  </update>
+  
+  <resultMap id="DtoBaseResultMap" type="cn.cofco.cpmp.splr.dto.SplrOnlineDto" >
+  	<result column="MID" 			property="mid" 			jdbcType="DECIMAL" />
+    <result column="SPLR_ID" 		property="splrId" 		jdbcType="DECIMAL" />
+    <result column="SPLR_NAM" 		property="splrNam" 		jdbcType="VARCHAR" />
+    <result column="PROJ_ID" 		property="projId" 		jdbcType="DECIMAL" />
+    <result column="QUE_CONTENT" 	property="queContent" 	jdbcType="VARCHAR" />
+    <result column="QUE_TIME" 		property="queTime" 		jdbcType="TIMESTAMP" />
+    <result column="ANSR_CONTENT" 	property="ansrContent" 	jdbcType="VARCHAR" />
+    <result column="ANSR_TIME" 		property="ansrTime" 	jdbcType="TIMESTAMP" />
+    <result column="OPEN_FLG" 		property="openFlg" 		jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="selectPageTemplate">
+  	SELECT
+  		MID,
+		SPLR_ID,
+		SPLR_NAM,
+		PROJ_ID,
+		QUE_CONTENT,
+		QUE_TIME,
+		ANSR_CONTENT,
+		ANSR_TIME,
+		OPEN_FLG
+	FROM
+		T_SPLR_ONLINE_ANSR
+	WHERE 1=1
+	  <if test="projId != null">
+		  AND PROJ_ID = #{projId}
+	  </if>
+	  <if test="splrId != null">
+		  AND SPLR_ID = #{splrId}
+	  </if>
+  </sql>
+  
+  <select id="findOpenContList" parameterType="Map" resultMap="DtoBaseResultMap">
+		    select A.* from (
+		    	<include refid="selectPageTemplate"/>
+		    	AND OPEN_FLG = 1
+		    ) A
+		    ORDER BY MID
+  </select>
+  
+  <select id="selectByCondition" parameterType="Map" resultMap="DtoBaseResultMap">
+		    select A.* from (
+		    	<include refid="selectPageTemplate"/>
+		    ) A
+		    ORDER BY MID
+  </select>
+  
+  <resultMap id="countBaseResultMap" type="cn.cofco.cpmp.splr.dto.SplrCountDto" >
+    <result column="SPLR_ID" 		property="splrId" 		jdbcType="DECIMAL" />
+    <result column="SPLR_NUM" 		property="splrNum" 		jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <select id="selectSplrCountByProjId" parameterType="Long" resultMap="countBaseResultMap">
+  	SELECT
+		splr_id,
+		COUNT (splr_id) splr_num
+	FROM
+		T_SPLR_ONLINE_ANSR
+	WHERE
+		PROJ_ID = #{projId}
+	GROUP BY
+		SPLR_ID,
+		PROJ_ID
+	ORDER BY
+		SPLR_ID
+  </select>
+  
+</mapper>

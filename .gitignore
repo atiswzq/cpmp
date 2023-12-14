@@ -1,0 +1,12 @@
+/out/
+/target/
+/.idea/
+rebel.xml
+*.iml
+*.log
+/classes/
+~$*
+__tst*
+/src/main/resources/generatorConfig.xml
+/src/main/resources/generator.properties
+logs/

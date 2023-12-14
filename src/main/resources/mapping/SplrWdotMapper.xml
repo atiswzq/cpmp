@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrWdotMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrWdot" >
+    <id column="APLY_ID" property="aplyId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" 			property="splrId" 			jdbcType="DECIMAL" />
+    <result column="WDOT_ORG" 			property="wdotOrg" 			jdbcType="VARCHAR" />
+    <result column="APLY_CTT" 			property="aplyCtt" 			jdbcType="VARCHAR" />
+    <result column="APLY_USR" 			property="aplyUsr" 			jdbcType="DECIMAL" />
+    <result column="APLY_TIM" 			property="aplyTim" 			jdbcType="TIMESTAMP" />
+    <result column="APLY_STS" 			property="aplySts" 			jdbcType="CHAR" />
+    <result column="WDOT_DEPT_ADT_MSG" 		property="wdotDeptAdtMsg" 		jdbcType="VARCHAR" />
+    <result column="WDOT_DEPT_ADT_STS" 		property="wdotDeptAdtSts" 		jdbcType="CHAR" />
+    <result column="WDOT_SPLR_MNG_ADT_MSG" 	property="wdotSplrMngAdtMsg" 	jdbcType="VARCHAR" />
+    <result column="WDOT_SPLR_MNG_ADT_STS" 	property="wdotSplrMngAdtSts" 	jdbcType="CHAR" />
+    <result column="SPLR_MNG_NAM" 		property="splrMngNam" 		jdbcType="VARCHAR" />
+    <result column="DEL_FLG" 			property="delFlg" 			jdbcType="CHAR" />
+    <result column="WDOT_TIM" 			property="wdotTim" 			jdbcType="TIMESTAMP" />
+    <result column="SPLR_STS" 			property="splrSts" 			jdbcType="CHAR" />
+    <result column="WDOT_MSG" 			property="wdotMsg" 			jdbcType="VARCHAR" />
+    <result column="DEPT_NAM"           property="deptNam"           jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, SPLR_ID, WDOT_ORG, APLY_CTT, APLY_USR, APLY_TIM, 
+    APLY_STS, WDOT_DEPT_ADT_MSG, WDOT_DEPT_ADT_STS, WDOT_SPLR_MNG_ADT_MSG, WDOT_SPLR_MNG_ADT_STS,
+    DEL_FLG, SPLR_MNG_NAM, WDOT_TIM, SPLR_STS, WDOT_MSG,DEPT_NAM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_WDOT
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectWdotList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_WDOT
+    order by APLY_ID
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_WDOT
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteBySplrIdAndOrg" parameterType="java.util.Map" >
+    delete from T_SPLR_WDOT
+    where SPLR_ID = #{splrId} AND WDOT_ORG = #{aplyOrg}
+  </delete>
+  
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrWdot" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_WDOT_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_WDOT (APLY_ID, SPLR_ID, WDOT_ORG, 
+      APLY_CTT, APLY_USR, APLY_TIM, 
+      APLY_STS, WDOT_DEPT_ADT_MSG, WDOT_DEPT_ADT_STS,
+      WDOT_SPLR_MNG_ADT_MSG, WDOT_SPLR_MNG_ADT_STS, DEL_FLG, 
+      SPLR_MNG_NAM, WDOT_TIM, SPLR_STS, WDOT_MSG,DEPT_NAM)
+    values (#{aplyId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{wdotOrg,jdbcType=VARCHAR}, 
+      #{aplyCtt,jdbcType=VARCHAR}, #{aplyUsr,jdbcType=DECIMAL}, #{aplyTim,jdbcType=TIMESTAMP}, 
+      #{aplySts,jdbcType=CHAR}, #{wdotDeptAdtMsg,jdbcType=VARCHAR}, #{wdotDeptAdtSts,jdbcType=CHAR}, 
+      #{wdotSplrMngAdtMsg,jdbcType=VARCHAR}, #{wdotSplrMngAdtSts,jdbcType=CHAR},
+      #{delFlg,jdbcType=CHAR}, #{splrMngNam,jdbcType=VARCHAR} , 
+      #{wdotTim,jdbcType=TIMESTAMP}, #{splrSts,jdbcType=CHAR}, #{wdotMsg,jdbcType=VARCHAR},
+      #{deptNam,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrWdot" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_WDOT_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_WDOT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      APLY_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="wdotOrg != null" >
+        WDOT_ORG,
+      </if>
+      <if test="aplyCtt != null" >
+        APLY_CTT,
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR,
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM,
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS,
+      </if>
+      <if test="wdotDeptAdtMsg != null" >
+        WDOT_DEPT_ADT_MSG,
+      </if>
+      <if test="wdotDeptAdtSts != null" >
+        WDOT_DEPT_ADT_STS,
+      </if>
+      <if test="wdotSplrMngAdtMsg != null" >
+        WDOT_SPLR_MNG_ADT_MSG,
+      </if>
+      <if test="wdotSplrMngAdtSts != null" >
+        WDOT_SPLR_MNG_ADT_STS,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+      <if test="splrMngNam != null" >
+        SPLR_MNG_NAM,
+      </if>
+      <if test="splrSts != null" >
+        SPLR_STS,
+      </if>
+      <if test="wdotMsg != null" >
+        WDOT_MSG,
+      </if>
+      <if test="wdotTim != null" >
+        WDOT_TIM,
+      </if>
+        <if test="deptNam != null" >
+            DEPT_NAM,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aplyId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="wdotOrg != null" >
+        #{wdotOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyCtt != null" >
+        #{aplyCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplySts != null" >
+        #{aplySts,jdbcType=CHAR},
+      </if>
+      <if test="wdotDeptAdtMsg != null" >
+        #{wdotDeptAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="wdotDeptAdtSts != null" >
+        #{wdotDeptAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="wdotSplrMngAdtMsg != null" >
+        #{wdotSplrMngAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="wdotSplrMngAdtSts != null" >
+        #{wdotSplrMngAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="splrMngNam != null" >
+        #{splrMngNam,jdbcType=VARCHAR},
+      </if>
+      <if test="splrSts != null" >
+        #{splrSts,jdbcType=CHAR},
+      </if>
+      <if test="wdotMsg != null" >
+        #{wdotMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="wdotTim != null" >
+        #{wdotTim,jdbcType=TIMESTAMP},
+      </if>
+        <if test="deptNam != null" >
+            #{deptNam,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrWdot" >
+    update T_SPLR_WDOT
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="wdotOrg != null" >
+        WDOT_ORG = #{wdotOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyCtt != null" >
+        APLY_CTT = #{aplyCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS = #{aplySts,jdbcType=CHAR},
+      </if>
+      <if test="wdotDeptAdtMsg != null" >
+        WDOT_DEPT_ADT_MSG = #{wdotDeptAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="wdotDeptAdtSts != null" >
+        WDOT_DEPT_ADT_STS = #{wdotDeptAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="wdotSplrMngAdtMsg != null" >
+        WDOT_SPLR_MNG_ADT_MSG = #{wdotSplrMngAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="wdotSplrMngAdtSts != null" >
+        WDOT_SPLR_MNG_ADT_STS = #{wdotSplrMngAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="splrMngNam != null" >
+        SPLR_MAN_NAM = #{splrMngNam,jdbcType=VARCHAR},
+      </if>
+      <if test="splrSts != null" >
+        SPLR_STS = #{splrSts,jdbcType=CHAR},
+      </if>
+      <if test="wdotMsg != null" >
+        WDOT_MSG = #{wdotMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="wdotTim != null" >
+        WDOT_TIM = #{wdotTim,jdbcType=TIMESTAMP},
+      </if>
+        <if test="deptNam != null" >
+            DEPT_NAM = #{deptNam,jdbcType=VARCHAR}
+        </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrWdot" >
+    update T_SPLR_WDOT
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      WDOT_ORG = #{wdotOrg,jdbcType=VARCHAR},
+      APLY_CTT = #{aplyCtt,jdbcType=VARCHAR},
+      APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      APLY_STS = #{aplySts,jdbcType=CHAR},
+      WDOT_DEPT_ADT_MSG = #{wdotDeptAdtMsg,jdbcType=VARCHAR},
+      WDOT_DEPT_ADT_STS = #{wdotDeptAdtSts,jdbcType=CHAR},
+      WDOT_SPLR_MNG_ADT_MSG = #{wdotSplrMngAdtMsg,jdbcType=VARCHAR},
+      WDOT_SPLR_MNG_ADT_STS = #{wdotSplrMngAdtSts,jdbcType=CHAR},
+      DEL_FLG = #{delFlg,jdbcType=CHAR},
+      SPLR_MAN_NAM = #{splrMngNam,jdbcType=VARCHAR},
+      SPLR_STS = #{splrSts,jdbcType=CHAR},
+      WDOT_MSG = #{wdotMsg,jdbcType=VARCHAR},
+      WDOT_TIM = #{wdotTim,jdbcType=TIMESTAMP},
+      DEPT_NAM = #{deptNam,jdbcType=VARCHAR}
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from T_SPLR_WDOT
+    where 1=1
+    <if test="splrId != null" >
+        AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+      </if>
+      <if test="wdotOrg != null" >
+        AND WDOT_ORG = #{wdotOrg,jdbcType=VARCHAR}
+      </if>
+      <if test="aplyCtt != null" >
+        AND APLY_CTT = #{aplyCtt,jdbcType=VARCHAR}
+      </if>
+      <if test="aplyUsr != null" >
+        AND APLY_USR = #{aplyUsr,jdbcType=DECIMAL}
+      </if>
+      <if test="aplyTim != null" >
+        AND APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP}
+      </if>
+      <if test="aplySts != null" >
+        AND APLY_STS = #{aplySts,jdbcType=CHAR}
+      </if>
+      <if test="wdotDeptAdtMsg != null" >
+        AND WDOT_DEPT_ADT_MSG = #{wdotDeptAdtMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="wdotDeptAdtSts != null" >
+        AND WDOT_DEPT_ADT_STS = #{wdotDeptAdtSts,jdbcType=CHAR}
+      </if>
+      <if test="wdotSplrMngAdtMsg != null" >
+        AND WDOT_SPLR_MNG_ADT_MSG = #{wdotSplrMngAdtMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="splrMngAdtSts != null" >
+        AND WDOT_SPLR_MNG_ADT_STS = #{wdotSplrMngAdtSts,jdbcType=CHAR}
+      </if>
+      <if test="delFlg != null" >
+        AND DEL_FLG = #{delFlg,jdbcType=CHAR}
+      </if>
+      <if test="splrMngNam != null" >
+        AND SPLR_MAN_NAM = #{splrMngNam,jdbcType=VARCHAR}
+      </if>
+      <if test="splrSts != null" >
+        AND SPLR_STS = #{splrSts,jdbcType=CHAR}
+      </if>
+      <if test="wdotMsg != null" >
+        AND WDOT_MSG = #{wdotMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="wdotTim != null" >
+        AND WDOT_TIM = #{wdotTim,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deptNam != null" >
+          AND DEPT_NAM = #{deptNam,jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  <resultMap id="WdotResultMap" type="cn.cofco.cpmp.splr.dto.SplrWdotDto" >
+  	<result column="APLY_ID" 			property="aplyId" 				jdbcType="DECIMAL" />
+  	<result column="RE_ACT_APLY_ID" 	property="reActAplyId" 			jdbcType="DECIMAL" />
+  	<result column="SPLR_ID" 			property="splrId" 				jdbcType="DECIMAL" />
+    <result column="FULL_NAM" 			property="splrFullName" 		jdbcType="VARCHAR" />
+    <result column="SHORT_NAM" 			property="splrShortName" 		jdbcType="VARCHAR" />
+    <result column="SPLR_LEVL" 			property="splrLevel" 			jdbcType="CHAR" />
+    <result column="APLY_STS" 			property="wdotSts" 				jdbcType="CHAR" />
+    <result column="APLY_CTT" 			property="aplyCtt" 				jdbcType="VARCHAR" />
+    <result column="WDOT_DEPT_ADT_MSG" 		property="wdotDeptAdtMsg" 		jdbcType="VARCHAR" />
+    <result column="WDOT_DEPT_ADT_STS" 		property="wdotDeptAdtSts" 		jdbcType="CHAR" />
+    <result column="WDOT_SPLR_MNG_ADT_MSG" 	property="wdotSplrMngAdtMsg" 	jdbcType="VARCHAR" />
+    <result column="WDOT_SPLR_MNG_ADT_STS" 	property="wdotSplrMngAdtSts" 	jdbcType="CHAR" />
+    <result column="RE_ACTIVE_CTT" 			property="reActiveCtt" 			jdbcType="VARCHAR" />
+    <result column="RE_ACT_DEPT_ADT_MSG" 	property="reActiveDeptAdtMsg" 	jdbcType="VARCHAR" />
+    <result column="RE_ACT_DEPT_ADT_STS" 	property="reActDeptAdtSts" 		jdbcType="CHAR" />
+    <result column="RE_ACT_SPLR_MNG_ADT_MSG" property="reActiveSplrMngAdtMsg" jdbcType="VARCHAR" />
+    <result column="RE_ACT_SPLR_MNG_ADT_STS" property="reActSplrMngAdtSts" jdbcType="CHAR" />
+      <result column="DEPT_NAM" property="deptNam" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="selectPageTemplate">
+  		SELECT
+			TSW.SPLR_ID,
+			TS.FULL_NAM,
+			TS.SHORT_NAM,
+			TS.SPLR_LEVL,
+			TSW.APLY_ID,
+			TSW.APLY_STS,
+			TSW.APLY_CTT,
+			TSW.WDOT_DEPT_ADT_MSG,
+			TSW.WDOT_SPLR_MNG_ADT_MSG,
+			TSW.WDOT_DEPT_ADT_STS,
+			TSW.WDOT_SPLR_MNG_ADT_STS,
+            TSW.DEPT_NAM,
+			TSWA.RE_ACT_APLY_ID,
+			TSWA.RE_ACTIVE_CTT,
+			TSWA.RE_ACT_DEPT_ADT_MSG,
+			TSWA.RE_ACT_DEPT_ADT_STS,
+			TSWA.RE_ACT_SPLR_MNG_ADT_MSG,
+			TSWA.RE_ACT_SPLR_MNG_ADT_STS
+		FROM
+			T_SPLR_WDOT TSW
+		LEFT JOIN T_SPLR TS ON TS.SPLR_ID = TSW.SPLR_ID 
+		LEFT JOIN T_SPLR_WDOT_RE_ACTIVE TSWA ON TSW.SPLR_ID = TSWA.SPLR_ID AND TSW.WDOT_ORG = TSWA.APLY_ORG
+            <if test="orgId!=null">
+                AND TSWA.aply_org = #{orgId}
+            </if>
+        AND TSWA.DEL_FLG ='0'
+		WHERE
+    		  <if test="splrName != null" >
+		        CONCAT(TS.FULL_NAM,TS.SHORT_NAM) like '%'||#{splrName}||'%'
+		        AND
+		      </if>
+		        TSW.DEL_FLG = '0'
+              <if test="orgId!=null">
+                  AND TSW.WDOT_ORG = #{orgId}
+              </if>
+  </sql>
+  
+  <select id="selectWdotsList" resultMap="WdotResultMap" parameterType="java.util.Map">
+	    select * from (
+		    select A.*, ROWNUM RN from (
+		    	<include refid="selectPageTemplate"/>
+		    	ORDER BY TSW.SPLR_ID DESC
+		    ) A
+		      where ROWNUM &lt;= #{end}
+		)  where RN &gt;= #{start}
+    	
+  </select>
+  
+  <select id="wdotListCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select
+        COUNT (1)
+        from (<include refid="selectPageTemplate"/>)
+  </select>
+  
+  
+  <resultMap id="splrListResultMap" type="cn.cofco.cpmp.splr.dto.SplrListDto" >
+  	<result column="SPLR_ID" 			property="splrId" 				jdbcType="DECIMAL" />
+    <result column="FULL_NAM" 			property="splrFullName" 		jdbcType="VARCHAR" />
+    <result column="SHORT_NAM" 			property="splrShortName" 		jdbcType="VARCHAR" />
+    <result column="SPLR_LEVL" 			property="splrLevel" 			jdbcType="CHAR" />
+    <result column="SPLR_STS" 			property="slprSts" 				jdbcType="CHAR" />
+    <result column="APLY_CTT" 			property="wdotCtt" 				jdbcType="VARCHAR" />
+    <result column="APLY_STS" 			property="aplySts" 				jdbcType="CHAR" />
+    <result column="APLY_ID" 			property="aplyId" 				jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="selectPageTemplate1">
+  	select * from (
+  		select 
+    	   TS.SPLR_ID, TS.FULL_NAM, TS.SHORT_NAM, TS.SPLR_LEVL, 
+    	   TS.SPLR_STS, TSW.APLY_CTT, TSW.APLY_STS, TSW.APLY_ID,TSW.DEL_FLG
+    	from T_SPLR TS, T_SPLR_WDOT TSW 
+    	WHERE TS.SPLR_ID = TSW.SPLR_ID(+) AND TSW.WDOT_ORG(+) = #{orgId} AND TS.SPLR_STS IN ('05') 
+    		  <if test="splrName != null" >
+		        AND CONCAT(TS.FULL_NAM,TS.SHORT_NAM) like '%'||#{splrName}||'%'
+		      </if>
+              AND TSW.DEL_FLG(+) = '0'
+		      ORDER BY TS.SPLR_ID
+		) b
+		where b.APLY_STS &lt;&gt; '04' OR b.APLY_STS IS NULL
+
+  </sql>
+  
+  <select id="selectSplrList" resultMap="splrListResultMap" parameterType="java.util.Map">
+	    select * from (
+		    select A.*, ROWNUM RN from (
+		    	<include refid="selectPageTemplate1"/>
+		    ) A
+		      where ROWNUM &lt;= #{end}
+		)  where RN &gt;= #{start}
+    	
+  </select>
+  
+  <select id="splrListCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select
+        COUNT (1)
+        from (<include refid="selectPageTemplate1"/>)
+  </select>
+</mapper>

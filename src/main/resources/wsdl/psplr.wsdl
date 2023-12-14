@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_CUSSUPPLIER_ACCESS_OUT" targetNamespace="http://www.cofco.com/bpm/customer_supplier" xmlns:p2="http://ibm.com/service/partner/" xmlns:p1="http://www.cofco.com/bpm/customer_supplier" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation/>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="OP_CusSupplier_Query"/>
+  <wsp:Policy wsu:Id="OP_CusSupplier_Apply"/>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ibm.com/service/partner/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://ibm.com/service/partner/">
+      <xsd:element name="getPartnerResponse" type="getPartnerResponse"/>
+      <xsd:element name="setPartner" type="setPartner"/>
+      <xsd:element name="getPartner" type="getPartner"/>
+      <xsd:element name="setPartnerResponse" type="setPartnerResponse"/>
+      <xsd:complexType name="coINFO">
+        <xsd:sequence>
+          <xsd:element name="CO_ACCOUNT_GROUP" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_COMPANY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_KEY_ACCOUNT" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_KEY_ACCOUNT_NO" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_MY_COMPANYCODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_REMARK1" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_REMARK2" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_REMARK3" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CO_REMARK4" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getPartnerResponse">
+        <xsd:sequence>
+          <xsd:element name="return" type="mdmPARTNER" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="bankINFO">
+        <xsd:sequence>
+          <xsd:element name="ACCOUNT_HOLDER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BANK_ACCOUNT" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BANK_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BANK_COUNTRY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BANK_NAME" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="DEFAULT" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="SWIFT_CODE" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="partnerRequest">
+        <xsd:sequence>
+          <xsd:element name="ACCOUNT_GROUP" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BP_CLASS" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BUSINESS_LICENSE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CREDIT_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="FULL_NAME" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="HAS_CREDIT_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="ORGANIZATION_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARTNER_NUMBER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="TAX_NUMBER" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="partnerResponse">
+        <xsd:sequence>
+          <xsd:element name="FLAG" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="MESSAGE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARTNER_ID" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARTNER_NUMBER" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="setPartner">
+        <xsd:sequence>
+          <xsd:element name="input" type="mdmPARTNER" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="uuid" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="getPartner">
+        <xsd:sequence>
+          <xsd:element name="input" type="partnerRequest" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="setPartnerResponse">
+        <xsd:sequence>
+          <xsd:element name="return" type="partnerResponse" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="mdmPARTNER">
+        <xsd:sequence>
+          <xsd:element name="ACCOUNT_GROUP" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="ACCOUNT_GROUP_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="ADDRESS" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BLACK_LIST" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BLACK_LIST_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BP_CLASS" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BP_CLASS_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BUSINESS_LICENSE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="BUSINESS_SCOPE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="banks" type="bankINFO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+          <xsd:element name="CITY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CITY_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CLASSIFICATION" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CLASSIFICATION_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="COMPANY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CONTROLLER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="COUNTRY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="COUNTRY_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CREATE_USER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CREATE_USER_CO" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="CREDIT_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="companys" type="coINFO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+          <xsd:element name="DISTRICT" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="DISTRICT_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="EMAIL" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="ENTERPRISE_NATURE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="ENTERPRISE_NATURE_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="FAX" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="FAX_EX" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="FULL_NAME" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="HAS_CREDIT_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="INDUSTRY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="INDUSTRY1" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="INDUSTRY1_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="INDUSTRY2" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="INDUSTRY2_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="IS_EXIST" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="IS_KEY_ACCOUNT" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="LEGAL_REPRESENTATIVE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="LEGAL_REPRESENTATIVE_ID" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="MOBILE_PHONE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="OLD_NUMBER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="ORGANIZATION_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARENT_COMPANY" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARENT_COMPANY_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARTNER_ID" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARTNER_NUMBER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="PARTNER_TYPE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="POST_CODE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="REGION" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="REGION_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="REGISTRATION_CAPITAL" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="REGISTRATION_DATE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="SHORT_NAME" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="SUPERIOR_GROUP" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="SUPERIOR_GROUP_DESC" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="TAX_NUMBER" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="TELEPHONE" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="TEL_EX" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="TRADING_PARTNER" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="p2.getPartnerIn">
+    <wsdl:documentation/>
+    <wsdl:part name="parameters" element="p2:getPartner"/>
+  </wsdl:message>
+  <wsdl:message name="p2.getPartnerOut">
+    <wsdl:documentation/>
+    <wsdl:part name="getPartnerResponse" element="p2:getPartnerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="p2.setPartnerIn">
+    <wsdl:documentation/>
+    <wsdl:part name="parameters" element="p2:setPartner"/>
+  </wsdl:message>
+  <wsdl:message name="p2.setPartnerOut">
+    <wsdl:documentation/>
+    <wsdl:part name="setPartnerResponse" element="p2:setPartnerResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="SI_CUSSUPPLIER_ACCESS_OUT">
+    <wsdl:documentation/>
+    <wsdl:operation name="CusSupplier_Query">
+      <wsdl:documentation/>
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_CusSupplier_Query"/>
+      </wsp:Policy>
+      <wsdl:input message="p1:p2.getPartnerIn"/>
+      <wsdl:output message="p1:p2.getPartnerOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CusSupplier_Apply">
+      <wsdl:documentation/>
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_CusSupplier_Apply"/>
+      </wsp:Policy>
+      <wsdl:input message="p1:p2.setPartnerIn"/>
+      <wsdl:output message="p1:p2.setPartnerOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SI_CUSSUPPLIER_ACCESS_OUTBinding" type="p1:SI_CUSSUPPLIER_ACCESS_OUT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    <wsdl:operation name="CusSupplier_Query">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CusSupplier_Apply">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SI_CUSSUPPLIER_ACCESS_OUTService">
+    <wsdl:port name="HTTP_Port" binding="p1:SI_CUSSUPPLIER_ACCESS_OUTBinding">
+      <soap:address location="http://hqpiamok01.cofco.com:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=YZ_CGPT&amp;receiverParty=&amp;receiverService=&amp;interface=SI_CUSSUPPLIER_ACCESS_OUT&amp;interfaceNamespace=http%3A%2F%2Fwww.cofco.com%2Fbpm%2Fcustomer_supplier" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:SI_CUSSUPPLIER_ACCESS_OUTBinding">
+      <soap:address location="https://hqpiamok01.cofco.com:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=YZ_CGPT&amp;receiverParty=&amp;receiverService=&amp;interface=SI_CUSSUPPLIER_ACCESS_OUT&amp;interfaceNamespace=http%3A%2F%2Fwww.cofco.com%2Fbpm%2Fcustomer_supplier" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

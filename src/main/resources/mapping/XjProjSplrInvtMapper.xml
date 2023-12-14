@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.XjProjSplrInvtMapper">
+    <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.XjProjSplrInvt">
+        <id column="ID" jdbcType="DECIMAL" property="id"/>
+        <result column="PROJ_ID" jdbcType="DECIMAL" property="projId"/>
+        <result column="SPLR_ID" jdbcType="DECIMAL" property="splrId"/>
+        <result column="SPLR_NAM" jdbcType="VARCHAR" property="splrNam"/>
+        <result column="BID_FLG" jdbcType="CHAR" property="bidFlg"/>
+        <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+        <result column="EFF_FLG" jdbcType="CHAR" property="effFlg"/>
+        <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr"/>
+        <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim"/>
+        <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr"/>
+        <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, PROJ_ID, SPLR_ID, SPLR_NAM, BID_FLG, MEMO, EFF_FLG, CRT_USR, CRT_TIM,
+    MOD_USR, MOD_TIM
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_XJ_PROJ_SPLR_INVT
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_XJ_PROJ_SPLR_INVT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="cn.cofco.cpmp.entity.XjProjSplrInvt">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+            select T_XJ_PROJ_SPLR_INVT_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ_SPLR_INVT (ID, PROJ_ID,
+        SPLR_ID, SPLR_NAM, BID_FLG,
+        MEMO, EFF_FLG, CRT_USR,
+        CRT_TIM, MOD_USR, MOD_TIM
+        )
+        values (#{id,jdbcType=DECIMAL}, #{projId,jdbcType=DECIMAL},
+        #{splrId,jdbcType=DECIMAL}, #{splrNam,jdbcType=VARCHAR}, #{bidFlg,jdbcType=CHAR},
+        #{memo,jdbcType=VARCHAR}, #{effFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=VARCHAR},
+        #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.XjProjSplrInvt">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+            select XJ_PROJ_SPLR_INVT_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into XJ_PROJ_SPLR_INVT
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="projId != null">
+                PROJ_ID,
+            </if>
+            <if test="splrId != null">
+                SPLR_ID,
+            </if>
+            <if test="splrNam != null">
+                SPLR_NAM,
+            </if>
+            <if test="bidFlg != null">
+                BID_FLG,
+            </if>
+            <if test="memo != null">
+                MEMO,
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG,
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR,
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM,
+            </if>
+            <if test="modUsr != null">
+                MOD_USR,
+            </if>
+            <if test="modTim != null">
+                MOD_TIM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=DECIMAL},
+            <if test="projId != null">
+                #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="splrId != null">
+                #{splrId,jdbcType=DECIMAL},
+            </if>
+            <if test="splrNam != null">
+                #{splrNam,jdbcType=VARCHAR},
+            </if>
+            <if test="bidFlg != null">
+                #{bidFlg,jdbcType=CHAR},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="effFlg != null">
+                #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                #{modTim,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.XjProjSplrInvt">
+        update T_XJ_PROJ_SPLR_INVT
+        <set>
+            <if test="projId != null">
+                PROJ_ID = #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="splrId != null">
+                SPLR_ID = #{splrId,jdbcType=DECIMAL},
+            </if>
+            <if test="splrNam != null">
+                SPLR_NAM = #{splrNam,jdbcType=VARCHAR},
+            </if>
+            <if test="bidFlg != null">
+                BID_FLG = #{bidFlg,jdbcType=CHAR},
+            </if>
+            <if test="memo != null">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG = #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                MOD_USR = #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.XjProjSplrInvt">
+    update T_XJ_PROJ_SPLR_INVT
+    set PROJ_ID = #{projId,jdbcType=DECIMAL},
+      SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      SPLR_NAM = #{splrNam,jdbcType=VARCHAR},
+      BID_FLG = #{bidFlg,jdbcType=CHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <delete id="deleteByProjId" parameterType="java.lang.Long">
+        delete from T_XJ_PROJ_SPLR_INVT
+        where PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </delete>
+
+    <select id="selectByEntity" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        SELECT *
+        FROM T_XJ_PROJ_SPLR_INVT
+        WHERE 1 = 1
+        <if test="projId != null">
+            AND PROJ_ID = #{projId,jdbcType=DECIMAL}
+        </if>
+        <if test="splrId != null">
+            AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+        </if>
+        <if test="bidFlg != null">
+            AND BID_FLG = #{bidFlg,jdbcType=CHAR}
+        </if>
+        <if test="memo != null">
+            AND MEMO = #{memo,jdbcType=VARCHAR}
+        </if>
+        <if test="effFlg != null">
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit &gt; 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.MatklSapMapper">
+    <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.MatklSap">
+        <id column="MATKL4" property="matkl4" jdbcType="VARCHAR"/>
+        <result column="MATKL1" property="matkl1" jdbcType="VARCHAR"/>
+        <result column="MATKL1NAME" property="matkl1name" jdbcType="VARCHAR"/>
+        <result column="MATKL2" property="matkl2" jdbcType="VARCHAR"/>
+        <result column="MATKL2NAME" property="matkl2name" jdbcType="VARCHAR"/>
+        <result column="MATKL3" property="matkl3" jdbcType="VARCHAR"/>
+        <result column="MATKL3NAME" property="matkl3name" jdbcType="VARCHAR"/>
+        <result column="MATKL4NAME" property="matkl4name" jdbcType="VARCHAR"/>
+        <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    MATKL4, MATKL1, MATKL1NAME, MATKL2, MATKL2NAME, MATKL3, MATKL3NAME, MATKL4NAME, CREATEDATE
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from C_MATKL_SAP
+        where MATKL4 = #{matkl4,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from C_MATKL_SAP
+    where MATKL4 = #{matkl4,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.cofco.cpmp.entity.MatklSap">
+    insert into C_MATKL_SAP (MATKL4, MATKL1, MATKL1NAME,
+      MATKL2, MATKL2NAME, MATKL3, 
+      MATKL3NAME, MATKL4NAME, CREATEDATE
+      )
+    values (#{matkl4,jdbcType=VARCHAR}, #{matkl1,jdbcType=VARCHAR}, #{matkl1name,jdbcType=VARCHAR}, 
+      #{matkl2,jdbcType=VARCHAR}, #{matkl2name,jdbcType=VARCHAR}, #{matkl3,jdbcType=VARCHAR}, 
+      #{matkl3name,jdbcType=VARCHAR}, #{matkl4name,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.MatklSap">
+        insert into C_MATKL_SAP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="matkl4 != null">
+                MATKL4,
+            </if>
+            <if test="matkl1 != null">
+                MATKL1,
+            </if>
+            <if test="matkl1name != null">
+                MATKL1NAME,
+            </if>
+            <if test="matkl2 != null">
+                MATKL2,
+            </if>
+            <if test="matkl2name != null">
+                MATKL2NAME,
+            </if>
+            <if test="matkl3 != null">
+                MATKL3,
+            </if>
+            <if test="matkl3name != null">
+                MATKL3NAME,
+            </if>
+            <if test="matkl4name != null">
+                MATKL4NAME,
+            </if>
+            <if test="createdate != null">
+                CREATEDATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="matkl4 != null">
+                #{matkl4,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl1 != null">
+                #{matkl1,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl1name != null">
+                #{matkl1name,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl2 != null">
+                #{matkl2,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl2name != null">
+                #{matkl2name,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl3 != null">
+                #{matkl3,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl3name != null">
+                #{matkl3name,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl4name != null">
+                #{matkl4name,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.MatklSap">
+        update C_MATKL_SAP
+        <set>
+            <if test="matkl1 != null">
+                MATKL1 = #{matkl1,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl1name != null">
+                MATKL1NAME = #{matkl1name,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl2 != null">
+                MATKL2 = #{matkl2,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl2name != null">
+                MATKL2NAME = #{matkl2name,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl3 != null">
+                MATKL3 = #{matkl3,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl3name != null">
+                MATKL3NAME = #{matkl3name,jdbcType=VARCHAR},
+            </if>
+            <if test="matkl4name != null">
+                MATKL4NAME = #{matkl4name,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where MATKL4 = #{matkl4,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.MatklSap">
+    update C_MATKL_SAP
+    set MATKL1 = #{matkl1,jdbcType=VARCHAR},
+      MATKL1NAME = #{matkl1name,jdbcType=VARCHAR},
+      MATKL2 = #{matkl2,jdbcType=VARCHAR},
+      MATKL2NAME = #{matkl2name,jdbcType=VARCHAR},
+      MATKL3 = #{matkl3,jdbcType=VARCHAR},
+      MATKL3NAME = #{matkl3name,jdbcType=VARCHAR},
+      MATKL4NAME = #{matkl4name,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP}
+    where MATKL4 = #{matkl4,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select
+    distinct MATKL1,MATKL1NAME,MATKL2,MATKL2NAME
+    from C_MATKL_SAP ORDER BY C_MATKL_SAP.MATKL1
+  </select>
+
+    <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.Map">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        SELECT *
+        FROM C_MATKL_SAP
+        WHERE 1 = 1
+        <if test="matkl1 != null">
+            AND MATKL1 = #{matkl1,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl1name != null">
+            AND MATKL1NAME = #{matkl1name,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl2 != null">
+            AND MATKL2 = #{matkl2,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl2name != null">
+            AND MATKL2NAME = #{matkl2name,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl3 != null">
+            AND MATKL3 = #{matkl3,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl3name != null">
+            AND MATKL3NAME = #{matkl3name,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl4 != null">
+            AND MATKL4 = #{matkl4,jdbcType=VARCHAR}
+        </if>
+        <if test="matkl4name != null">
+            AND MATKL4NAME = #{matkl4name,jdbcType=VARCHAR}
+        </if>
+        <if test="createdate != null">
+            AND CREATEDATE = #{createdate,jdbcType=TIMESTAMP}
+        </if>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit &gt; 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+</mapper>

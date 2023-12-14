@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.XjProjMatDtlMapper">
+    <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.XjProjMatDtl">
+        <id column="ID" jdbcType="DECIMAL" property="id"/>
+        <result column="PROJ_ID" jdbcType="DECIMAL" property="projId"/>
+        <result column="MAT_COD" jdbcType="VARCHAR" property="matCod"/>
+        <result column="MAT_NAM" jdbcType="VARCHAR" property="matNam"/>
+        <result column="PCHS_NUM" jdbcType="VARCHAR" property="pchsNum"/>
+        <result column="MAT_UNT" jdbcType="VARCHAR" property="matUnt"/>
+        <result column="TECH_SERV" jdbcType="VARCHAR" property="techServ"/>
+        <result column="MEMO" jdbcType="VARCHAR" property="memo"/>
+        <result column="EFF_FLG" jdbcType="CHAR" property="effFlg"/>
+        <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr"/>
+        <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim"/>
+        <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr"/>
+        <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim"/>
+        <result column="REQ_ID" jdbcType="DECIMAL" property="reqId"/>
+        <result column="DLV_DTE" jdbcType="TIMESTAMP" property="dlvDte"/>
+        <result column="DLV_ADR" jdbcType="VARCHAR" property="dlvAdr"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, PROJ_ID, MAT_COD, MAT_NAM, PCHS_NUM, MAT_UNT, TECH_SERV, MEMO, EFF_FLG, CRT_USR, 
+    CRT_TIM, MOD_USR, MOD_TIM, REQ_ID, DLV_DTE, DLV_ADR
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_XJ_PROJ_MAT_DTL
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_XJ_PROJ_MAT_DTL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="cn.cofco.cpmp.entity.XjProjMatDtl">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+            select XJ_PROJ_MAT_DTL_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ_MAT_DTL (ID, PROJ_ID, MAT_COD,
+        MAT_NAM, PCHS_NUM, MAT_UNT,
+        TECH_SERV, MEMO, EFF_FLG,
+        CRT_USR, CRT_TIM, MOD_USR,
+        MOD_TIM, REQ_ID, DLV_DTE,
+        DLV_ADR)
+        values (#{id,jdbcType=DECIMAL}, #{projId,jdbcType=DECIMAL}, #{matCod,jdbcType=VARCHAR},
+        #{matNam,jdbcType=VARCHAR}, #{pchsNum,jdbcType=VARCHAR}, #{matUnt,jdbcType=VARCHAR},
+        #{techServ,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{effFlg,jdbcType=CHAR},
+        #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR},
+        #{modTim,jdbcType=TIMESTAMP}, #{reqId,jdbcType=DECIMAL}, #{dlvDte,jdbcType=TIMESTAMP},
+        #{dlvAdr,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.XjProjMatDtl">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+            select XJ_PROJ_MAT_DTL_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ_MAT_DTL
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="projId != null">
+                PROJ_ID,
+            </if>
+            <if test="matCod != null">
+                MAT_COD,
+            </if>
+            <if test="matNam != null">
+                MAT_NAM,
+            </if>
+            <if test="pchsNum != null">
+                PCHS_NUM,
+            </if>
+            <if test="matUnt != null">
+                MAT_UNT,
+            </if>
+            <if test="techServ != null">
+                TECH_SERV,
+            </if>
+            <if test="memo != null">
+                MEMO,
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG,
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR,
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM,
+            </if>
+            <if test="modUsr != null">
+                MOD_USR,
+            </if>
+            <if test="modTim != null">
+                MOD_TIM,
+            </if>
+            <if test="reqId != null">
+                REQ_ID,
+            </if>
+            <if test="dlvDte != null">
+                DLV_DTE,
+            </if>
+            <if test="dlvAdr != null">
+                DLV_ADR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=DECIMAL},
+            <if test="projId != null">
+                #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="matCod != null">
+                #{matCod,jdbcType=VARCHAR},
+            </if>
+            <if test="matNam != null">
+                #{matNam,jdbcType=VARCHAR},
+            </if>
+            <if test="pchsNum != null">
+                #{pchsNum,jdbcType=VARCHAR},
+            </if>
+            <if test="matUnt != null">
+                #{matUnt,jdbcType=VARCHAR},
+            </if>
+            <if test="techServ != null">
+                #{techServ,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="effFlg != null">
+                #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                #{modTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqId != null">
+                #{reqId,jdbcType=DECIMAL},
+            </if>
+            <if test="dlvDte != null">
+                #{dlvDte,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dlvAdr != null">
+                #{dlvAdr,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.XjProjMatDtl">
+        update T_XJ_PROJ_MAT_DTL
+        <set>
+            <if test="projId != null">
+                PROJ_ID = #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="matCod != null">
+                MAT_COD = #{matCod,jdbcType=VARCHAR},
+            </if>
+            <if test="matNam != null">
+                MAT_NAM = #{matNam,jdbcType=VARCHAR},
+            </if>
+            <if test="pchsNum != null">
+                PCHS_NUM = #{pchsNum,jdbcType=VARCHAR},
+            </if>
+            <if test="matUnt != null">
+                MAT_UNT = #{matUnt,jdbcType=VARCHAR},
+            </if>
+            <if test="techServ != null">
+                TECH_SERV = #{techServ,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null">
+                MEMO = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG = #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                MOD_USR = #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="reqId != null">
+                REQ_ID = #{reqId,jdbcType=DECIMAL},
+            </if>
+            <if test="dlvDte != null">
+                DLV_DTE = #{dlvDte,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dlvAdr != null">
+                DLV_ADR = #{dlvAdr,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.XjProjMatDtl">
+    update T_XJ_PROJ_MAT_DTL
+    set PROJ_ID = #{projId,jdbcType=DECIMAL},
+      MAT_COD = #{matCod,jdbcType=VARCHAR},
+      MAT_NAM = #{matNam,jdbcType=VARCHAR},
+      PCHS_NUM = #{pchsNum,jdbcType=VARCHAR},
+      MAT_UNT = #{matUnt,jdbcType=VARCHAR},
+      TECH_SERV = #{techServ,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      REQ_ID = #{reqId,jdbcType=DECIMAL},
+      DLV_DTE = #{dlvDte,jdbcType=TIMESTAMP},
+      DLV_ADR = #{dlvAdr,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+    <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        SELECT *
+        FROM T_XJ_PROJ_MAT_DTL
+        WHERE 1 = 1
+        <if test="projId != null">
+            AND PROJ_ID = #{projId,jdbcType=DECIMAL}
+        </if>
+        <if test="reqId != null">
+            AND REQ_ID = #{reqId,jdbcType=DECIMAL}
+        </if>
+        <if test="matCod != null">
+            AND MAT_COD = #{matCod,jdbcType=VARCHAR}
+        </if>
+        <if test="matNam != null">
+            AND MAT_NAM = #{matNam,jdbcType=VARCHAR}
+        </if>
+        <if test="pchsNum != null">
+            AND PCHS_NUM = #{pchsNum,jdbcType=VARCHAR}
+        </if>
+        <if test="matUnit != null">
+            AND MAT_UNIT = #{matUnit,jdbcType=CHAR}
+        </if>
+        <if test="techServ != null">
+            AND TECH_SERV = #{techServ,jdbcType=VARCHAR}
+        </if>
+        <if test="memo != null">
+            AND MEMO = #{memo,jdbcType=VARCHAR}
+        </if>
+        <if test="effFlg != null">
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="dlvDte != null">
+            AND DLV_DTE = #{dlvDte,jdbcType=TIMESTAMP}
+        </if>
+        <if test="dlvAdr != null">
+            AND DLV_ADR = #{dlvAdr,jdbcType=VARCHAR}
+        </if>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+</mapper>

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.BidProjOnExptGrdInfMapper">
+    <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.BidProjOnExptGrdInf">
+        <id column="GRD_ID" jdbcType="DECIMAL" property="grdId"/>
+        <result column="GRD_TYP" jdbcType="CHAR" property="grdTyp"/>
+        <result column="PROJ_ID" jdbcType="DECIMAL" property="projId"/>
+        <result column="PROJ_NBR" jdbcType="VARCHAR" property="projNbr"/>
+        <result column="PROJ_NAM" jdbcType="VARCHAR" property="projNam"/>
+        <result column="EXPT_ID" jdbcType="DECIMAL" property="exptId"/>
+        <result column="EXPT_NAM" jdbcType="VARCHAR" property="exptNam"/>
+        <result column="MOB_NBR" jdbcType="VARCHAR" property="mobNbr"/>
+        <result column="EXPT_TTL" jdbcType="VARCHAR" property="exptTtl"/>
+        <result column="PROJ_GRD_STS" jdbcType="CHAR" property="projGrdSts"/>
+        <result column="GRD_MEMO" jdbcType="VARCHAR" property="grdMemo"/>
+        <result column="GRD_KEY" jdbcType="CHAR" property="grdKey"/>
+        <result column="EFF_FLG" jdbcType="CHAR" property="effFlg"/>
+        <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr"/>
+        <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim"/>
+        <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr"/>
+        <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    GRD_ID, GRD_TYP, PROJ_ID, PROJ_NBR, PROJ_NAM, EXPT_ID, EXPT_NAM, MOB_NBR, EXPT_TTL, 
+    PROJ_GRD_STS, GRD_MEMO, GRD_KEY, EFF_FLG, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_BID_PROJ_ON_EXPT_GRD_INF
+        where GRD_ID = #{grdId,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_BID_PROJ_ON_EXPT_GRD_INF
+    where GRD_ID = #{grdId,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="cn.cofco.cpmp.entity.BidProjOnExptGrdInf">
+        <selectKey keyProperty="grdId" order="BEFORE" resultType="java.lang.Long">
+            select BID_PROJ_ON_EXPT_GRD_INF_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_BID_PROJ_ON_EXPT_GRD_INF (GRD_ID, GRD_TYP, PROJ_ID,
+        PROJ_NBR, PROJ_NAM, EXPT_ID,
+        EXPT_NAM, MOB_NBR, EXPT_TTL,
+        PROJ_GRD_STS, GRD_MEMO, GRD_KEY,
+        EFF_FLG, CRT_USR, CRT_TIM,
+        MOD_USR, MOD_TIM)
+        values (#{grdId,jdbcType=DECIMAL}, #{grdTyp,jdbcType=CHAR}, #{projId,jdbcType=DECIMAL},
+        #{projNbr,jdbcType=VARCHAR}, #{projNam,jdbcType=VARCHAR}, #{exptId,jdbcType=DECIMAL},
+        #{exptNam,jdbcType=VARCHAR}, #{mobNbr,jdbcType=VARCHAR}, #{exptTtl,jdbcType=VARCHAR},
+        #{projGrdSts,jdbcType=CHAR}, #{grdMemo,jdbcType=VARCHAR}, #{grdKey,jdbcType=CHAR},
+        #{effFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP},
+        #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.BidProjOnExptGrdInf">
+        <selectKey keyProperty="grdId" order="BEFORE" resultType="java.lang.Long">
+            select BID_PROJ_ON_EXPT_GRD_INF_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_BID_PROJ_ON_EXPT_GRD_INF
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            GRD_ID,
+            <if test="grdTyp != null">
+                GRD_TYP,
+            </if>
+            <if test="projId != null">
+                PROJ_ID,
+            </if>
+            <if test="projNbr != null">
+                PROJ_NBR,
+            </if>
+            <if test="projNam != null">
+                PROJ_NAM,
+            </if>
+            <if test="exptId != null">
+                EXPT_ID,
+            </if>
+            <if test="exptNam != null">
+                EXPT_NAM,
+            </if>
+            <if test="mobNbr != null">
+                MOB_NBR,
+            </if>
+            <if test="exptTtl != null">
+                EXPT_TTL,
+            </if>
+            <if test="projGrdSts != null">
+                PROJ_GRD_STS,
+            </if>
+            <if test="grdMemo != null">
+                GRD_MEMO,
+            </if>
+            <if test="grdKey != null">
+                GRD_KEY,
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG,
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR,
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM,
+            </if>
+            <if test="modUsr != null">
+                MOD_USR,
+            </if>
+            <if test="modTim != null">
+                MOD_TIM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{grdId,jdbcType=DECIMAL},
+            <if test="grdTyp != null">
+                #{grdTyp,jdbcType=CHAR},
+            </if>
+            <if test="projId != null">
+                #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="projNbr != null">
+                #{projNbr,jdbcType=VARCHAR},
+            </if>
+            <if test="projNam != null">
+                #{projNam,jdbcType=VARCHAR},
+            </if>
+            <if test="exptId != null">
+                #{exptId,jdbcType=DECIMAL},
+            </if>
+            <if test="exptNam != null">
+                #{exptNam,jdbcType=VARCHAR},
+            </if>
+            <if test="mobNbr != null">
+                #{mobNbr,jdbcType=VARCHAR},
+            </if>
+            <if test="exptTtl != null">
+                #{exptTtl,jdbcType=VARCHAR},
+            </if>
+            <if test="projGrdSts != null">
+                #{projGrdSts,jdbcType=CHAR},
+            </if>
+            <if test="grdMemo != null">
+                #{grdMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="grdKey != null">
+                #{grdKey,jdbcType=CHAR},
+            </if>
+            <if test="effFlg != null">
+                #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                #{modTim,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.BidProjOnExptGrdInf">
+        update T_BID_PROJ_ON_EXPT_GRD_INF
+        <set>
+            <if test="grdTyp != null">
+                GRD_TYP = #{grdTyp,jdbcType=CHAR},
+            </if>
+            <if test="projId != null">
+                PROJ_ID = #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="projNbr != null">
+                PROJ_NBR = #{projNbr,jdbcType=VARCHAR},
+            </if>
+            <if test="projNam != null">
+                PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+            </if>
+            <if test="exptId != null">
+                EXPT_ID = #{exptId,jdbcType=DECIMAL},
+            </if>
+            <if test="exptNam != null">
+                EXPT_NAM = #{exptNam,jdbcType=VARCHAR},
+            </if>
+            <if test="mobNbr != null">
+                MOB_NBR = #{mobNbr,jdbcType=VARCHAR},
+            </if>
+            <if test="exptTtl != null">
+                EXPT_TTL = #{exptTtl,jdbcType=VARCHAR},
+            </if>
+            <if test="projGrdSts != null">
+                PROJ_GRD_STS = #{projGrdSts,jdbcType=CHAR},
+            </if>
+            <if test="grdMemo != null">
+                GRD_MEMO = #{grdMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="grdKey != null">
+                GRD_KEY = #{grdKey,jdbcType=CHAR},
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG = #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                MOD_USR = #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where GRD_ID = #{grdId,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.BidProjOnExptGrdInf">
+    update T_BID_PROJ_ON_EXPT_GRD_INF
+    set GRD_TYP = #{grdTyp,jdbcType=CHAR},
+      PROJ_ID = #{projId,jdbcType=DECIMAL},
+      PROJ_NBR = #{projNbr,jdbcType=VARCHAR},
+      PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+      EXPT_ID = #{exptId,jdbcType=DECIMAL},
+      EXPT_NAM = #{exptNam,jdbcType=VARCHAR},
+      MOB_NBR = #{mobNbr,jdbcType=VARCHAR},
+      EXPT_TTL = #{exptTtl,jdbcType=VARCHAR},
+      PROJ_GRD_STS = #{projGrdSts,jdbcType=CHAR},
+      GRD_MEMO = #{grdMemo,jdbcType=VARCHAR},
+      GRD_KEY = #{grdKey,jdbcType=CHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where GRD_ID = #{grdId,jdbcType=DECIMAL}
+  </update>
+
+    <sql id="selectOrgIdTemplate">
+        select t.id from umsdepartment t where t.dept_code ='3900'
+    </sql>
+
+    <select id="countByMap" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+        SELECT count(1)
+        FROM (<include refid="selectPageTemplate"/>)
+    </select>
+
+    <sql id="selectPageTemplate">
+        SELECT TBPOEGI.*
+        FROM T_BID_PROJ_ON_EXPT_GRD_INF TBPOEGI,
+        T_BID_PROJ_ON TBPO
+        WHERE 1 = 1 AND TBPOEGI.PROJ_ID = TBPO.PROJ_ID
+        <if test="IsMCompany==1">
+            AND TBPO.ORG_ID IN
+            (<include refid="selectOrgIdTemplate"/>)
+        </if>
+        <if test="IsMCompany==0">
+            AND TBPO.ORG_ID NOT IN
+            (<include refid="selectOrgIdTemplate"/>)
+        </if>
+        <if test="grdTyp != null">
+            AND TBPOEGI.GRD_TYP = #{grdTyp,jdbcType=CHAR}
+        </if>
+        <if test="projId != null">
+            AND TBPOEGI.PROJ_ID = #{projId,jdbcType=DECIMAL}
+        </if>
+        <if test="projNbr != null">
+            AND TBPOEGI.PROJ_NBR like '%'|| #{projNbr,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="projNam != null">
+            AND TBPOEGI.PROJ_NAM like '%'|| #{projNam,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="exptId != null">
+            AND TBPOEGI.EXPT_ID = #{exptId,jdbcType=DECIMAL}
+        </if>
+        <if test="projGrdSts != null">
+            AND TBPOEGI.PROJ_GRD_STS = #{projGrdSts,jdbcType=CHAR}
+        </if>
+        <if test="grdMemo != null">
+            AND TBPOEGI.GRD_MEMO = #{grdMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="grdKey != null">
+            AND TBPOEGI.GRD_KEY = #{grdKey,jdbcType=CHAR}
+        </if>
+        <if test="effFlg != null">
+            AND TBPOEGI.EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND TBPOEGI.CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND TBPOEGI.CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND TBPOEGI.MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND TBPOEGI.MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        ORDER BY TBPOEGI.GRD_ID DESC
+    </sql>
+
+    <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.HashMap">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        <include refid="selectPageTemplate"/>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+</mapper>

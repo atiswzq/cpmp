@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrModAplyMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrModAply" >
+    <id column="MOD_ID" property="modId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="MOD_FLD" property="modFld" jdbcType="VARCHAR" />
+    <result column="OLD_VAL" property="oldVal" jdbcType="VARCHAR" />
+    <result column="NEW_VAL" property="newVal" jdbcType="VARCHAR" />
+    <result column="PRPR" property="prpr" jdbcType="DECIMAL" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+    <result column="ADT_STS" property="adtSts" jdbcType="CHAR" />
+    <result column="ADT_TIM" property="adtTim" jdbcType="TIMESTAMP" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MOD_ID, SPLR_ID, MOD_FLD, OLD_VAL, NEW_VAL, PRPR, MOD_TIM, ADT_STS, ADT_TIM, DEL_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_MOD_APLY
+    where MOD_ID = #{modId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_MOD_APLY
+    where MOD_ID = #{modId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrModAply" >
+    <selectKey resultType="java.lang.Long" keyProperty="modId" order="BEFORE" >
+      select SPLR_MOD_APLY_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_MOD_APLY (MOD_ID, SPLR_ID, MOD_FLD, 
+      OLD_VAL, NEW_VAL, PRPR, 
+      MOD_TIM, ADT_STS, ADT_TIM, 
+      DEL_FLG)
+    values (#{modId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{modFld,jdbcType=VARCHAR}, 
+      #{oldVal,jdbcType=VARCHAR}, #{newVal,jdbcType=VARCHAR}, #{prpr,jdbcType=DECIMAL}, 
+      #{modTim,jdbcType=TIMESTAMP}, #{adtSts,jdbcType=CHAR}, #{adtTim,jdbcType=TIMESTAMP}, 
+      #{delFlg,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrModAply" >
+    <selectKey resultType="java.lang.Long" keyProperty="modId" order="BEFORE" >
+      select SPLR_MOD_APLY_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_MOD_APLY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      MOD_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="modFld != null" >
+        MOD_FLD,
+      </if>
+      <if test="oldVal != null" >
+        OLD_VAL,
+      </if>
+      <if test="newVal != null" >
+        NEW_VAL,
+      </if>
+      <if test="prpr != null" >
+        PRPR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+      <if test="adtSts != null" >
+        ADT_STS,
+      </if>
+      <if test="adtTim != null" >
+        ADT_TIM,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{modId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="modFld != null" >
+        #{modFld,jdbcType=VARCHAR},
+      </if>
+      <if test="oldVal != null" >
+        #{oldVal,jdbcType=VARCHAR},
+      </if>
+      <if test="newVal != null" >
+        #{newVal,jdbcType=VARCHAR},
+      </if>
+      <if test="prpr != null" >
+        #{prpr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adtSts != null" >
+        #{adtSts,jdbcType=CHAR},
+      </if>
+      <if test="adtTim != null" >
+        #{adtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrModAply" >
+    update T_SPLR_MOD_APLY
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="modFld != null" >
+        MOD_FLD = #{modFld,jdbcType=VARCHAR},
+      </if>
+      <if test="oldVal != null" >
+        OLD_VAL = #{oldVal,jdbcType=VARCHAR},
+      </if>
+      <if test="newVal != null" >
+        NEW_VAL = #{newVal,jdbcType=VARCHAR},
+      </if>
+      <if test="prpr != null" >
+        PRPR = #{prpr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adtSts != null" >
+        ADT_STS = #{adtSts,jdbcType=CHAR},
+      </if>
+      <if test="adtTim != null" >
+        ADT_TIM = #{adtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where MOD_ID = #{modId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrModAply" >
+    update T_SPLR_MOD_APLY
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      MOD_FLD = #{modFld,jdbcType=VARCHAR},
+      OLD_VAL = #{oldVal,jdbcType=VARCHAR},
+      NEW_VAL = #{newVal,jdbcType=VARCHAR},
+      PRPR = #{prpr,jdbcType=DECIMAL},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      ADT_STS = #{adtSts,jdbcType=CHAR},
+      ADT_TIM = #{adtTim,jdbcType=TIMESTAMP},
+      DEL_FLG = #{delFlg,jdbcType=CHAR}
+    where MOD_ID = #{modId,jdbcType=DECIMAL}
+  </update>
+</mapper>

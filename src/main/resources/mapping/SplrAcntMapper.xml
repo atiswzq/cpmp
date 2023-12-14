@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrAcntMapper">
+	<resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrAcnt">
+		<id column="ACNT_ID" property="acntId" jdbcType="DECIMAL" />
+		<result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+		<result column="ACNT_TYP" property="acntTyp" jdbcType="CHAR" />
+		<result column="USR_NAM" property="usrNam" jdbcType="VARCHAR" />
+		<result column="PASSWD" property="passwd" jdbcType="VARCHAR" />
+		<result column="NAM" property="nam" jdbcType="VARCHAR" />
+		<result column="MOB" property="mob" jdbcType="VARCHAR" />
+		<result column="DFF_FLG" property="dffFlg" jdbcType="CHAR" />
+		<result column="CRT_USR" property="crtUsr" jdbcType="DECIMAL" />
+		<result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+		<result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+		<result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+		<result column="ACCESS_TOKEN" property="accessToken" jdbcType="VARCHAR" />
+		<result column="TOKEN_TIM" property="tokenTim" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ACNT_ID, SPLR_ID, ACNT_TYP, USR_NAM, PASSWD, NAM, MOB,
+		DFF_FLG, CRT_USR,
+		CRT_TIM,
+		MOD_USR, MOD_TIM, ACCESS_TOKEN, TOKEN_TIM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_ACNT
+		where ACNT_ID = #{acntId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		T_SPLR_ACNT
+		where ACNT_ID = #{acntId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrAcnt">
+		<selectKey resultType="java.lang.Long" keyProperty="acntId"
+			order="BEFORE">
+			select SPLR_ACNT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_ACNT (ACNT_ID, SPLR_ID, ACNT_TYP,
+		USR_NAM, PASSWD,
+		NAM,
+		MOB, DFF_FLG, CRT_USR, CRT_TIM,
+		MOD_USR, MOD_TIM, ACCESS_TOKEN,
+		TOKEN_TIM)
+		values (#{acntId,jdbcType=DECIMAL},
+		#{splrId,jdbcType=DECIMAL},
+		#{acntTyp,jdbcType=CHAR},
+		#{usrNam,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR},
+		#{nam,jdbcType=VARCHAR},
+		#{mob,jdbcType=VARCHAR},
+		#{dffFlg,jdbcType=CHAR},
+		#{crtUsr,jdbcType=DECIMAL},
+		#{crtTim,jdbcType=TIMESTAMP},
+		#{modUsr,jdbcType=DECIMAL},
+		#{modTim,jdbcType=TIMESTAMP},
+		#{accessToken,jdbcType=VARCHAR},
+		#{tokenTim,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrAcnt">
+		<selectKey resultType="java.lang.Long" keyProperty="acntId"
+			order="BEFORE">
+			select SPLR_ACNT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_ACNT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			ACNT_ID,
+			<if test="splrId != null">
+				SPLR_ID,
+			</if>
+			<if test="acntTyp != null">
+				ACNT_TYP,
+			</if>
+			<if test="usrNam != null">
+				USR_NAM,
+			</if>
+			<if test="passwd != null">
+				PASSWD,
+			</if>
+			<if test="nam != null">
+				NAM,
+			</if>
+			<if test="mob != null">
+				MOB,
+			</if>
+			<if test="dffFlg != null">
+				DFF_FLG,
+			</if>
+			<if test="crtUsr != null">
+				CRT_USR,
+			</if>
+			<if test="crtTim != null">
+				CRT_TIM,
+			</if>
+			<if test="modUsr != null">
+				MOD_USR,
+			</if>
+			<if test="modTim != null">
+				MOD_TIM,
+			</if>
+			<if test="accessToken != null">
+				ACCESS_TOKEN,
+			</if>
+			<if test="tokenTim != null">
+				TOKEN_TIM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{acntId,jdbcType=DECIMAL},
+			<if test="splrId != null">
+				#{splrId,jdbcType=DECIMAL},
+			</if>
+			<if test="acntTyp != null">
+				#{acntTyp,jdbcType=CHAR},
+			</if>
+			<if test="usrNam != null">
+				#{usrNam,jdbcType=VARCHAR},
+			</if>
+			<if test="passwd != null">
+				#{passwd,jdbcType=VARCHAR},
+			</if>
+			<if test="nam != null">
+				#{nam,jdbcType=VARCHAR},
+			</if>
+			<if test="mob != null">
+				#{mob,jdbcType=VARCHAR},
+			</if>
+			<if test="dffFlg != null">
+				#{dffFlg,jdbcType=CHAR},
+			</if>
+			<if test="crtUsr != null">
+				#{crtUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="crtTim != null">
+				#{crtTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modUsr != null">
+				#{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				#{modTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="accessToken != null">
+				#{accessToken,jdbcType=VARCHAR},
+			</if>
+			<if test="tokenTim != null">
+				#{tokenTim,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrAcnt">
+		update T_SPLR_ACNT
+		<set>
+			<if test="splrId != null">
+				SPLR_ID = #{splrId,jdbcType=DECIMAL},
+			</if>
+			<if test="acntTyp != null">
+				ACNT_TYP = #{acntTyp,jdbcType=CHAR},
+			</if>
+			<if test="usrNam != null">
+				USR_NAM = #{usrNam,jdbcType=VARCHAR},
+			</if>
+			<if test="passwd != null">
+				PASSWD = #{passwd,jdbcType=VARCHAR},
+			</if>
+			<if test="nam != null">
+				NAM = #{nam,jdbcType=VARCHAR},
+			</if>
+			<if test="mob != null">
+				MOB = #{mob,jdbcType=VARCHAR},
+			</if>
+			<if test="dffFlg != null">
+				DFF_FLG = #{dffFlg,jdbcType=CHAR},
+			</if>
+			<if test="crtUsr != null">
+				CRT_USR = #{crtUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="crtTim != null">
+				CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modUsr != null">
+				MOD_USR = #{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="accessToken != null">
+				ACCESS_TOKEN = #{accessToken,jdbcType=VARCHAR},
+			</if>
+			<if test="tokenTim != null">
+				TOKEN_TIM = #{tokenTim,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ACNT_ID = #{acntId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrAcnt">
+		update T_SPLR_ACNT
+		set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+		ACNT_TYP =
+		#{acntTyp,jdbcType=CHAR},
+		USR_NAM = #{usrNam,jdbcType=VARCHAR},
+		PASSWD =
+		#{passwd,jdbcType=VARCHAR},
+		NAM = #{nam,jdbcType=VARCHAR},
+		MOB =
+		#{mob,jdbcType=VARCHAR},
+		DFF_FLG = #{dffFlg,jdbcType=CHAR},
+		CRT_USR =
+		#{crtUsr,jdbcType=DECIMAL},
+		CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+		MOD_USR = #{modUsr,jdbcType=DECIMAL},
+		MOD_TIM =
+		#{modTim,jdbcType=TIMESTAMP},
+		ACCESS_TOKEN =
+		#{accessToken,jdbcType=VARCHAR},
+		TOKEN_TIM =
+		#{tokenTim,jdbcType=TIMESTAMP}
+		where ACNT_ID =
+		#{acntId,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 供应商登录 start -->
+	<select id="selectByLogin" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_ACNT
+		where 1 =1 and DFF_FLG != '1'
+		<if test="usrNam != null">
+			and USR_NAM = #{usrNam,jdbcType=VARCHAR}
+		</if>
+		<if test="passwd != null">
+			and PASSWD = #{passwd,jdbcType=VARCHAR}
+		</if>
+		and rownum = 1
+	</select>
+
+	<select id="selectByToken" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_ACNT
+		where 1 = 1 and DFF_FLG != '1'
+		<if test="accessToken != null">
+			and ACCESS_TOKEN = #{accessToken,jdbcType=VARCHAR}
+		</if>
+		and rownum = 1
+	</select>
+
+	<select id="selectAcnts" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_ACNT
+		where 1 =1 and DFF_FLG != '1'
+		<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+	</select>
+
+	<select id="selectAcntsByConditions" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_ACNT
+		where 1=1
+		<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=CHAR}
+		</if>
+		<if test="acntTyp != null">
+			and ACNT_TYP = #{acntTyp,jdbcType=CHAR}
+		</if>
+		<if test="usrNam != null">
+			and USR_NAM = #{usrNam,jdbcType=VARCHAR}
+		</if>
+		<if test="passwd != null">
+			and PASSWD = #{passwd,jdbcType=VARCHAR}
+		</if>
+		<if test="nam != null">
+			and NAM = #{nam,jdbcType=VARCHAR}
+		</if>
+		<if test="mob != null">
+			and MOB = #{mob,jdbcType=VARCHAR}
+		</if>
+		<if test="crtUsr != null">
+			and CRT_USR = #{crtUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="crtTim != null">
+			and CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+		</if>
+		<if test="modUsr != null">
+			and MOD_USR = #{modUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="modTim != null">
+			and MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+		</if>
+		<if test="accessToken != null">
+			and ACCESS_TOKEN = #{accessToken,jdbcType=VARCHAR}
+		</if>
+		<if test="tokenTim != null">
+			and TOKEN_TIM = #{tokenTim,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+
+</mapper>

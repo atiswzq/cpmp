@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrAcntLginMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrAcntLgin" >
+    <id column="LGIN_ID" property="lginId" jdbcType="DECIMAL" />
+    <result column="USR_NAM" property="usrNam" jdbcType="VARCHAR" />
+    <result column="ACNT_ID" property="acntId" jdbcType="DECIMAL" />
+    <result column="LGIN_TIM" property="lginTim" jdbcType="TIMESTAMP" />
+    <result column="LGIN_IP" property="lginIp" jdbcType="VARCHAR" />
+    <result column="LGIN_CITY" property="lginCity" jdbcType="CHAR" />
+    <result column="LGIN_STS" property="lginSts" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LGIN_ID, USR_NAM, ACNT_ID, LGIN_TIM, LGIN_IP, LGIN_CITY, LGIN_STS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_ACNT_LGIN
+    where LGIN_ID = #{lginId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_ACNT_LGIN
+    where LGIN_ID = #{lginId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrAcntLgin" >
+    <selectKey resultType="java.lang.Long" keyProperty="lginId" order="BEFORE" >
+      select SPLR_ACNT_LGIN_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ACNT_LGIN (LGIN_ID, USR_NAM, ACNT_ID, 
+      LGIN_TIM, LGIN_IP, LGIN_CITY, 
+      LGIN_STS)
+    values (#{lginId,jdbcType=DECIMAL}, #{usrNam,jdbcType=VARCHAR}, #{acntId,jdbcType=DECIMAL}, 
+      #{lginTim,jdbcType=TIMESTAMP}, #{lginIp,jdbcType=VARCHAR}, #{lginCity,jdbcType=CHAR}, 
+      #{lginSts,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrAcntLgin" >
+    <selectKey resultType="java.lang.Long" keyProperty="lginId" order="BEFORE" >
+      select SPLR_ACNT_LGIN_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ACNT_LGIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      LGIN_ID,
+      <if test="usrNam != null" >
+        USR_NAM,
+      </if>
+      <if test="acntId != null" >
+        ACNT_ID,
+      </if>
+      <if test="lginTim != null" >
+        LGIN_TIM,
+      </if>
+      <if test="lginIp != null" >
+        LGIN_IP,
+      </if>
+      <if test="lginCity != null" >
+        LGIN_CITY,
+      </if>
+      <if test="lginSts != null" >
+        LGIN_STS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{lginId,jdbcType=DECIMAL},
+      <if test="usrNam != null" >
+        #{usrNam,jdbcType=VARCHAR},
+      </if>
+      <if test="acntId != null" >
+        #{acntId,jdbcType=DECIMAL},
+      </if>
+      <if test="lginTim != null" >
+        #{lginTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lginIp != null" >
+        #{lginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lginCity != null" >
+        #{lginCity,jdbcType=CHAR},
+      </if>
+      <if test="lginSts != null" >
+        #{lginSts,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrAcntLgin" >
+    update T_SPLR_ACNT_LGIN
+    <set >
+      <if test="usrNam != null" >
+        USR_NAM = #{usrNam,jdbcType=VARCHAR},
+      </if>
+      <if test="acntId != null" >
+        ACNT_ID = #{acntId,jdbcType=DECIMAL},
+      </if>
+      <if test="lginTim != null" >
+        LGIN_TIM = #{lginTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lginIp != null" >
+        LGIN_IP = #{lginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lginCity != null" >
+        LGIN_CITY = #{lginCity,jdbcType=CHAR},
+      </if>
+      <if test="lginSts != null" >
+        LGIN_STS = #{lginSts,jdbcType=CHAR},
+      </if>
+    </set>
+    where LGIN_ID = #{lginId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrAcntLgin" >
+    update T_SPLR_ACNT_LGIN
+    set USR_NAM = #{usrNam,jdbcType=VARCHAR},
+      ACNT_ID = #{acntId,jdbcType=DECIMAL},
+      LGIN_TIM = #{lginTim,jdbcType=TIMESTAMP},
+      LGIN_IP = #{lginIp,jdbcType=VARCHAR},
+      LGIN_CITY = #{lginCity,jdbcType=CHAR},
+      LGIN_STS = #{lginSts,jdbcType=CHAR}
+    where LGIN_ID = #{lginId,jdbcType=DECIMAL}
+  </update>
+</mapper>

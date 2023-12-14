@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.RequisitionMapper">
+    <select id="selectByMap" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        select rownum, r.req_id, r.banfn, r.bsart, r.batxt, nvl(r.name_text,r.ernam) as ernam, r.name_text, r.badat, r.bukrs, r.butxt, r.bnfpo, LTRIM(r.matnr,'0') as matnr,
+        r.txz01, r.meins, r.menge, r.preis, r.matkl, r.wgbez, r.werks, r.req_source, r.create_time, r.zyxqbm_txt, r.aufnr, r.plnbez, r.ztxz01, r.kostl, r.menge_ordered,
+        r.lfdat,u.unitname,r.bstme, r.umrez, r.umren, r.hasdone,round(r.menge*(r.umren/r.umrez),3) as ordermenge,u2.unitname as orderunitname
+        from c_z_requisition r
+        inner join c_usermatkl um on r.matkl=um.matkl
+        left outer join c_unit u on r.meins=u.unit
+        left outer join c_unit u2 on r.bstme=u2.unit
+        where round(r.menge*(r.umren/r.umrez),3) > r.menge_ordered
+        and target='FC' and r.hasdone=0 and r.INZB = 0
+        <if test="bukrses != null">
+            AND r.BUKRS in
+            <foreach close=")" collection="bukrses" index="index" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        and um.userid=#{userName}
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+    <select id="countByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*)
+        from c_z_requisition r
+        inner join c_usermatkl um on r.matkl=um.matkl
+        left outer join c_unit u on r.meins=u.unit
+        left outer join c_unit u2 on r.bstme=u2.unit
+        where round(r.menge*(r.umren/r.umrez),3) > r.menge_ordered
+        and target='FC' and r.hasdone=0 and r.INZB = 0
+        <if test="bukrses != null">
+            AND r.BUKRS in
+            <foreach close=")" collection="bukrses" index="index" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        and um.userid=#{userName}
+    </select>
+
+
+    <update id="updateToInzb">
+        UPDATE c_z_requisition SET INZB = #{inzb}
+        WHERE REQ_ID IN
+        <foreach close=")" collection="reqIds" index="index" item="item" open="(" separator=",">
+            #{item}
+        </foreach>
+    </update>
+
+    <sql id="selectPageTemplate">
+        SELECT * FROM (
+        select rownum, r.req_id, r.banfn, r.bsart, r.batxt, nvl(r.name_text,r.ernam) as ernam, r.name_text, r.badat, r.bukrs, r.butxt, r.bnfpo, LTRIM(r.matnr,'0') as matnr,
+        r.txz01, r.meins, r.menge, r.preis, r.matkl, r.wgbez, r.werks, r.req_source, r.create_time, r.zyxqbm_txt, r.aufnr, r.plnbez, r.ztxz01, r.kostl, r.menge_ordered,
+        r.lfdat,u.unitname,r.bstme, r.umrez, r.umren, r.hasdone,round(r.menge*(r.umren/r.umrez),3) as ordermenge,u2.unitname as orderunitname
+        from c_z_requisition r
+        inner join c_usermatkl um on r.matkl=um.matkl
+        left outer join c_unit u on r.meins=u.unit
+        left outer join c_unit u2 on r.bstme=u2.unit
+        where round(r.menge*(r.umren/r.umrez),3) > r.menge_ordered
+        and target='FC' and r.hasdone=0 and r.INZB = 0
+        <if test="bukrses != null">
+            AND r.BUKRS in
+            <foreach close=")" collection="bukrses" index="index" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        and um.userid=#{userName})
+        WHERE
+        <if test="matName != null" >
+            AND CONCAT(TXZ01) like '%'||#{matName}||'%'
+        </if>
+    </sql>
+
+    <select id="selectByName" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        select * from (
+        <include refid="selectPageTemplate"/>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+    <select id="countByName" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*)  from(
+        <include refid="selectPageTemplate"/>
+        )
+
+    </select>
+
+</mapper>

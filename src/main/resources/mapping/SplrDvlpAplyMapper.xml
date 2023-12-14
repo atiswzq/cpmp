@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrDvlpAplyMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrDvlpAply" >
+    <id column="APLY_ID" property="aplyId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="PTNR_TYP" property="ptnrTyp" jdbcType="CHAR" />
+    <result column="FULL_NAM" property="fullNam" jdbcType="VARCHAR" />
+    <result column="SHORT_NAM" property="shortNam" jdbcType="VARCHAR" />
+    <result column="RGST_ADDR" property="rgstAddr" jdbcType="VARCHAR" />
+    <result column="POST_COD" property="postCod" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="MOB" property="mob" jdbcType="VARCHAR" />
+    <result column="FAX" property="fax" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="HAS_CREDIT_CODE" property="hasCreditCode" jdbcType="CHAR" />
+    <result column="TAX_COD" property="taxCod" jdbcType="VARCHAR" />
+    <result column="DBUSI_LICE" property="dbusiLice" jdbcType="VARCHAR" />
+    <result column="ORG_COD" property="orgCod" jdbcType="VARCHAR" />
+    <result column="CRDT_COD" property="crdtCod" jdbcType="VARCHAR" />
+    <result column="IDST1" property="idst1" jdbcType="VARCHAR" />
+    <result column="IDST2" property="idst2" jdbcType="VARCHAR" />
+    <result column="IDST" property="idst" jdbcType="VARCHAR" />
+    <result column="OPR_RNG" property="oprRng" jdbcType="VARCHAR" />
+    <result column="REG_CPTL" property="regCptl" jdbcType="VARCHAR" />
+    <result column="REG_TIM" property="regTim" jdbcType="TIMESTAMP" />
+    <result column="CPN_NTR" property="cpnNtr" jdbcType="CHAR" />
+    <result column="LGL_USER" property="lglUser" jdbcType="VARCHAR" />
+    <result column="LGL_IDNT_CAD" property="lglIdntCad" jdbcType="VARCHAR" />
+    <result column="TRDE_PTNR" property="trdePtnr" jdbcType="VARCHAR" />
+    <result column="IS_KEY_ACNT" property="isKeyAcnt" jdbcType="CHAR" />
+    <result column="SUPR_GRUP" property="suprGrup" jdbcType="VARCHAR" />
+    <result column="PARENT_CPN" property="parentCpn" jdbcType="VARCHAR" />
+    <result column="CTRL_USR" property="ctrlUsr" jdbcType="VARCHAR" />
+    <result column="APLY_USR" property="aplyUsr" jdbcType="VARCHAR" />
+    <result column="APLY_TIM" property="aplyTim" jdbcType="TIMESTAMP" />
+    <result column="BPM_SEQ_NO" property="bpmSeqNo" jdbcType="VARCHAR" />
+    <result column="MAT_TYP" property="matTyp" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="APLY_STS" property="aplySts" jdbcType="VARCHAR" />
+    <result column="ADT_MSG" property="adtMsg" jdbcType="VARCHAR" />
+    <result column="MDM_APLY_UUID" property="mdmAplyUuid" jdbcType="VARCHAR" />
+    <result column="MDM_APLY_MSG" property="mdmAplyMsg" jdbcType="VARCHAR" />
+    <result column="MAT_IDS" property="matIds" jdbcType="VARCHAR" />
+    <result column="CHK_IDS" property="chkIds" jdbcType="VARCHAR" />
+    <result column="SEQ_NO" property="seqNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, SPLR_ID, PTNR_TYP, FULL_NAM, SHORT_NAM, RGST_ADDR, POST_COD, TELEPHONE, 
+    MOB, FAX, EMAIL, HAS_CREDIT_CODE, TAX_COD, DBUSI_LICE, ORG_COD, CRDT_COD, IDST1, 
+    IDST2, IDST, OPR_RNG, REG_CPTL, REG_TIM, CPN_NTR, LGL_USER, LGL_IDNT_CAD, TRDE_PTNR, 
+    IS_KEY_ACNT, SUPR_GRUP, PARENT_CPN, CTRL_USR, APLY_USR, APLY_TIM, BPM_SEQ_NO, MAT_TYP, 
+    REMARK, APLY_STS, ADT_MSG, MDM_APLY_UUID, MDM_APLY_MSG, MAT_IDS, CHK_IDS, SEQ_NO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_DVLP_APLY
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_DVLP_APLY
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrDvlpAply" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_DVLP_APLY_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_DVLP_APLY (APLY_ID, SPLR_ID, PTNR_TYP, 
+      FULL_NAM, SHORT_NAM, RGST_ADDR, 
+      POST_COD, TELEPHONE, MOB, 
+      FAX, EMAIL, HAS_CREDIT_CODE, 
+      TAX_COD, DBUSI_LICE, ORG_COD, 
+      CRDT_COD, IDST1, IDST2, 
+      IDST, OPR_RNG, REG_CPTL, 
+      REG_TIM, CPN_NTR, LGL_USER, 
+      LGL_IDNT_CAD, TRDE_PTNR, IS_KEY_ACNT, 
+      SUPR_GRUP, PARENT_CPN, CTRL_USR, 
+      APLY_USR, APLY_TIM, BPM_SEQ_NO, 
+      MAT_TYP, REMARK, APLY_STS, ADT_MSG, MDM_APLY_UUID, MDM_APLY_MSG, MAT_IDS, CHK_IDS, SEQ_NO
+      )
+    values (#{aplyId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{ptnrTyp,jdbcType=CHAR}, 
+      #{fullNam,jdbcType=VARCHAR}, #{shortNam,jdbcType=VARCHAR}, #{rgstAddr,jdbcType=VARCHAR}, 
+      #{postCod,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{mob,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{hasCreditCode,jdbcType=CHAR}, 
+      #{taxCod,jdbcType=VARCHAR}, #{dbusiLice,jdbcType=VARCHAR}, #{orgCod,jdbcType=VARCHAR}, 
+      #{crdtCod,jdbcType=VARCHAR}, #{idst1,jdbcType=VARCHAR}, #{idst2,jdbcType=VARCHAR}, 
+      #{idst,jdbcType=VARCHAR}, #{oprRng,jdbcType=VARCHAR}, #{regCptl,jdbcType=VARCHAR}, 
+      #{regTim,jdbcType=TIMESTAMP}, #{cpnNtr,jdbcType=CHAR}, #{lglUser,jdbcType=VARCHAR},
+      #{lglIdntCad,jdbcType=VARCHAR}, #{trdePtnr,jdbcType=VARCHAR}, #{isKeyAcnt,jdbcType=CHAR}, 
+      #{suprGrup,jdbcType=VARCHAR}, #{parentCpn,jdbcType=VARCHAR}, #{ctrlUsr,jdbcType=VARCHAR}, 
+      #{aplyUsr,jdbcType=VARCHAR}, #{aplyTim,jdbcType=TIMESTAMP}, #{bpmSeqNo,jdbcType=VARCHAR},
+      #{matTyp,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{aplySts,jdbcType=VARCHAR}, #{adtMsg,jdbcType=VARCHAR},
+      #{mdmAplyUuid,jdbcType=VARCHAR}, #{mdmAplyMsg,jdbcType=VARCHAR}, #{matIds,jdbcType=VARCHAR}, #{chkIds,jdbcType=VARCHAR},
+      #{seqNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrDvlpAply" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_DVLP_APLY_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_DVLP_APLY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      APLY_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="ptnrTyp != null" >
+        PTNR_TYP,
+      </if>
+      <if test="fullNam != null" >
+        FULL_NAM,
+      </if>
+      <if test="shortNam != null" >
+        SHORT_NAM,
+      </if>
+      <if test="rgstAddr != null" >
+        RGST_ADDR,
+      </if>
+      <if test="postCod != null" >
+        POST_COD,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="mob != null" >
+        MOB,
+      </if>
+      <if test="fax != null" >
+        FAX,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="hasCreditCode != null" >
+        HAS_CREDIT_CODE,
+      </if>
+      <if test="taxCod != null" >
+        TAX_COD,
+      </if>
+      <if test="dbusiLice != null" >
+        DBUSI_LICE,
+      </if>
+      <if test="orgCod != null" >
+        ORG_COD,
+      </if>
+      <if test="crdtCod != null" >
+        CRDT_COD,
+      </if>
+      <if test="idst1 != null" >
+        IDST1,
+      </if>
+      <if test="idst2 != null" >
+        IDST2,
+      </if>
+      <if test="idst != null" >
+        IDST,
+      </if>
+      <if test="oprRng != null" >
+        OPR_RNG,
+      </if>
+      <if test="regCptl != null" >
+        REG_CPTL,
+      </if>
+      <if test="regTim != null" >
+        REG_TIM,
+      </if>
+      <if test="cpnNtr != null" >
+        CPN_NTR,
+      </if>
+      <if test="lglUser != null" >
+        LGL_USER,
+      </if>
+      <if test="lglIdntCad != null" >
+        LGL_IDNT_CAD,
+      </if>
+      <if test="trdePtnr != null" >
+        TRDE_PTNR,
+      </if>
+      <if test="isKeyAcnt != null" >
+        IS_KEY_ACNT,
+      </if>
+      <if test="suprGrup != null" >
+        SUPR_GRUP,
+      </if>
+      <if test="parentCpn != null" >
+        PARENT_CPN,
+      </if>
+      <if test="ctrlUsr != null" >
+        CTRL_USR,
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR,
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM,
+      </if>
+      <if test="bpmSeqNo != null" >
+        BPM_SEQ_NO,
+      </if>
+      <if test="matTyp != null" >
+        MAT_TYP,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS,
+      </if>
+      <if test="adtMsg != null" >
+        ADT_MSG,
+      </if>
+      <if test="mdmAplyUuid != null" >
+        MDM_APLY_UUID,
+      </if>
+      <if test="mdmAplyMsg != null" >
+        MDM_APLY_MSG,
+      </if>
+      <if test="matIds != null" >
+        MAT_IDS,
+      </if>
+      <if test="chkIds != null" >
+        CHK_IDS,
+      </if>
+      <if test="seqNo != null" >
+        SEQ_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aplyId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="ptnrTyp != null" >
+        #{ptnrTyp,jdbcType=CHAR},
+      </if>
+      <if test="fullNam != null" >
+        #{fullNam,jdbcType=VARCHAR},
+      </if>
+      <if test="shortNam != null" >
+        #{shortNam,jdbcType=VARCHAR},
+      </if>
+      <if test="rgstAddr != null" >
+        #{rgstAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="postCod != null" >
+        #{postCod,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mob != null" >
+        #{mob,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCreditCode != null" >
+        #{hasCreditCode,jdbcType=CHAR},
+      </if>
+      <if test="taxCod != null" >
+        #{taxCod,jdbcType=VARCHAR},
+      </if>
+      <if test="dbusiLice != null" >
+        #{dbusiLice,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCod != null" >
+        #{orgCod,jdbcType=VARCHAR},
+      </if>
+      <if test="crdtCod != null" >
+        #{crdtCod,jdbcType=VARCHAR},
+      </if>
+      <if test="idst1 != null" >
+        #{idst1,jdbcType=VARCHAR},
+      </if>
+      <if test="idst2 != null" >
+        #{idst2,jdbcType=VARCHAR},
+      </if>
+      <if test="idst != null" >
+        #{idst,jdbcType=VARCHAR},
+      </if>
+      <if test="oprRng != null" >
+        #{oprRng,jdbcType=VARCHAR},
+      </if>
+      <if test="regCptl != null" >
+        #{regCptl,jdbcType=VARCHAR},
+      </if>
+      <if test="regTim != null" >
+        #{regTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpnNtr != null" >
+        #{cpnNtr,jdbcType=CHAR},
+      </if>
+      <if test="lglUser != null" >
+        #{lglUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lglIdntCad != null" >
+        #{lglIdntCad,jdbcType=VARCHAR},
+      </if>
+      <if test="trdePtnr != null" >
+        #{trdePtnr,jdbcType=VARCHAR},
+      </if>
+      <if test="isKeyAcnt != null" >
+        #{isKeyAcnt,jdbcType=CHAR},
+      </if>
+      <if test="suprGrup != null" >
+        #{suprGrup,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCpn != null" >
+        #{parentCpn,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlUsr != null" >
+        #{ctrlUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        #{aplyUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyTim != null" >
+        #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bpmSeqNo != null" >
+        #{bpmSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matTyp != null" >
+        #{matTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="aplySts != null" >
+        #{aplySts,jdbcType=VARCHAR},
+      </if>
+      <if test="adtMsg != null" >
+        #{adtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="mdmAplyUuid != null" >
+        #{mdmAplyUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mdmAplyMsg != null" >
+        #{mdmAplyMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="matIds != null" >
+        #{matIds,jdbcType=VARCHAR},
+      </if>
+      <if test="chkIds != null" >
+        #{chkIds,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null" >
+        #{seqNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrDvlpAply" >
+    update T_SPLR_DVLP_APLY
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="ptnrTyp != null" >
+        PTNR_TYP = #{ptnrTyp,jdbcType=CHAR},
+      </if>
+      <if test="fullNam != null" >
+        FULL_NAM = #{fullNam,jdbcType=VARCHAR},
+      </if>
+      <if test="shortNam != null" >
+        SHORT_NAM = #{shortNam,jdbcType=VARCHAR},
+      </if>
+      <if test="rgstAddr != null" >
+        RGST_ADDR = #{rgstAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="postCod != null" >
+        POST_COD = #{postCod,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mob != null" >
+        MOB = #{mob,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCreditCode != null" >
+        HAS_CREDIT_CODE = #{hasCreditCode,jdbcType=CHAR},
+      </if>
+      <if test="taxCod != null" >
+        TAX_COD = #{taxCod,jdbcType=VARCHAR},
+      </if>
+      <if test="dbusiLice != null" >
+        DBUSI_LICE = #{dbusiLice,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCod != null" >
+        ORG_COD = #{orgCod,jdbcType=VARCHAR},
+      </if>
+      <if test="crdtCod != null" >
+        CRDT_COD = #{crdtCod,jdbcType=VARCHAR},
+      </if>
+      <if test="idst1 != null" >
+        IDST1 = #{idst1,jdbcType=VARCHAR},
+      </if>
+      <if test="idst2 != null" >
+        IDST2 = #{idst2,jdbcType=VARCHAR},
+      </if>
+      <if test="idst != null" >
+        IDST = #{idst,jdbcType=VARCHAR},
+      </if>
+      <if test="oprRng != null" >
+        OPR_RNG = #{oprRng,jdbcType=VARCHAR},
+      </if>
+      <if test="regCptl != null" >
+        REG_CPTL = #{regCptl,jdbcType=VARCHAR},
+      </if>
+      <if test="regTim != null" >
+        REG_TIM = #{regTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpnNtr != null" >
+        CPN_NTR = #{cpnNtr,jdbcType=CHAR},
+      </if>
+      <if test="lglUser != null" >
+        LGL_USER = #{lglUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lglIdntCad != null" >
+        LGL_IDNT_CAD = #{lglIdntCad,jdbcType=VARCHAR},
+      </if>
+      <if test="trdePtnr != null" >
+        TRDE_PTNR = #{trdePtnr,jdbcType=VARCHAR},
+      </if>
+      <if test="isKeyAcnt != null" >
+        IS_KEY_ACNT = #{isKeyAcnt,jdbcType=CHAR},
+      </if>
+      <if test="suprGrup != null" >
+        SUPR_GRUP = #{suprGrup,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCpn != null" >
+        PARENT_CPN = #{parentCpn,jdbcType=VARCHAR},
+      </if>
+      <if test="ctrlUsr != null" >
+        CTRL_USR = #{ctrlUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR = #{aplyUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bpmSeqNo != null" >
+        BPM_SEQ_NO = #{bpmSeqNo,jdbcType=VARCHAR},
+      </if>
+      <if test="matTyp != null" >
+        MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS = #{aplySts,jdbcType=VARCHAR},
+      </if>
+      <if test="adtMsg != null" >
+        ADT_MSG = #{adtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="mdmAplyUuid != null" >
+        MDM_APLY_UUID = #{mdmAplyUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="mdmAplyMsg != null" >
+        MDM_APLY_MSG = #{mdmAplyMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="matIds != null" >
+        MAT_IDS = #{matIds,jdbcType=VARCHAR},
+      </if>
+      <if test="chkIds != null" >
+        CHK_IDS = #{chkIds,jdbcType=VARCHAR},
+      </if>
+      <if test="seqNo != null" >
+        SEQ_NO = #{seqNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrDvlpAply" >
+    update T_SPLR_DVLP_APLY
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      PTNR_TYP = #{ptnrTyp,jdbcType=CHAR},
+      FULL_NAM = #{fullNam,jdbcType=VARCHAR},
+      SHORT_NAM = #{shortNam,jdbcType=VARCHAR},
+      RGST_ADDR = #{rgstAddr,jdbcType=VARCHAR},
+      POST_COD = #{postCod,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      MOB = #{mob,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      HAS_CREDIT_CODE = #{hasCreditCode,jdbcType=CHAR},
+      TAX_COD = #{taxCod,jdbcType=VARCHAR},
+      DBUSI_LICE = #{dbusiLice,jdbcType=VARCHAR},
+      ORG_COD = #{orgCod,jdbcType=VARCHAR},
+      CRDT_COD = #{crdtCod,jdbcType=VARCHAR},
+      IDST1 = #{idst1,jdbcType=VARCHAR},
+      IDST2 = #{idst2,jdbcType=VARCHAR},
+      IDST = #{idst,jdbcType=VARCHAR},
+      OPR_RNG = #{oprRng,jdbcType=VARCHAR},
+      REG_CPTL = #{regCptl,jdbcType=VARCHAR},
+      REG_TIM = #{regTim,jdbcType=TIMESTAMP},
+      CPN_NTR = #{cpnNtr,jdbcType=CHAR},
+      LGL_USER = #{lglUser,jdbcType=VARCHAR},
+      LGL_IDNT_CAD = #{lglIdntCad,jdbcType=VARCHAR},
+      TRDE_PTNR = #{trdePtnr,jdbcType=VARCHAR},
+      IS_KEY_ACNT = #{isKeyAcnt,jdbcType=CHAR},
+      SUPR_GRUP = #{suprGrup,jdbcType=VARCHAR},
+      PARENT_CPN = #{parentCpn,jdbcType=VARCHAR},
+      CTRL_USR = #{ctrlUsr,jdbcType=VARCHAR},
+      APLY_USR = #{aplyUsr,jdbcType=VARCHAR},
+      APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      BPM_SEQ_NO = #{bpmSeqNo,jdbcType=VARCHAR},
+      MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      APLY_STS = #{aplySts,jdbcType=VARCHAR},
+      ADT_MSG = #{adtMsg,jdbcType=VARCHAR},
+      MDM_APLY_UUID = #{mdmAplyUuid,jdbcType=VARCHAR},
+      MDM_APLY_MSG = #{mdmAplyMsg,jdbcType=VARCHAR},
+      MAT_IDS = #{matIds,jdbcType=VARCHAR},
+      CHK_IDS = #{chkIds,jdbcType=VARCHAR},
+      SEQ_NO = #{seqNo,jdbcType=VARCHAR}
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from T_SPLR_DVLP_APLY
+    where 1=1
+    <if test="splrId != null" >
+      AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+    </if>
+    <if test="ptnrTyp != null" >
+      AND PTNR_TYP = #{ptnrTyp,jdbcType=CHAR}
+    </if>
+    <if test="fullNam != null" >
+      AND FULL_NAM = #{fullNam,jdbcType=VARCHAR}
+    </if>
+    <if test="shortNam != null" >
+      AND SHORT_NAM = #{shortNam,jdbcType=VARCHAR}
+    </if>
+    <if test="rgstAddr != null" >
+      AND RGST_ADDR = #{rgstAddr,jdbcType=VARCHAR}
+    </if>
+    <if test="postCod != null" >
+      AND POST_COD = #{postCod,jdbcType=VARCHAR}
+    </if>
+    <if test="telephone != null" >
+      AND TELEPHONE = #{telephone,jdbcType=VARCHAR}
+    </if>
+    <if test="mob != null" >
+      AND MOB = #{mob,jdbcType=VARCHAR}
+    </if>
+    <if test="fax != null" >
+      AND FAX = #{fax,jdbcType=VARCHAR}
+    </if>
+    <if test="email != null" >
+      AND EMAIL = #{email,jdbcType=VARCHAR}
+    </if>
+    <if test="hasCreditCode != null" >
+      AND HAS_CREDIT_CODE = #{hasCreditCode,jdbcType=CHAR}
+    </if>
+    <if test="taxCod != null" >
+      AND TAX_COD = #{taxCod,jdbcType=VARCHAR}
+    </if>
+    <if test="dbusiLice != null" >
+      AND DBUSI_LICE = #{dbusiLice,jdbcType=VARCHAR}
+    </if>
+    <if test="orgCod != null" >
+      AND ORG_COD = #{orgCod,jdbcType=VARCHAR}
+    </if>
+    <if test="crdtCod != null" >
+      AND CRDT_COD = #{crdtCod,jdbcType=VARCHAR}
+    </if>
+    <if test="idst1 != null" >
+      AND IDST1 = #{idst1,jdbcType=VARCHAR}
+    </if>
+    <if test="idst2 != null" >
+      AND IDST2 = #{idst2,jdbcType=VARCHAR}
+    </if>
+    <if test="idst != null" >
+      AND IDST = #{idst,jdbcType=VARCHAR}
+    </if>
+    <if test="oprRng != null" >
+      AND OPR_RNG = #{oprRng,jdbcType=VARCHAR}
+    </if>
+    <if test="regCptl != null" >
+      AND REG_CPTL = #{regCptl,jdbcType=VARCHAR}
+    </if>
+    <if test="regTim != null" >
+      AND REG_TIM = #{regTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="cpnNtr != null" >
+      AND CPN_NTR = #{cpnNtr,jdbcType=CHAR}
+    </if>
+    <if test="lglUser != null" >
+      AND LGL_USER = #{lglUser,jdbcType=VARCHAR}
+    </if>
+    <if test="lglIdntCad != null" >
+      AND LGL_IDNT_CAD = #{lglIdntCad,jdbcType=VARCHAR}
+    </if>
+    <if test="trdePtnr != null" >
+      AND TRDE_PTNR = #{trdePtnr,jdbcType=VARCHAR}
+    </if>
+    <if test="isKeyAcnt != null" >
+      AND IS_KEY_ACNT = #{isKeyAcnt,jdbcType=CHAR}
+    </if>
+    <if test="suprGrup != null" >
+      AND SUPR_GRUP = #{suprGrup,jdbcType=VARCHAR}
+    </if>
+    <if test="parentCpn != null" >
+      AND PARENT_CPN = #{parentCpn,jdbcType=VARCHAR}
+    </if>
+    <if test="ctrlUsr != null" >
+      AND CTRL_USR = #{ctrlUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="aplyUsr != null" >
+      AND APLY_USR = #{aplyUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="aplyTim != null" >
+      AND APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="bpmSeqNo != null" >
+      AND BPM_SEQ_NO = #{bpmSeqNo,jdbcType=VARCHAR}
+    </if>
+    <if test="matTyp != null" >
+      AND MAT_TYP = #{matTyp,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null" >
+      AND REMARK = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="aplySts != null" >
+      AND APLY_STS = #{aplySts,jdbcType=VARCHAR}
+    </if>
+    <if test="adtMsg != null" >
+      AND ADT_MSG = #{adtMsg,jdbcType=VARCHAR}
+    </if>
+    <if test="mdmAplyUuid != null" >
+      AND MDM_APLY_UUID = #{mdmAplyUuid,jdbcType=VARCHAR}
+    </if>
+    <if test="mdmAplyMsg != null" >
+      AND MDM_APLY_MSG = #{mdmAplyMsg,jdbcType=VARCHAR}
+    </if>
+    <if test="matIds != null" >
+      and MAT_IDS = #{matIds,jdbcType=VARCHAR}
+    </if>
+    <if test="chkIds != null" >
+      and CHK_IDS = #{chkIds,jdbcType=VARCHAR}
+    </if>
+    <if test="seqNo != null" >
+      and SEQ_NO = #{seqNo,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrAptDefMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrAptDef" >
+    <id column="SPLR_APT_ID" property="splrAptId" jdbcType="DECIMAL" />
+    <result column="SPLR_TYP" property="splrTyp" jdbcType="VARCHAR" />
+    <result column="APT_DEF_ID" property="aptDefId" jdbcType="DECIMAL" />
+    <result column="REQUIRE" property="require" jdbcType="CHAR" />
+    <result column="DFF_FLG" property="dffFlg" jdbcType="CHAR" />
+    <result column="CRT_USR" property="crtUsr" jdbcType="DECIMAL" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SPLR_APT_ID, SPLR_TYP, APT_DEF_ID, REQUIRE, DFF_FLG, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_APT_DEF
+    where SPLR_APT_ID = #{splrAptId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_APT_DEF
+    where SPLR_APT_ID = #{splrAptId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrAptDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="splrAptId" order="BEFORE" >
+      select SPLR_APT_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_APT_DEF (SPLR_APT_ID, SPLR_TYP, APT_DEF_ID, 
+      REQUIRE, DFF_FLG, CRT_USR, 
+      CRT_TIM, MOD_USR, MOD_TIM
+      )
+    values (#{splrAptId,jdbcType=DECIMAL}, #{splrTyp,jdbcType=VARCHAR}, #{aptDefId,jdbcType=DECIMAL}, 
+      #{require,jdbcType=CHAR}, #{dffFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=DECIMAL}, 
+      #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=DECIMAL}, #{modTim,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrAptDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="splrAptId" order="BEFORE" >
+      select SPLR_APT_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_APT_DEF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      SPLR_APT_ID,
+      <if test="splrTyp != null" >
+        SPLR_TYP,
+      </if>
+      <if test="aptDefId != null" >
+        APT_DEF_ID,
+      </if>
+      <if test="require != null" >
+        REQUIRE,
+      </if>
+      <if test="dffFlg != null" >
+        DFF_FLG,
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{splrAptId,jdbcType=DECIMAL},
+      <if test="splrTyp != null" >
+        #{splrTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="aptDefId != null" >
+        #{aptDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="require != null" >
+        #{require,jdbcType=CHAR},
+      </if>
+      <if test="dffFlg != null" >
+        #{dffFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null" >
+        #{crtUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrAptDef" >
+    update T_SPLR_APT_DEF
+    <set >
+      <if test="splrTyp != null" >
+        SPLR_TYP = #{splrTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="aptDefId != null" >
+        APT_DEF_ID = #{aptDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="require != null" >
+        REQUIRE = #{require,jdbcType=CHAR},
+      </if>
+      <if test="dffFlg != null" >
+        DFF_FLG = #{dffFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR = #{crtUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SPLR_APT_ID = #{splrAptId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrAptDef" >
+    update T_SPLR_APT_DEF
+    set SPLR_TYP = #{splrTyp,jdbcType=VARCHAR},
+      APT_DEF_ID = #{aptDefId,jdbcType=DECIMAL},
+      REQUIRE = #{require,jdbcType=CHAR},
+      DFF_FLG = #{dffFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=DECIMAL},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where SPLR_APT_ID = #{splrAptId,jdbcType=DECIMAL}
+  </update>
+</mapper>

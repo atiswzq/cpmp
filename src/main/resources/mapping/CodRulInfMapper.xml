@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.CodRulInfMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.CodRulInf" >
+    <id column="COD_ID" property="codId" jdbcType="DECIMAL" />
+    <result column="ORG_COD" property="orgCod" jdbcType="VARCHAR" />
+    <result column="RUL_TYP" property="rulTyp" jdbcType="VARCHAR" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+    <result column="MON" property="mon" jdbcType="CHAR" />
+    <result column="SEQ" property="seq" jdbcType="DECIMAL" />
+    <result column="EFF_FLG" property="effFlg" jdbcType="CHAR" />
+    <result column="CRT_USR" property="crtUsr" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="VARCHAR" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COD_ID, ORG_COD, RUL_TYP, YEAR, MON, SEQ, EFF_FLG, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_COD_RUL_INF
+    where COD_ID = #{codId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_COD_RUL_INF
+    where COD_ID = #{codId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.CodRulInf" >
+    <selectKey resultType="java.lang.Long" keyProperty="codId" order="BEFORE" >
+      select COD_RUL_INF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_COD_RUL_INF (COD_ID, ORG_COD, RUL_TYP, 
+      YEAR, MON, SEQ, EFF_FLG, 
+      CRT_USR, CRT_TIM, MOD_USR, 
+      MOD_TIM)
+    values (#{codId,jdbcType=DECIMAL}, #{orgCod,jdbcType=VARCHAR}, #{rulTyp,jdbcType=VARCHAR}, 
+      #{year,jdbcType=VARCHAR}, #{mon,jdbcType=CHAR}, #{seq,jdbcType=DECIMAL}, #{effFlg,jdbcType=CHAR}, 
+      #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, 
+      #{modTim,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.CodRulInf" >
+    <selectKey resultType="java.lang.Long" keyProperty="codId" order="BEFORE" >
+      select COD_RUL_INF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_COD_RUL_INF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      COD_ID,
+      <if test="orgCod != null" >
+        ORG_COD,
+      </if>
+      <if test="rulTyp != null" >
+        RUL_TYP,
+      </if>
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="mon != null" >
+        MON,
+      </if>
+      <if test="seq != null" >
+        SEQ,
+      </if>
+      <if test="effFlg != null" >
+        EFF_FLG,
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{codId,jdbcType=DECIMAL},
+      <if test="orgCod != null" >
+        #{orgCod,jdbcType=VARCHAR},
+      </if>
+      <if test="rulTyp != null" >
+        #{rulTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="mon != null" >
+        #{mon,jdbcType=CHAR},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="effFlg != null" >
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null" >
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.CodRulInf" >
+    update T_COD_RUL_INF
+    <set >
+      <if test="orgCod != null" >
+        ORG_COD = #{orgCod,jdbcType=VARCHAR},
+      </if>
+      <if test="rulTyp != null" >
+        RUL_TYP = #{rulTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        YEAR = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="mon != null" >
+        MON = #{mon,jdbcType=CHAR},
+      </if>
+      <if test="seq != null" >
+        SEQ = #{seq,jdbcType=DECIMAL},
+      </if>
+      <if test="effFlg != null" >
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where COD_ID = #{codId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.CodRulInf" >
+    update T_COD_RUL_INF
+    set ORG_COD = #{orgCod,jdbcType=VARCHAR},
+      RUL_TYP = #{rulTyp,jdbcType=VARCHAR},
+      YEAR = #{year,jdbcType=VARCHAR},
+      MON = #{mon,jdbcType=CHAR},
+      SEQ = #{seq,jdbcType=DECIMAL},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where COD_ID = #{codId,jdbcType=DECIMAL}
+  </update>
+
+
+  <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT * FROM (
+    SELECT A.*,ROWNUM RN
+    FROM (
+    SELECT *
+    FROM T_COD_RUL_INF
+    WHERE 1 = 1
+    <if test="orgCod != null" >
+      AND ORG_COD = #{orgCod,jdbcType=VARCHAR}
+    </if>
+    <if test="rulTyp != null" >
+      AND RUL_TYP = #{rulTyp,jdbcType=VARCHAR}
+    </if>
+    <if test="year != null" >
+      AND YEAR = #{year,jdbcType=VARCHAR}
+    </if>
+    <if test="mon != null" >
+      AND MON = #{mon,jdbcType=CHAR}
+    </if>
+    <if test="seq != null" >
+      AND SEQ = #{seq,jdbcType=DECIMAL}
+    </if>
+    <if test="effFlg != null" >
+      AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+    </if>
+    <if test="crtUsr != null" >
+      AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null" >
+      AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="modUsr != null" >
+      AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="modTim != null" >
+      AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="desc != null and desc == 1">
+      ORDER BY SEQ DESC
+    </if>
+    ) A
+    WHERE
+    <choose>
+      <when test="limit > 0">
+        ROWNUM &lt;= #{limit}
+      </when>
+      <otherwise>
+        ROWNUM &lt;= 10000
+      </otherwise>
+    </choose>
+    ) TL
+    WHERE RN &gt;=#{start}
+  </select>
+
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SysParmMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SysParm" >
+    <id column="PARM_COD" property="parmCod" jdbcType="VARCHAR" />
+    <id column="PARM_TYP" property="parmTyp" jdbcType="CHAR" />
+    <result column="PARM_NAM" property="parmNam" jdbcType="VARCHAR" />
+    <result column="VAL_TYP" property="valTyp" jdbcType="CHAR" />
+    <result column="PARM_VAL" property="parmVal" jdbcType="VARCHAR" />
+    <result column="PARM_FROM" property="parmFrom" jdbcType="VARCHAR" />
+    <result column="PARM_TO" property="parmTo" jdbcType="VARCHAR" />
+    <result column="PARM_MEMO" property="parmMemo" jdbcType="VARCHAR" />
+    <result column="EFF_FLG" property="effFlg" jdbcType="CHAR" />
+    <result column="MNT_USR" property="mntUsr" jdbcType="VARCHAR" />
+    <result column="MNT_TIM" property="mntTim" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PARM_COD, PARM_TYP, PARM_NAM, VAL_TYP, PARM_VAL, PARM_FROM, PARM_TO, PARM_MEMO, EFF_FLG, 
+    MNT_USR, MNT_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.cofco.cpmp.entity.SysParmKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SYS_PARM
+    where PARM_COD = #{parmCod,jdbcType=VARCHAR}
+      and PARM_TYP = #{parmTyp,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from T_SYS_PARM
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SysParmKey" >
+    delete from T_SYS_PARM
+    where PARM_COD = #{parmCod,jdbcType=VARCHAR}
+      and PARM_TYP = #{parmTyp,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SysParm" >
+    insert into T_SYS_PARM (PARM_COD, PARM_TYP, PARM_NAM, 
+      VAL_TYP, PARM_VAL, PARM_FROM, 
+      PARM_TO, PARM_MEMO, EFF_FLG, 
+      MNT_USR, MNT_TIM)
+    values (#{parmCod,jdbcType=VARCHAR}, #{parmTyp,jdbcType=CHAR}, #{parmNam,jdbcType=VARCHAR}, 
+      #{valTyp,jdbcType=CHAR}, #{parmVal,jdbcType=VARCHAR}, #{parmFrom,jdbcType=VARCHAR}, 
+      #{parmTo,jdbcType=VARCHAR}, #{parmMemo,jdbcType=VARCHAR}, #{effFlg,jdbcType=CHAR}, 
+      #{mntUsr,jdbcType=VARCHAR}, #{mntTim,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SysParm" >
+    insert into T_SYS_PARM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="parmCod != null" >
+        PARM_COD,
+      </if>
+      <if test="parmTyp != null" >
+        PARM_TYP,
+      </if>
+      <if test="parmNam != null" >
+        PARM_NAM,
+      </if>
+      <if test="valTyp != null" >
+        VAL_TYP,
+      </if>
+      <if test="parmVal != null" >
+        PARM_VAL,
+      </if>
+      <if test="parmFrom != null" >
+        PARM_FROM,
+      </if>
+      <if test="parmTo != null" >
+        PARM_TO,
+      </if>
+      <if test="parmMemo != null" >
+        PARM_MEMO,
+      </if>
+      <if test="effFlg != null" >
+        EFF_FLG,
+      </if>
+      <if test="mntUsr != null" >
+        MNT_USR,
+      </if>
+      <if test="mntTim != null" >
+        MNT_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="parmCod != null" >
+        #{parmCod,jdbcType=VARCHAR},
+      </if>
+      <if test="parmTyp != null" >
+        #{parmTyp,jdbcType=CHAR},
+      </if>
+      <if test="parmNam != null" >
+        #{parmNam,jdbcType=VARCHAR},
+      </if>
+      <if test="valTyp != null" >
+        #{valTyp,jdbcType=CHAR},
+      </if>
+      <if test="parmVal != null" >
+        #{parmVal,jdbcType=VARCHAR},
+      </if>
+      <if test="parmFrom != null" >
+        #{parmFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="parmTo != null" >
+        #{parmTo,jdbcType=VARCHAR},
+      </if>
+      <if test="parmMemo != null" >
+        #{parmMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null" >
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="mntUsr != null" >
+        #{mntUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="mntTim != null" >
+        #{mntTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SysParm" >
+    update T_SYS_PARM
+    <set >
+      <if test="parmNam != null" >
+        PARM_NAM = #{parmNam,jdbcType=VARCHAR},
+      </if>
+      <if test="valTyp != null" >
+        VAL_TYP = #{valTyp,jdbcType=CHAR},
+      </if>
+      <if test="parmVal != null" >
+        PARM_VAL = #{parmVal,jdbcType=VARCHAR},
+      </if>
+      <if test="parmFrom != null" >
+        PARM_FROM = #{parmFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="parmTo != null" >
+        PARM_TO = #{parmTo,jdbcType=VARCHAR},
+      </if>
+      <if test="parmMemo != null" >
+        PARM_MEMO = #{parmMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null" >
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="mntUsr != null" >
+        MNT_USR = #{mntUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="mntTim != null" >
+        MNT_TIM = #{mntTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PARM_COD = #{parmCod,jdbcType=VARCHAR}
+      and PARM_TYP = #{parmTyp,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SysParm" >
+    update T_SYS_PARM
+    set PARM_NAM = #{parmNam,jdbcType=VARCHAR},
+      VAL_TYP = #{valTyp,jdbcType=CHAR},
+      PARM_VAL = #{parmVal,jdbcType=VARCHAR},
+      PARM_FROM = #{parmFrom,jdbcType=VARCHAR},
+      PARM_TO = #{parmTo,jdbcType=VARCHAR},
+      PARM_MEMO = #{parmMemo,jdbcType=VARCHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      MNT_USR = #{mntUsr,jdbcType=VARCHAR},
+      MNT_TIM = #{mntTim,jdbcType=TIMESTAMP}
+    where PARM_COD = #{parmCod,jdbcType=VARCHAR}
+      and PARM_TYP = #{parmTyp,jdbcType=CHAR}
+  </update>
+</mapper>

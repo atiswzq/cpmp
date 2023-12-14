@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.KpiDefMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.KpiDef" >
+    <id column="KPI_ID" property="kpiId" jdbcType="DECIMAL" />
+    <result column="KPI_TYP_ID" property="kpiTypId" jdbcType="DECIMAL" />
+    <result column="KPI_NAM" property="kpiNam" jdbcType="VARCHAR" />
+    <result column="KPI_WGT" property="kpiWgt" jdbcType="DECIMAL" />
+    <result column="DSPY_ORDER" property="dspyOrder" jdbcType="DECIMAL" />
+    <result column="DEF_FLG" property="defFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    KPI_ID, KPI_TYP_ID, KPI_NAM, KPI_WGT, DSPY_ORDER, DEF_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_KPI_DEF
+    where KPI_ID = #{kpiId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_KPI_DEF
+    where KPI_ID = #{kpiId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.KpiDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="kpiId" order="BEFORE" >
+      select KPI_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_KPI_DEF (KPI_ID, KPI_TYP_ID, KPI_NAM, 
+      KPI_WGT, DSPY_ORDER, DEF_FLG
+      )
+    values (#{kpiId,jdbcType=DECIMAL}, #{kpiTypId,jdbcType=DECIMAL}, #{kpiNam,jdbcType=VARCHAR}, 
+      #{kpiWgt,jdbcType=DECIMAL}, #{dspyOrder,jdbcType=DECIMAL}, #{defFlg,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.KpiDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="kpiId" order="BEFORE" >
+      select KPI_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_KPI_DEF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      KPI_ID,
+      <if test="kpiTypId != null" >
+        KPI_TYP_ID,
+      </if>
+      <if test="kpiNam != null" >
+        KPI_NAM,
+      </if>
+      <if test="kpiWgt != null" >
+        KPI_WGT,
+      </if>
+      <if test="dspyOrder != null" >
+        DSPY_ORDER,
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{kpiId,jdbcType=DECIMAL},
+      <if test="kpiTypId != null" >
+        #{kpiTypId,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiNam != null" >
+        #{kpiNam,jdbcType=VARCHAR},
+      </if>
+      <if test="kpiWgt != null" >
+        #{kpiWgt,jdbcType=DECIMAL},
+      </if>
+      <if test="dspyOrder != null" >
+        #{dspyOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="defFlg != null" >
+        #{defFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.KpiDef" >
+    update T_KPI_DEF
+    <set >
+      <if test="kpiTypId != null" >
+        KPI_TYP_ID = #{kpiTypId,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiNam != null" >
+        KPI_NAM = #{kpiNam,jdbcType=VARCHAR},
+      </if>
+      <if test="kpiWgt != null" >
+        KPI_WGT = #{kpiWgt,jdbcType=DECIMAL},
+      </if>
+      <if test="dspyOrder != null" >
+        DSPY_ORDER = #{dspyOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG = #{defFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where KPI_ID = #{kpiId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.KpiDef" >
+    update T_KPI_DEF
+    set KPI_TYP_ID = #{kpiTypId,jdbcType=DECIMAL},
+      KPI_NAM = #{kpiNam,jdbcType=VARCHAR},
+      KPI_WGT = #{kpiWgt,jdbcType=DECIMAL},
+      DSPY_ORDER = #{dspyOrder,jdbcType=DECIMAL},
+      DEF_FLG = #{defFlg,jdbcType=CHAR}
+    where KPI_ID = #{kpiId,jdbcType=DECIMAL}
+  </update>
+</mapper>

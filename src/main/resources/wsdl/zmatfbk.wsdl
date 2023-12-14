@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_MaterialStatus_Out" targetNamespace="http://www.cofco.com/segment/material" xmlns:p1="http://www.cofco.com/segment/material" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation/>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="OP_SI_MaterialStatus_Out"/>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.cofco.com/segment/material" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.cofco.com/segment/material">
+      <xsd:element name="MT_MaterialStatus" type="DT_MaterialStatus"/>
+      <xsd:complexType name="DT_MaterialStatus">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">48c313a809fd11e7b8e60000003df19e</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="FEEDBACK" maxOccurs="unbounded">
+            <xsd:annotation>
+              <xsd:appinfo source="http://sap.com/xi/TextID">8b6eb113fe3811e6b28a00059a3c7a00</xsd:appinfo>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="MATCODE" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">8b6eb10ffe3811e6bd6e00059a3c7a00</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="TARGET_SYSTEM" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">8b6eb110fe3811e6b70b00059a3c7a00</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="SYN_STATUS" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">8b6eb111fe3811e6ce0700059a3c7a00</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="FEEDBACK_MSG" type="xsd:string">
+                  <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/TextID">8b6eb112fe3811e6b09400059a3c7a00</xsd:appinfo>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MT_MaterialStatus">
+    <wsdl:documentation/>
+    <wsdl:part name="MT_MaterialStatus" element="p1:MT_MaterialStatus"/>
+  </wsdl:message>
+  <wsdl:portType name="SI_MaterialStatus_Out">
+    <wsdl:documentation/>
+    <wsdl:operation name="SI_MaterialStatus_Out">
+      <wsdl:documentation/>
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_SI_MaterialStatus_Out"/>
+      </wsp:Policy>
+      <wsdl:input message="p1:MT_MaterialStatus"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SI_MaterialStatus_OutBinding" type="p1:SI_MaterialStatus_Out">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    <wsdl:operation name="SI_MaterialStatus_Out">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SI_MaterialStatus_OutService">
+    <wsdl:port name="HTTP_Port" binding="p1:SI_MaterialStatus_OutBinding">
+      <soap:address location="http://hqpiaprd01.cofco.com:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_GOS_PI&amp;receiverParty=&amp;receiverService=&amp;interface=SI_MaterialStatus_Out&amp;interfaceNamespace=http%3A%2F%2Fwww.cofco.com%2Fsegment%2Fmaterial" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:SI_MaterialStatus_OutBinding">
+      <soap:address location="https://hqpiaprd01.cofco.com:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_GOS_PI&amp;receiverParty=&amp;receiverService=&amp;interface=SI_MaterialStatus_Out&amp;interfaceNamespace=http%3A%2F%2Fwww.cofco.com%2Fsegment%2Fmaterial" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

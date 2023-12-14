@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrReActMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrReActive" >
+    <id column="RE_ACT_APLY_ID" property="aplyId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" 			property="splrId" 			jdbcType="DECIMAL" />
+    <result column="SPLR_STS" 			property="splrSts" 			jdbcType="CHAR" />
+    <result column="APLY_ORG" 			property="aplyOrg" 			jdbcType="VARCHAR" />
+    <result column="RE_ACTIVE_CTT" 		property="reActiveCtt" 		jdbcType="VARCHAR" />
+    <result column="APLY_USR" 			property="aplyUsr" 			jdbcType="DECIMAL" />
+    <result column="APLY_TIM" 			property="aplyTim" 			jdbcType="TIMESTAMP" />
+    <result column="APLY_STS" 			property="aplySts" 			jdbcType="CHAR" />
+    <result column="RE_ACT_DEPT_ADT_MSG" property="reActDeptAdtMsg" jdbcType="VARCHAR" />
+    <result column="RE_ACT_DEPT_ADT_STS" property="reActDeptAdtSts" jdbcType="CHAR" />
+    <result column="RE_ACT_SPLR_MNG_ADT_MSG" property="reActSplrMngAdtMsg" jdbcType="VARCHAR" />
+    <result column="RE_ACT_SPLR_MNG_ADT_STS" property="reActSplrMngAdtSts" jdbcType="CHAR" />
+    <result column="SPLR_MNG_NAM" 		property="splrMngNam" 		jdbcType="VARCHAR" />
+    <result column="RE_ACTIVE_TIM" 		property="reActiveTim" 		jdbcType="TIMESTAMP" />
+    <result column="RE_ACTIVE_MSG" 		property="reActiveMsg" 		jdbcType="VARCHAR" />
+    <result column="DEL_FLG" 			property="delFlg" 			jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RE_ACT_APLY_ID, SPLR_ID, APLY_ORG, RE_ACTIVE_CTT, APLY_USR, APLY_TIM, 
+    APLY_STS, RE_ACT_DEPT_ADT_MSG, RE_ACT_DEPT_ADT_STS, RE_ACT_SPLR_MNG_ADT_MSG, RE_ACT_SPLR_MNG_ADT_STS,
+    DEL_FLG, SPLR_MNG_NAM, RE_ACTIVE_TIM, SPLR_STS, RE_ACTIVE_MSG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_WDOT_RE_ACTIVE
+    where RE_ACT_APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_WDOT_RE_ACTIVE
+    where RE_ACT_APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrReActive" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_WDOT_RE_ACTIVE_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_WDOT_RE_ACTIVE (RE_ACT_APLY_ID, SPLR_ID, APLY_ORG, 
+      RE_ACTIVE_CTT, APLY_USR, APLY_TIM, 
+      APLY_STS, RE_ACT_DEPT_ADT_MSG, RE_ACT_DEPT_ADT_STS,
+      RE_ACT_SPLR_MNG_ADT_MSG, RE_ACT_SPLR_MNG_ADT_STS, DEL_FLG, 
+      SPLR_MNG_NAM, RE_ACTIVE_TIM, SPLR_STS, RE_ACTIVE_MSG)
+    values (#{aplyId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{aplyOrg,jdbcType=VARCHAR}, 
+      #{reActiveCtt,jdbcType=VARCHAR}, #{aplyUsr,jdbcType=DECIMAL}, #{aplyTim,jdbcType=TIMESTAMP}, 
+      #{aplySts,jdbcType=CHAR}, #{reActDeptAdtMsg,jdbcType=VARCHAR}, #{reActDeptAdtSts,jdbcType=CHAR}, 
+      #{reActSplrMngAdtMsg,jdbcType=VARCHAR}, #{reActSplrMngAdtSts,jdbcType=CHAR},
+      #{delFlg,jdbcType=CHAR}, #{splrMngNam,jdbcType=VARCHAR} , 
+      #{reActiveTim,jdbcType=TIMESTAMP}, #{splrSts,jdbcType=CHAR}, #{reActiveMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrReActive" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_WDOT_RE_ACTIVE_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_WDOT_RE_ACTIVE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      RE_ACT_APLY_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="aplyOrg != null" >
+        APLY_ORG,
+      </if>
+      <if test="reActiveCtt != null" >
+        RE_ACTIVE_CTT,
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR,
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM,
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS,
+      </if>
+      <if test="reActDeptAdtMsg != null" >
+        RE_ACT_DEPT_ADT_MSG,
+      </if>
+      <if test="reActDeptAdtSts != null" >
+        RE_ACT_DEPT_ADT_STS,
+      </if>
+      <if test="reActSplrMngAdtMsg != null" >
+        RE_ACT_SPLR_MNG_ADT_MSG,
+      </if>
+      <if test="reActSplrMngAdtSts != null" >
+        RE_ACT_SPLR_MNG_ADT_STS,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+      <if test="splrMngNam != null" >
+        SPLR_MNG_NAM,
+      </if>
+      <if test="splrSts != null" >
+        SPLR_STS,
+      </if>
+      <if test="reActiveMsg != null" >
+        RE_ACTIVE_MSG,
+      </if>
+      <if test="reActiveTim != null" >
+        RE_ACTIVE_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aplyId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyOrg != null" >
+        #{aplyOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActiveCtt != null" >
+        #{reActiveCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplySts != null" >
+        #{aplySts,jdbcType=CHAR},
+      </if>
+      <if test="reActDeptAdtMsg != null" >
+        #{reActDeptAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActDeptAdtSts != null" >
+        #{reActDeptAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="reActSplrMngAdtMsg != null" >
+        #{reActSplrMngAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActSplrMngAdtSts != null" >
+        #{reActSplrMngAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="splrMngNam != null" >
+        #{splrMngNam,jdbcType=VARCHAR},
+      </if>
+      <if test="splrSts != null" >
+        #{splrSts,jdbcType=CHAR},
+      </if>
+      <if test="reActiveMsg != null" >
+        #{reActiveMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActiveTim != null" >
+        #{reActiveTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrReActive" >
+    update T_SPLR_WDOT_RE_ACTIVE
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyOrg != null" >
+        APLY_ORG = #{aplyOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActiveCtt != null" >
+        RE_ACTIVE_CTT = #{reActiveCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS = #{aplySts,jdbcType=CHAR},
+      </if>
+      <if test="reActDeptAdtMsg != null" >
+        RE_ACT_DEPT_ADT_MSG = #{reActDeptAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActDeptAdtSts != null" >
+        RE_ACT_DEPT_ADT_STS = #{reActDeptAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="reActSplrMngAdtMsg != null" >
+        RE_ACT_SPLR_MNG_ADT_MSG = #{reActSplrMngAdtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActSplrMngAdtSts != null" >
+        RE_ACT_SPLR_MNG_ADT_STS = #{reActSplrMngAdtSts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="splrMngNam != null" >
+        SPLR_MAN_NAM = #{splrMngNam,jdbcType=VARCHAR},
+      </if>
+      <if test="splrSts != null" >
+        SPLR_STS = #{splrSts,jdbcType=CHAR},
+      </if>
+      <if test="reActiveMsg != null" >
+        RE_ACTIVE_MSG = #{reActiveMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="reActiveTim != null" >
+        RE_ACTIVE_TIM = #{reActiveTim,jdbcType=TIMESTAMP}
+      </if>
+    </set>
+    where RE_ACT_APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrReActive" >
+    update T_SPLR_WDOT_RE_ACTIVE
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      APLY_ORG = #{aplyOrg,jdbcType=VARCHAR},
+      RE_ACTIVE_CTT = #{reActiveCtt,jdbcType=VARCHAR},
+      APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      APLY_STS = #{aplySts,jdbcType=CHAR},
+      RE_ACT_DEPT_ADT_MSG = #{reActDeptAdtMsg,jdbcType=VARCHAR},
+      RE_ACT_DEPT_ADT_STS = #{reActDeptAdtSts,jdbcType=CHAR},
+      RE_ACT_SPLR_MNG_ADT_MSG = #{reActSplrMngAdtMsg,jdbcType=VARCHAR},
+      RE_ACT_SPLR_MNG_ADT_STS = #{reActSplrMngAdtSts,jdbcType=CHAR},
+      DEL_FLG = #{delFlg,jdbcType=CHAR},
+      SPLR_MAN_NAM = #{splrMngNam,jdbcType=VARCHAR},
+      SPLR_STS = #{splrSts,jdbcType=CHAR},
+      RE_ACTIVE_MSG = #{reActiveMsg,jdbcType=VARCHAR},
+      RE_ACTIVE_TIM = #{reActiveTim,jdbcType=TIMESTAMP}
+    where RE_ACT_APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from T_SPLR_WDOT_RE_ACTIVE
+    where 1=1
+    <if test="splrId != null" >
+        AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+      </if>
+      <if test="aplyOrg != null" >
+        AND APLY_ORG = #{aplyOrg,jdbcType=VARCHAR}
+      </if>
+      <if test="reActiveCtt != null" >
+        AND RE_ACTIVE_CTT = #{reActiveCtt,jdbcType=VARCHAR}
+      </if>
+      <if test="aplyUsr != null" >
+        AND APLY_USR = #{aplyUsr,jdbcType=DECIMAL}
+      </if>
+      <if test="aplyTim != null" >
+        AND APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP}
+      </if>
+      <if test="aplySts != null" >
+        AND APLY_STS = #{aplySts,jdbcType=CHAR}
+      </if>
+      <if test="reActDeptAdtMsg != null" >
+        AND RE_ACT_DEPT_ADT_MSG = #{reActDeptAdtMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="reActDeptAdtSts != null" >
+        AND RE_ACT_DEPT_ADT_STS = #{reActDeptAdtSts,jdbcType=CHAR}
+      </if>
+      <if test="reActSplrMngAdtMsg != null" >
+        AND RE_ACT_SPLR_MNG_ADT_MSG = #{reActSplrMngAdtMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="splrMngAdtSts != null" >
+        AND RE_ACT_SPLR_MNG_ADT_STS = #{reActSplrMngAdtSts,jdbcType=CHAR}
+      </if>
+      <if test="delFlg != null" >
+        AND DEL_FLG = #{delFlg,jdbcType=CHAR}
+      </if>
+      <if test="splrMngNam != null" >
+        AND SPLR_MAN_NAM = #{splrMngNam,jdbcType=VARCHAR}
+      </if>
+      <if test="splrSts != null" >
+        AND SPLR_STS = #{splrSts,jdbcType=CHAR}
+      </if>
+      <if test="reActiveMsg != null" >
+        AND RE_ACTIVE_MSG = #{reActiveMsg,jdbcType=VARCHAR}
+      </if>
+      <if test="reActiveTim != null" >
+        AND RE_ACTIVE_TIM = #{reActiveTim,jdbcType=TIMESTAMP}
+      </if>
+  </select>
+  
+</mapper>

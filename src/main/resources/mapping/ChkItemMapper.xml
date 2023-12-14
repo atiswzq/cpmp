@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.ChkItemMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.ChkItem" >
+    <id column="CHK_ITEM_ID" property="chkItemId" jdbcType="DECIMAL" />
+    <result column="CHK_DEF_ID" property="chkDefId" jdbcType="DECIMAL" />
+    <result column="DSPY_ORDER" property="dspyOrder" jdbcType="DECIMAL" />
+    <result column="KPI_ID" property="kpiId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CHK_ITEM_ID, CHK_DEF_ID, DSPY_ORDER, KPI_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CHK_ITEM
+    where CHK_ITEM_ID = #{chkItemId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_CHK_ITEM
+    where CHK_ITEM_ID = #{chkItemId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.ChkItem" >
+    <selectKey resultType="java.lang.Long" keyProperty="chkItemId" order="BEFORE" >
+      select CHK_ITEM_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_CHK_ITEM (CHK_ITEM_ID, CHK_DEF_ID, DSPY_ORDER, 
+      KPI_ID)
+    values (#{chkItemId,jdbcType=DECIMAL}, #{chkDefId,jdbcType=DECIMAL}, #{dspyOrder,jdbcType=DECIMAL}, 
+      #{kpiId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.ChkItem" >
+    <selectKey resultType="java.lang.Long" keyProperty="chkItemId" order="BEFORE" >
+      select CHK_ITEM_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_CHK_ITEM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      CHK_ITEM_ID,
+      <if test="chkDefId != null" >
+        CHK_DEF_ID,
+      </if>
+      <if test="dspyOrder != null" >
+        DSPY_ORDER,
+      </if>
+      <if test="kpiId != null" >
+        KPI_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{chkItemId,jdbcType=DECIMAL},
+      <if test="chkDefId != null" >
+        #{chkDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="dspyOrder != null" >
+        #{dspyOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiId != null" >
+        #{kpiId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.ChkItem" >
+    update T_CHK_ITEM
+    <set >
+      <if test="chkDefId != null" >
+        CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL},
+      </if>
+      <if test="dspyOrder != null" >
+        DSPY_ORDER = #{dspyOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="kpiId != null" >
+        KPI_ID = #{kpiId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CHK_ITEM_ID = #{chkItemId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.ChkItem" >
+    update T_CHK_ITEM
+    set CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL},
+      DSPY_ORDER = #{dspyOrder,jdbcType=DECIMAL},
+      KPI_ID = #{kpiId,jdbcType=DECIMAL}
+    where CHK_ITEM_ID = #{chkItemId,jdbcType=DECIMAL}
+  </update>
+</mapper>

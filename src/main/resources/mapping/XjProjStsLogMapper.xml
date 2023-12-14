@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.XjProjStsLogMapper">
+    <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.XjProjStsLog">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="PROJ_ID" property="projId" jdbcType="DECIMAL"/>
+        <result column="PROJ_NAM" property="projNam" jdbcType="VARCHAR"/>
+        <result column="PROJ_STS" property="projSts" jdbcType="CHAR"/>
+        <result column="STS_UPD_TIM" property="stsUpdTim" jdbcType="TIMESTAMP"/>
+        <result column="UPD_USR" property="updUsr" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, PROJ_ID, PROJ_NAM, PROJ_STS, STS_UPD_TIM, UPD_USR
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from T_XJ_PROJ_STS_LOG
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_XJ_PROJ_STS_LOG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="cn.cofco.cpmp.entity.XjProjStsLog">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE">
+            select XJ_PROJ_STS_LOG_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ_STS_LOG (ID, PROJ_ID, PROJ_NAM,
+        PROJ_STS, STS_UPD_TIM, UPD_USR
+        )
+        values (#{id,jdbcType=DECIMAL}, #{projId,jdbcType=DECIMAL}, #{projNam,jdbcType=VARCHAR},
+        #{projSts,jdbcType=CHAR}, #{stsUpdTim,jdbcType=TIMESTAMP}, #{updUsr,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.XjProjStsLog">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE">
+            select XJ_PROJ_STS_LOG_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ_STS_LOG
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="projId != null">
+                PROJ_ID,
+            </if>
+            <if test="projNam != null">
+                PROJ_NAM,
+            </if>
+            <if test="projSts != null">
+                PROJ_STS,
+            </if>
+            <if test="stsUpdTim != null">
+                STS_UPD_TIM,
+            </if>
+            <if test="updUsr != null">
+                UPD_USR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id,jdbcType=DECIMAL},
+            <if test="projId != null">
+                #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="projNam != null">
+                #{projNam,jdbcType=VARCHAR},
+            </if>
+            <if test="projSts != null">
+                #{projSts,jdbcType=CHAR},
+            </if>
+            <if test="stsUpdTim != null">
+                #{stsUpdTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updUsr != null">
+                #{updUsr,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.XjProjStsLog">
+        update T_XJ_PROJ_STS_LOG
+        <set>
+            <if test="projId != null">
+                PROJ_ID = #{projId,jdbcType=DECIMAL},
+            </if>
+            <if test="projNam != null">
+                PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+            </if>
+            <if test="projSts != null">
+                PROJ_STS = #{projSts,jdbcType=CHAR},
+            </if>
+            <if test="stsUpdTim != null">
+                STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updUsr != null">
+                UPD_USR = #{updUsr,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.XjProjStsLog">
+    update T_XJ_PROJ_STS_LOG
+    set PROJ_ID = #{projId,jdbcType=DECIMAL},
+      PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+      PROJ_STS = #{projSts,jdbcType=CHAR},
+      STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP},
+      UPD_USR = #{updUsr,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+    <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        SELECT *
+        FROM T_XJ_PROJ_STS_LOG
+        WHERE 1 = 1
+        <if test="projId != null">
+            AND PROJ_ID = #{projId,jdbcType=DECIMAL}
+        </if>
+        ORDER BY STS_UPD_TIM DESC
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.ArtclMapper">
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.Artcl">
+    <id column="ARTCL_ID" jdbcType="DECIMAL" property="artclId" />
+    <result column="ARTCL_TYP_COD" jdbcType="CHAR" property="artclTypCod" />
+    <result column="ARTCL_TTL" jdbcType="VARCHAR" property="artclTtl" />
+    <result column="PUB_FLG" jdbcType="CHAR" property="pubFlg" />
+    <result column="CLK_CNT" jdbcType="DECIMAL" property="clkCnt" />
+    <result column="EFF_FLG" jdbcType="CHAR" property="effFlg" />
+    <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr" />
+    <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim" />
+    <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr" />
+    <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim" />
+    <result column="PUB_USR" jdbcType="VARCHAR" property="pubUsr" />
+    <result column="PUB_TIM" jdbcType="TIMESTAMP" property="pubTim" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.cofco.cpmp.entity.Artcl">
+    <result column="ARTCL_CTT" jdbcType="CLOB" property="artclCtt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ARTCL_ID, ARTCL_TYP_COD, ARTCL_TTL, PUB_FLG, CLK_CNT, EFF_FLG, CRT_USR, CRT_TIM, 
+    MOD_USR, MOD_TIM, PUB_USR, PUB_TIM
+  </sql>
+  <sql id="Blob_Column_List">
+    ARTCL_CTT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from T_ARTCL
+    where ARTCL_ID = #{artclId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_ARTCL
+    where ARTCL_ID = #{artclId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.Artcl">
+    <selectKey keyProperty="artclId" order="BEFORE" resultType="java.lang.Long">
+      select ARTCL_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_ARTCL (ARTCL_ID, ARTCL_TYP_COD, ARTCL_TTL, 
+      PUB_FLG, CLK_CNT, EFF_FLG, CRT_USR, 
+      CRT_TIM, MOD_USR, MOD_TIM, 
+      PUB_USR, PUB_TIM, ARTCL_CTT
+      )
+    values (#{artclId,jdbcType=DECIMAL}, #{artclTypCod,jdbcType=CHAR}, #{artclTtl,jdbcType=VARCHAR}, 
+      #{pubFlg,jdbcType=CHAR}, #{clkCnt,jdbcType=DECIMAL}, #{effFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=VARCHAR}, 
+      #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP}, 
+      #{pubUsr,jdbcType=VARCHAR}, #{pubTim,jdbcType=TIMESTAMP}, #{artclCtt,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.Artcl">
+    <selectKey keyProperty="artclId" order="BEFORE" resultType="java.lang.Long">
+      select ARTCL_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_ARTCL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ARTCL_ID,
+      <if test="artclTypCod != null">
+        ARTCL_TYP_COD,
+      </if>
+      <if test="artclTtl != null">
+        ARTCL_TTL,
+      </if>
+      <if test="pubFlg != null">
+        PUB_FLG,
+      </if>
+      <if test="clkCnt != null">
+        CLK_CNT,
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG,
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR,
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null">
+        MOD_USR,
+      </if>
+      <if test="modTim != null">
+        MOD_TIM,
+      </if>
+      <if test="pubUsr != null">
+        PUB_USR,
+      </if>
+      <if test="pubTim != null">
+        PUB_TIM,
+      </if>
+      <if test="artclCtt != null">
+        ARTCL_CTT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{artclId,jdbcType=DECIMAL},
+      <if test="artclTypCod != null">
+        #{artclTypCod,jdbcType=CHAR},
+      </if>
+      <if test="artclTtl != null">
+        #{artclTtl,jdbcType=VARCHAR},
+      </if>
+      <if test="pubFlg != null">
+        #{pubFlg,jdbcType=CHAR},
+      </if>
+      <if test="clkCnt != null">
+        #{clkCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="effFlg != null">
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubUsr != null">
+        #{pubUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTim != null">
+        #{pubTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="artclCtt != null">
+        #{artclCtt,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.Artcl">
+    update T_ARTCL
+    <set>
+      <if test="artclTypCod != null">
+        ARTCL_TYP_COD = #{artclTypCod,jdbcType=CHAR},
+      </if>
+      <if test="artclTtl != null">
+        ARTCL_TTL = #{artclTtl,jdbcType=VARCHAR},
+      </if>
+      <if test="pubFlg != null">
+        PUB_FLG = #{pubFlg,jdbcType=CHAR},
+      </if>
+      <if test="clkCnt != null">
+        CLK_CNT = #{clkCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pubUsr != null">
+        PUB_USR = #{pubUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTim != null">
+        PUB_TIM = #{pubTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="artclCtt != null">
+        ARTCL_CTT = #{artclCtt,jdbcType=CLOB},
+      </if>
+    </set>
+    where ARTCL_ID = #{artclId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.cofco.cpmp.entity.Artcl">
+    update T_ARTCL
+    set ARTCL_TYP_COD = #{artclTypCod,jdbcType=CHAR},
+      ARTCL_TTL = #{artclTtl,jdbcType=VARCHAR},
+      PUB_FLG = #{pubFlg,jdbcType=CHAR},
+      CLK_CNT = #{clkCnt,jdbcType=DECIMAL},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      PUB_USR = #{pubUsr,jdbcType=VARCHAR},
+      PUB_TIM = #{pubTim,jdbcType=TIMESTAMP},
+      ARTCL_CTT = #{artclCtt,jdbcType=CLOB}
+    where ARTCL_ID = #{artclId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.Artcl">
+    update T_ARTCL
+    set ARTCL_TYP_COD = #{artclTypCod,jdbcType=CHAR},
+      ARTCL_TTL = #{artclTtl,jdbcType=VARCHAR},
+      PUB_FLG = #{pubFlg,jdbcType=CHAR},
+      CLK_CNT = #{clkCnt,jdbcType=DECIMAL},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      PUB_USR = #{pubUsr,jdbcType=VARCHAR},
+      PUB_TIM = #{pubTim,jdbcType=TIMESTAMP}
+    where ARTCL_ID = #{artclId,jdbcType=DECIMAL}
+  </update>
+
+  <select id="countByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+    select
+    COUNT (1)
+    from T_ARTCL
+    WHERE 1 = 1
+    <if test="artclTypCod != null">
+      AND ARTCL_TYP_COD = #{artclTypCod,jdbcType=CHAR}
+    </if>
+    <if test="artclTtl != null">
+      AND ARTCL_TTL LIKE '%' || #{artclTtl,jdbcType=VARCHAR} || '%'
+    </if>
+    <if test="pubFlg != null">
+      AND PUB_FLG = #{pubFlg,jdbcType=CHAR}
+    </if>
+    <if test="clkCnt != null">
+      AND CLK_CNT = #{clkCnt,jdbcType=DECIMAL}
+    </if>
+    <if test="effFlg != null">
+      AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+    </if>
+    <if test="crtUsr != null">
+      AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null">
+      AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="modUsr != null">
+      AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="modTim != null">
+      AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="pubUsr != null">
+      AND PUB_USR = #{pubUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="pubTim != null">
+      AND PUB_TIM = #{pubTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="artclCtt != null">
+      AND ARTCL_CTT = #{artclCtt,jdbcType=CLOB}
+    </if>
+  </select>
+
+
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM (
+    SELECT A.*,ROWNUM RN
+    FROM (
+    SELECT *
+    FROM T_ARTCL
+    WHERE 1 = 1
+      <if test="artclTypCod != null">
+          AND ARTCL_TYP_COD = #{artclTypCod,jdbcType=CHAR}
+      </if>
+      <if test="artclTtl != null">
+          AND ARTCL_TTL LIKE '%' || #{artclTtl,jdbcType=VARCHAR} || '%'
+      </if>
+      <if test="pubFlg != null">
+          AND PUB_FLG = #{pubFlg,jdbcType=CHAR}
+      </if>
+      <if test="clkCnt != null">
+          AND CLK_CNT = #{clkCnt,jdbcType=DECIMAL}
+      </if>
+      <if test="effFlg != null">
+          AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+      </if>
+      <if test="crtUsr != null">
+          AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+      </if>
+      <if test="crtTim != null">
+          AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modUsr != null">
+          AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+      </if>
+      <if test="modTim != null">
+          AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pubUsr != null">
+          AND PUB_USR = #{pubUsr,jdbcType=VARCHAR}
+      </if>
+      <if test="pubTim != null">
+          AND PUB_TIM = #{pubTim,jdbcType=TIMESTAMP}
+      </if>
+      <if test="artclCtt != null">
+          AND ARTCL_CTT = #{artclCtt,jdbcType=CLOB}
+      </if>
+      <if test="desc != null and desc = '1'">
+          ORDER BY PUB_TIM DESC, CRT_TIM DESC, MOD_TIM DESC
+      </if>
+    ) A
+    WHERE
+    <choose>
+      <when test="limit > 0">
+        ROWNUM &lt;= #{limit}
+      </when>
+      <otherwise>
+        ROWNUM &lt;= 10000
+      </otherwise>
+    </choose>
+    ) TL
+    WHERE RN &gt;=#{start}
+  </select>
+</mapper>

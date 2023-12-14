@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.MatMapper">
+	<resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.Mat">
+		<id column="MAT_ID" property="matId" jdbcType="DECIMAL" />
+		<result column="MAT_NAM" property="matNam" jdbcType="VARCHAR" />
+		<result column="MAT_COD" property="matCod" jdbcType="VARCHAR" />
+		<result column="MAT_IND" property="matInd" jdbcType="CHAR" />
+		<result column="MAT_TYP" property="matTyp" jdbcType="CHAR" />
+		<result column="MAT_GRUP" property="matGrup" jdbcType="VARCHAR" />
+		<result column="UNT" property="unt" jdbcType="CHAR" />
+		<result column="PROD_GRUP" property="prodGrup" jdbcType="CHAR" />
+		<result column="PRCS_NBR" property="prcsNbr" jdbcType="VARCHAR" />
+		<result column="MAT_DSCB" property="matDscb" jdbcType="VARCHAR" />
+		<result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+		<result column="MAT_SPFT" property="matSpft" jdbcType="VARCHAR" />
+		<result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+		<result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		MAT_ID, MAT_NAM, MAT_COD, MAT_IND, MAT_TYP, MAT_GRUP, UNT, PROD_GRUP, PRCS_NBR,
+		MAT_DSCB,
+		DEL_FLG, MAT_SPFT, MOD_USR, MOD_TIM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from T_MAT
+		where MAT_ID = #{matId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from T_MAT
+		where MAT_ID = #{matId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="cn.cofco.cpmp.entity.Mat">
+		<selectKey resultType="java.lang.Long" keyProperty="matId"
+			order="BEFORE">
+			select MAT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_MAT (MAT_ID, MAT_NAM, MAT_COD, MAT_IND,
+		MAT_TYP, MAT_GRUP, UNT, PROD_GRUP,
+		PRCS_NBR, MAT_DSCB, DEL_FLG,
+		MAT_SPFT, MOD_USR, MOD_TIM
+		)
+		values (#{matId,jdbcType=DECIMAL}, #{matNam,jdbcType=VARCHAR}, #{matCod,jdbcType=VARCHAR},
+		#{matInd,jdbcType=CHAR},
+		#{matTyp,jdbcType=CHAR}, #{matGrup,jdbcType=VARCHAR}, #{unt,jdbcType=CHAR},
+		#{prodGrup,jdbcType=CHAR},
+		#{prcsNbr,jdbcType=VARCHAR}, #{matDscb,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR},
+		#{matSpft,jdbcType=VARCHAR}, #{modUsr,jdbcType=DECIMAL},
+		#{modTim,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.Mat">
+		<selectKey resultType="java.lang.Long" keyProperty="matId"
+			order="BEFORE">
+			select MAT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_MAT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			MAT_ID,
+			<if test="matNam != null">
+				MAT_NAM,
+			</if>
+			<if test="matCod != null">
+				MAT_COD,
+			</if>
+			<if test="matInd != null">
+				MAT_IND,
+			</if>
+			<if test="matTyp != null">
+				MAT_TYP,
+			</if>
+			<if test="matGrup != null">
+				MAT_GRUP,
+			</if>
+			<if test="unt != null">
+				UNT,
+			</if>
+			<if test="prodGrup != null">
+				PROD_GRUP,
+			</if>
+			<if test="prcsNbr != null">
+				PRCS_NBR,
+			</if>
+			<if test="matDscb != null">
+				MAT_DSCB,
+			</if>
+			<if test="delFlg != null">
+				DEL_FLG,
+			</if>
+			<if test="matSpft != null">
+				MAT_SPFT,
+			</if>
+			<if test="modUsr != null">
+				MOD_USR,
+			</if>
+			<if test="modTim != null">
+				MOD_TIM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{matId,jdbcType=DECIMAL},
+			<if test="matNam != null">
+				#{matNam,jdbcType=VARCHAR},
+			</if>
+			<if test="matCod != null">
+				#{matCod,jdbcType=VARCHAR},
+			</if>
+			<if test="matInd != null">
+				#{matInd,jdbcType=CHAR},
+			</if>
+			<if test="matTyp != null">
+				#{matTyp,jdbcType=CHAR},
+			</if>
+			<if test="matGrup != null">
+				#{matGrup,jdbcType=VARCHAR},
+			</if>
+			<if test="unt != null">
+				#{unt,jdbcType=CHAR},
+			</if>
+			<if test="prodGrup != null">
+				#{prodGrup,jdbcType=CHAR},
+			</if>
+			<if test="prcsNbr != null">
+				#{prcsNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="matDscb != null">
+				#{matDscb,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlg != null">
+				#{delFlg,jdbcType=CHAR},
+			</if>
+			<if test="matSpft != null">
+				#{matSpft,jdbcType=VARCHAR},
+			</if>
+			<if test="modUsr != null">
+				#{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				#{modTim,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.Mat">
+		update T_MAT
+		<set>
+			<if test="matNam != null">
+				MAT_NAM = #{matNam,jdbcType=VARCHAR},
+			</if>
+			<if test="matCod != null">
+				MAT_COD = #{matCod,jdbcType=VARCHAR},
+			</if>
+			<if test="matInd != null">
+				MAT_IND = #{matInd,jdbcType=CHAR},
+			</if>
+			<if test="matTyp != null">
+				MAT_TYP = #{matTyp,jdbcType=CHAR},
+			</if>
+			<if test="matGrup != null">
+				MAT_GRUP = #{matGrup,jdbcType=VARCHAR},
+			</if>
+			<if test="unt != null">
+				UNT = #{unt,jdbcType=CHAR},
+			</if>
+			<if test="prodGrup != null">
+				PROD_GRUP = #{prodGrup,jdbcType=CHAR},
+			</if>
+			<if test="prcsNbr != null">
+				PRCS_NBR = #{prcsNbr,jdbcType=VARCHAR},
+			</if>
+			<if test="matDscb != null">
+				MAT_DSCB = #{matDscb,jdbcType=VARCHAR},
+			</if>
+			<if test="delFlg != null">
+				DEL_FLG = #{delFlg,jdbcType=CHAR},
+			</if>
+			<if test="matSpft != null">
+				MAT_SPFT = #{matSpft,jdbcType=VARCHAR},
+			</if>
+			<if test="modUsr != null">
+				MOD_USR = #{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where MAT_ID = #{matId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.Mat">
+		update T_MAT
+		set MAT_NAM = #{matNam,jdbcType=VARCHAR},
+		MAT_COD = #{matCod,jdbcType=VARCHAR},
+		MAT_IND = #{matInd,jdbcType=CHAR},
+		MAT_TYP = #{matTyp,jdbcType=CHAR},
+		MAT_GRUP = #{matGrup,jdbcType=VARCHAR},
+		UNT = #{unt,jdbcType=CHAR},
+		PROD_GRUP = #{prodGrup,jdbcType=CHAR},
+		PRCS_NBR = #{prcsNbr,jdbcType=VARCHAR},
+		MAT_DSCB = #{matDscb,jdbcType=VARCHAR},
+		DEL_FLG = #{delFlg,jdbcType=CHAR},
+		MAT_SPFT = #{matSpft,jdbcType=VARCHAR},
+		MOD_USR = #{modUsr,jdbcType=DECIMAL},
+		MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+		where MAT_ID = #{matId,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 批量插入 -->
+	<insert id="inserts" parameterType="java.util.List">
+		INSERT INTO T_MAT(
+		<include refid="Base_Column_List" />
+		)
+		select MAT_SEQ.NEXTVAL as MAT_ID,TM.* from(
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			select
+			#{item.matNam,jdbcType=VARCHAR},
+			#{item.matCod,jdbcType=VARCHAR},
+			#{item.matInd,jdbcType=CHAR},
+			#{item.matTyp,jdbcType=CHAR},
+			#{item.matGrup,jdbcType=VARCHAR},
+			#{item.unt,jdbcType=CHAR},
+			#{item.prodGrup,jdbcType=CHAR},
+			#{item.prcsNbr,jdbcType=VARCHAR},
+			#{item.matDscb,jdbcType=VARCHAR},
+			#{item.delFlg,jdbcType=CHAR},
+			#{item.matSpft,jdbcType=VARCHAR},
+			#{item.modUsr,jdbcType=DECIMAL},
+			#{item.modTim,jdbcType=TIMESTAMP}
+			from dual
+		</foreach>
+		) TM
+	</insert>
+	
+	<select id="selectCondition" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        SELECT *
+        FROM T_MAT
+        WHERE 1=1 
+        <if test="matId != null" >
+            AND MAT_ID = #{matId,jdbcType=DECIMAL}
+        </if>
+        <if test="matNam != null" >
+            AND MAT_NAM = #{matNam,jdbcType=VARCHAR}
+        </if>
+        <if test="matCod != null" >
+            AND MAT_COD = #{matCod,jdbcType=VARCHAR}
+        </if>
+        <if test="matNam != null" >
+            AND MAT_NAM = #{matNam,jdbcType=VARCHAR}
+        </if>
+        <if test="pchsNum != null" >
+            AND PCHS_NUM = #{pchsNum,jdbcType=DECIMAL}
+        </if>
+        <if test="matUnit != null" >
+            AND MAT_UNIT = #{matUnit,jdbcType=CHAR}
+        </if>
+        <if test="techServ != null" >
+            AND TECH_SERV = #{techServ,jdbcType=VARCHAR}
+        </if>
+        <if test="memo != null" >
+            AND MEMO = #{memo,jdbcType=VARCHAR}
+        </if>
+        <if test="winMemo != null" >
+            AND WIN_MEMO = #{winMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="effFlg != null" >
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null" >
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null" >
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null" >
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null" >
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        )  TL
+        WHERE RN &gt;=#{start}
+    </select>
+</mapper>

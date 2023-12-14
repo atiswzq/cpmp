@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrAdmtChkMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrAdmtChk" >
+    <id column="ADMT_CHK_ID" property="admtChkId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="CHK_NAM" property="chkNam" jdbcType="VARCHAR" />
+    <result column="CHK_URL" property="chkUrl" jdbcType="VARCHAR" />
+    <result column="EFF_FLG" jdbcType="CHAR" property="effFlg" />
+    <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr" />
+    <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim" />
+    <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr" />
+    <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ADMT_CHK_ID, SPLR_ID, CHK_NAM, CHK_URL,EFF_FLG, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_ADMT_CHK
+    where ADMT_CHK_ID = #{admtChkId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_ADMT_CHK
+    where ADMT_CHK_ID = #{admtChkId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrAdmtChk" >
+    <selectKey resultType="java.lang.Long" keyProperty="admtChkId" order="BEFORE" >
+      select SPLR_ADMT_CHK_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ADMT_CHK (ADMT_CHK_ID, SPLR_ID,
+       CHK_NAM, CHK_URL,
+    EFF_FLG, CRT_USR, CRT_TIM, MOD_USR,MOD_TIM
+      )
+    values (#{admtChkId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL},
+       #{chkNam,jdbcType=VARCHAR}, #{chkUrl,jdbcType=VARCHAR},
+    #{effFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=VARCHAR},
+    #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrAdmtChk" >
+    <selectKey resultType="java.lang.Long" keyProperty="admtChkId" order="BEFORE" >
+      select SPLR_ADMT_CHK_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ADMT_CHK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ADMT_CHK_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="chkNam != null" >
+        CHK_NAM,
+      </if>
+      <if test="chkUrl != null" >
+        CHK_URL,
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG,
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR,
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null">
+        MOD_USR,
+      </if>
+      <if test="modTim != null">
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{admtChkId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="chkNam != null" >
+        #{chkNam,jdbcType=VARCHAR},
+      </if>
+      <if test="chkUrl != null" >
+        #{chkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null">
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrAdmtChk" >
+    update T_SPLR_ADMT_CHK
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="chkNam != null" >
+        CHK_NAM = #{chkNam,jdbcType=VARCHAR},
+      </if>
+      <if test="chkUrl != null" >
+        CHK_URL = #{chkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ADMT_CHK_ID = #{admtChkId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrAdmtChk" >
+    update T_SPLR_ADMT_CHK
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      CHK_NAM = #{chkNam,jdbcType=VARCHAR},
+      CHK_URL = #{chkUrl,jdbcType=VARCHAR},
+    EFF_FLG = #{effFlg,jdbcType=CHAR},
+    CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+    CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+    MOD_USR = #{modUsr,jdbcType=VARCHAR},
+    MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where ADMT_CHK_ID = #{admtChkId,jdbcType=DECIMAL}
+  </update>
+
+  <delete id="deleteBySplrId" parameterType="java.lang.Long">
+    delete from T_SPLR_ADMT_CHK
+    where SPLR_ID = #{splrId,jdbcType=DECIMAL}
+  </delete>
+
+  <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT * FROM (
+    SELECT A.*,ROWNUM RN
+    FROM (
+    SELECT *
+    FROM T_SPLR_ADMT_CHK
+    WHERE 1 = 1
+    <if test="splrId != null">
+      AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+    </if>
+    <if test="chkNam != null">
+      AND CHK_NAM = #{chkNam,jdbcType=VARCHAR}
+    </if>
+    <if test="chkUrl != null">
+      AND CHK_URL = #{chkUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="effFlg != null">
+      AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+    </if>
+    <if test="crtUsr != null">
+      AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null">
+      AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="modUsr != null">
+      AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="modTim != null">
+      AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    </if>
+    ) A
+    WHERE
+    <choose>
+      <when test="limit > 0">
+        ROWNUM &lt;= #{limit}
+      </when>
+      <otherwise>
+        ROWNUM &lt;= 10000
+      </otherwise>
+    </choose>
+    ) TL
+    WHERE RN &gt;=#{start}
+  </select>
+</mapper>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.AdvMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.Adv" >
+    <id column="ADV_ID" property="advId" jdbcType="DECIMAL" />
+    <result column="ADV_NAM" property="advNam" jdbcType="VARCHAR" />
+    <result column="ADV_PIC" property="advPic" jdbcType="VARCHAR" />
+    <result column="ADV_LNK" property="advLnk" jdbcType="VARCHAR" />
+    <result column="DIS_ODR" property="disOdr" jdbcType="DECIMAL" />
+    <result column="ADV_TYP" property="advTyp" jdbcType="CHAR" />
+    <result column="EFF_FLG" property="effFlg" jdbcType="CHAR" />
+    <result column="CRT_USR" property="crtUsr" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="VARCHAR" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ADV_ID, ADV_NAM, ADV_PIC, ADV_LNK, DIS_ODR, ADV_TYP, EFF_FLG, CRT_USR, CRT_TIM, MOD_USR,
+    MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from T_ADV
+    where ADV_ID = #{advId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_ADV
+    where ADV_ID = #{advId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.Adv" >
+    <selectKey resultType="java.lang.Long" keyProperty="advId" order="BEFORE" >
+      select ADV_SEQ.NEXTVAL AS advId from dual
+    </selectKey>
+
+    insert into T_ADV (ADV_ID, ADV_NAM, ADV_PIC,
+      ADV_LNK, DIS_ODR, ADV_TYP,
+      EFF_FLG, CRT_USR, CRT_TIM,
+      MOD_USR, MOD_TIM)
+    values (#{advId,jdbcType=DECIMAL}, #{advNam,jdbcType=VARCHAR}, #{advPic,jdbcType=VARCHAR},
+      #{advLnk,jdbcType=VARCHAR}, #{disOdr,jdbcType=DECIMAL}, #{advTyp,jdbcType=CHAR},
+      #{effFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP},
+      #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP})
+
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.Adv" >
+    <selectKey resultType="java.lang.Long" keyProperty="advId" order="BEFORE" >
+      select ADV_SEQ.NEXTVAL AS advId from dual
+    </selectKey>
+    insert into T_ADV
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ADV_ID,
+      <if test="advNam != null" >
+        ADV_NAM,
+      </if>
+      <if test="advPic != null" >
+        ADV_PIC,
+      </if>
+      <if test="advLnk != null" >
+        ADV_LNK,
+      </if>
+      <if test="disOdr != null" >
+        DIS_ODR,
+      </if>
+      <if test="advTyp != null" >
+        ADV_TYP,
+      </if>
+      <if test="effFlg != null" >
+        EFF_FLG,
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{advId,jdbcType=DECIMAL},
+      <if test="advNam != null" >
+        #{advNam,jdbcType=VARCHAR},
+      </if>
+      <if test="advPic != null" >
+        #{advPic,jdbcType=VARCHAR},
+      </if>
+      <if test="advLnk != null" >
+        #{advLnk,jdbcType=VARCHAR},
+      </if>
+      <if test="disOdr != null" >
+        #{disOdr,jdbcType=DECIMAL},
+      </if>
+      <if test="advTyp != null" >
+        #{advTyp,jdbcType=CHAR},
+      </if>
+      <if test="effFlg != null" >
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null" >
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.Adv" >
+    update T_ADV
+    <set >
+      <if test="advNam != null" >
+        ADV_NAM = #{advNam,jdbcType=VARCHAR},
+      </if>
+      <if test="advPic != null" >
+        ADV_PIC = #{advPic,jdbcType=VARCHAR},
+      </if>
+      <if test="advLnk != null" >
+        ADV_LNK = #{advLnk,jdbcType=VARCHAR},
+      </if>
+      <if test="disOdr != null" >
+        DIS_ODR = #{disOdr,jdbcType=DECIMAL},
+      </if>
+      <if test="advTyp != null" >
+        ADV_TYP = #{advTyp,jdbcType=CHAR},
+      </if>
+      <if test="effFlg != null" >
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ADV_ID = #{advId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.Adv" >
+    update T_ADV
+    set ADV_NAM = #{advNam,jdbcType=VARCHAR},
+      ADV_PIC = #{advPic,jdbcType=VARCHAR},
+      ADV_LNK = #{advLnk,jdbcType=VARCHAR},
+      DIS_ODR = #{disOdr,jdbcType=DECIMAL},
+      ADV_TYP = #{advTyp,jdbcType=CHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where ADV_ID = #{advId,jdbcType=DECIMAL}
+  </update>
+</mapper>

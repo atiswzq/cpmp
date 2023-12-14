@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_CUSSUPPLIER_STATUS_OUT" targetNamespace="http://www.cofco.com/segment/customer_supplier" xmlns:p1="http://www.cofco.com/segment/customer_supplier" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation/>
+  <wsp1_2:UsingPolicy wsdl:required="true" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"/>
+  <wsp1_2:Policy wsu:Id="OP_SI_CUSSUPPLIER_STATUS_OUT" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"/>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.cofco.com/segment/customer_supplier" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.cofco.com/segment/customer_supplier">
+      <xsd:element name="MT_CUSSUPPLIER_STATUS" type="DT_CUSSUPPLIER_STATUS"/>
+      <xsd:complexType name="DT_CUSSUPPLIER_STATUS">
+        <xsd:annotation>
+          <xsd:appinfo source="http://sap.com/xi/VersionID">9373d927edcc11e687cf000000983f96</xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element name="FEEDBACK" maxOccurs="unbounded">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="PARTNER_NUMBER" type="xsd:string"/>
+                <xsd:element name="TARGET_SYSTEM" type="xsd:string"/>
+                <xsd:element name="SYN_STATUS" type="xsd:string"/>
+                <xsd:element name="FEEDBACK_MSG" type="xsd:string"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="MT_CUSSUPPLIER_STATUS">
+    <wsdl:documentation/>
+    <wsdl:part name="MT_CUSSUPPLIER_STATUS" element="p1:MT_CUSSUPPLIER_STATUS"/>
+  </wsdl:message>
+  <wsdl:portType name="SI_CUSSUPPLIER_STATUS_OUT">
+    <wsdl:documentation/>
+    <wsdl:operation name="SI_CUSSUPPLIER_STATUS_OUT">
+      <wsdl:documentation/>
+      <wsp1_2:Policy xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy">
+        <wsp:PolicyReference URI="#OP_SI_CUSSUPPLIER_STATUS_OUT"/>
+      </wsp1_2:Policy>
+      <wsdl:input message="p1:MT_CUSSUPPLIER_STATUS"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SI_CUSSUPPLIER_STATUS_OUTBinding" type="p1:SI_CUSSUPPLIER_STATUS_OUT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    <wsdl:operation name="SI_CUSSUPPLIER_STATUS_OUT">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SI_CUSSUPPLIER_STATUS_OUTService">
+    <wsdl:port name="HTTP_Port" binding="p1:SI_CUSSUPPLIER_STATUS_OUTBinding">
+      <soap:address location="http://hqpiaqas01.cofco.com:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_GOS_PI&amp;receiverParty=&amp;receiverService=&amp;interface=SI_CUSSUPPLIER_STATUS_OUT&amp;interfaceNamespace=http%3A%2F%2Fwww.cofco.com%2Fsegment%2Fcustomer_supplier" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:SI_CUSSUPPLIER_STATUS_OUTBinding">
+      <soap:address location="https://hqpiaqas01.cofco.com:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_GOS_PI&amp;receiverParty=&amp;receiverService=&amp;interface=SI_CUSSUPPLIER_STATUS_OUT&amp;interfaceNamespace=http%3A%2F%2Fwww.cofco.com%2Fsegment%2Fcustomer_supplier" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

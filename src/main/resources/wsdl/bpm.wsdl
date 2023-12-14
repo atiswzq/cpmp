@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_LYT2BPM_APPRV_OUT" targetNamespace="http://cofco.com/lyt/bpm" xmlns:p2="www.seeyon.com" xmlns:p1="http://cofco.com/lyt/bpm" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation/>
+  <wsp:UsingPolicy wsdl:required="true"/>
+  <wsp:Policy wsu:Id="OP_SI_LYT2BPM_APPRV_OUT"/>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://services.v3x.seeyon.com/xsd" xmlns="http://services.v3x.seeyon.com/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:complexType name="ServiceResponse">
+        <xsd:sequence>
+          <xsd:element name="errorMessage" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+          <xsd:element name="errorNumber" type="xsd:long" minOccurs="0" form="qualified"/>
+          <xsd:element name="result" type="xsd:long" minOccurs="0" form="qualified"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema targetNamespace="http://impl.flow.services.v3x.seeyon.com" xmlns:ax224="http://services.v3x.seeyon.com/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://impl.flow.services.v3x.seeyon.com">
+      <xsd:import namespace="http://services.v3x.seeyon.com/xsd"/>
+      <xsd:element name="launchFormCollaboration4sap">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="token" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+            <xsd:element name="senderLoginName" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+            <xsd:element name="templateCode" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+            <xsd:element name="subject" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+            <xsd:element name="data" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+            <xsd:element name="attachments" type="xsd:long" minOccurs="0" maxOccurs="unbounded" form="qualified"/>
+            <xsd:element name="param" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+            <xsd:element name="relateDoc" type="xsd:string" minOccurs="0" form="qualified" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="launchFormCollaboration4sapResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="return" type="ax224:ServiceResponse" minOccurs="0" form="qualified" nillable="true"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="p2.launchFormCollaboration4sapRequest">
+    <wsdl:documentation/>
+    <wsdl:part name="parameters" element="ns:launchFormCollaboration4sap" xmlns:ns="http://impl.flow.services.v3x.seeyon.com"/>
+  </wsdl:message>
+  <wsdl:message name="p2.launchFormCollaboration4sapResponse">
+    <wsdl:documentation/>
+    <wsdl:part name="parameters" element="ns:launchFormCollaboration4sapResponse" xmlns:ns="http://impl.flow.services.v3x.seeyon.com"/>
+  </wsdl:message>
+  <wsdl:portType name="SI_LYT2BPM_APPRV_OUT">
+    <wsdl:documentation/>
+    <wsdl:operation name="SI_LYT2BPM_APPRV_OUT">
+      <wsdl:documentation/>
+      <wsp:Policy>
+        <wsp:PolicyReference URI="#OP_SI_LYT2BPM_APPRV_OUT"/>
+      </wsp:Policy>
+      <wsdl:input message="p1:p2.launchFormCollaboration4sapRequest"/>
+      <wsdl:output message="p1:p2.launchFormCollaboration4sapResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SI_LYT2BPM_APPRV_OUTBinding" type="p1:SI_LYT2BPM_APPRV_OUT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    <wsdl:operation name="SI_LYT2BPM_APPRV_OUT">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      <wsdl:input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SI_LYT2BPM_APPRV_OUTService">
+    <wsdl:port name="HTTP_Port" binding="p1:SI_LYT2BPM_APPRV_OUTBinding">
+      <soap:address location="http://hqpiadev01.cofco.com:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_GOS_PI&amp;receiverParty=&amp;receiverService=&amp;interface=SI_LYT2BPM_APPRV_OUT&amp;interfaceNamespace=http%3A%2F%2Fcofco.com%2Flyt%2Fbpm" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+    <wsdl:port name="HTTPS_Port" binding="p1:SI_LYT2BPM_APPRV_OUTBinding">
+      <soap:address location="https://hqpiadev01.cofco.com:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_GOS_PI&amp;receiverParty=&amp;receiverService=&amp;interface=SI_LYT2BPM_APPRV_OUT&amp;interfaceNamespace=http%3A%2F%2Fcofco.com%2Flyt%2Fbpm" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

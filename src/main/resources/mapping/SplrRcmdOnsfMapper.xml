@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrRcmdOnsfMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrRcmdOnsf" >
+    <id column="RCMD_ONSF_ID" property="rcmdOnsfId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="PROD_NUM" property="prodNum" jdbcType="VARCHAR" />
+    <result column="PROD_NAM" property="prodNam" jdbcType="VARCHAR" />
+    <result column="PROD_MODEL" property="prodModel" jdbcType="VARCHAR" />
+    <result column="PROD_BRAND" property="prodBrand" jdbcType="VARCHAR" />
+    <result column="PROD_PRIK" property="prodPrik" jdbcType="VARCHAR" />
+    <result column="PROD_ITDC" property="prodItdc" jdbcType="VARCHAR" />
+    <result column="UPLD_USR" property="upldUsr" jdbcType="DECIMAL" />
+    <result column="UPLD_TIM" property="upldTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RCMD_ONSF_ID, SPLR_ID, PROD_NUM, PROD_NAM, PROD_MODEL, PROD_BRAND, PROD_PRIK, PROD_ITDC, 
+    UPLD_USR, UPLD_TIM, MOD_USR, MOD_TIM, DEL_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_RCMD_ONSF
+    where RCMD_ONSF_ID = #{rcmdOnsfId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_RCMD_ONSF
+    where RCMD_ONSF_ID = #{rcmdOnsfId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrRcmdOnsf" >
+    <selectKey resultType="java.lang.Long" keyProperty="rcmdOnsfId" order="BEFORE" >
+      select SPLR_RCMD_ONSF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_RCMD_ONSF (RCMD_ONSF_ID, SPLR_ID, PROD_NUM, 
+      PROD_NAM, PROD_MODEL, PROD_BRAND, 
+      PROD_PRIK, PROD_ITDC, UPLD_USR, 
+      UPLD_TIM, MOD_USR, MOD_TIM, 
+      DEL_FLG)
+    values (#{rcmdOnsfId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{prodNum,jdbcType=VARCHAR}, 
+      #{prodNam,jdbcType=VARCHAR}, #{prodModel,jdbcType=VARCHAR}, #{prodBrand,jdbcType=VARCHAR}, 
+      #{prodPrik,jdbcType=VARCHAR}, #{prodItdc,jdbcType=VARCHAR}, #{upldUsr,jdbcType=DECIMAL}, 
+      #{upldTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=DECIMAL}, #{modTim,jdbcType=TIMESTAMP}, 
+      #{delFlg,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrRcmdOnsf" >
+    <selectKey resultType="java.lang.Long" keyProperty="rcmdOnsfId" order="BEFORE" >
+      select SPLR_RCMD_ONSF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_RCMD_ONSF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      RCMD_ONSF_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="prodNum != null" >
+        PROD_NUM,
+      </if>
+      <if test="prodNam != null" >
+        PROD_NAM,
+      </if>
+      <if test="prodModel != null" >
+        PROD_MODEL,
+      </if>
+      <if test="prodBrand != null" >
+        PROD_BRAND,
+      </if>
+      <if test="prodPrik != null" >
+        PROD_PRIK,
+      </if>
+      <if test="prodItdc != null" >
+        PROD_ITDC,
+      </if>
+      <if test="upldUsr != null" >
+        UPLD_USR,
+      </if>
+      <if test="upldTim != null" >
+        UPLD_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{rcmdOnsfId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="prodNum != null" >
+        #{prodNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodNam != null" >
+        #{prodNam,jdbcType=VARCHAR},
+      </if>
+      <if test="prodModel != null" >
+        #{prodModel,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBrand != null" >
+        #{prodBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPrik != null" >
+        #{prodPrik,jdbcType=VARCHAR},
+      </if>
+      <if test="prodItdc != null" >
+        #{prodItdc,jdbcType=VARCHAR},
+      </if>
+      <if test="upldUsr != null" >
+        #{upldUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="upldTim != null" >
+        #{upldTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrRcmdOnsf" >
+    update T_SPLR_RCMD_ONSF
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="prodNum != null" >
+        PROD_NUM = #{prodNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodNam != null" >
+        PROD_NAM = #{prodNam,jdbcType=VARCHAR},
+      </if>
+      <if test="prodModel != null" >
+        PROD_MODEL = #{prodModel,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBrand != null" >
+        PROD_BRAND = #{prodBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPrik != null" >
+        PROD_PRIK = #{prodPrik,jdbcType=VARCHAR},
+      </if>
+      <if test="prodItdc != null" >
+        PROD_ITDC = #{prodItdc,jdbcType=VARCHAR},
+      </if>
+      <if test="upldUsr != null" >
+        UPLD_USR = #{upldUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="upldTim != null" >
+        UPLD_TIM = #{upldTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where RCMD_ONSF_ID = #{rcmdOnsfId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrRcmdOnsf" >
+    update T_SPLR_RCMD_ONSF
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      PROD_NUM = #{prodNum,jdbcType=VARCHAR},
+      PROD_NAM = #{prodNam,jdbcType=VARCHAR},
+      PROD_MODEL = #{prodModel,jdbcType=VARCHAR},
+      PROD_BRAND = #{prodBrand,jdbcType=VARCHAR},
+      PROD_PRIK = #{prodPrik,jdbcType=VARCHAR},
+      PROD_ITDC = #{prodItdc,jdbcType=VARCHAR},
+      UPLD_USR = #{upldUsr,jdbcType=DECIMAL},
+      UPLD_TIM = #{upldTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      DEL_FLG = #{delFlg,jdbcType=CHAR}
+    where RCMD_ONSF_ID = #{rcmdOnsfId,jdbcType=DECIMAL}
+  </update>
+  
+<!--   <select id="selectByCondition" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_RCMD_ONSF
+    where 1 = 1 
+    <if test="splrId != null">
+		and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+	</if>
+  </select> -->
+  <select id="selectByCondition" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from ( 
+    	select <include refid="Base_Column_List" />, row_number()over(ORDER BY RCMD_ONSF_ID asc) rn 
+    	FROM T_SPLR_RCMD_ONSF WHERE 1=1 
+    	<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+    ) WHERE rn BETWEEN ((#{pageNo,jdbcType=DECIMAL} - 1)*#{pageSize,jdbcType=DECIMAL} + 1) AND (#{pageNo,jdbcType=DECIMAL}*#{pageSize,jdbcType=DECIMAL})
+  </select>
+  
+  <select id="selectByConditionCount" resultType="java.lang.Integer">
+    select 
+    COUNT(RCMD_ONSF_ID)
+    from ( 
+    	select <include refid="Base_Column_List" />, row_number()over(ORDER BY RCMD_ONSF_ID asc) rn 
+    	FROM T_SPLR_RCMD_ONSF WHERE 1=1 
+    	<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+    )
+  </select>
+</mapper>

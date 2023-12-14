@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.MaterielMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.Materiel" >
+    <id column="MAT_ID" property="matId" jdbcType="DECIMAL" />
+    <result column="MAT_COD" property="matCod" jdbcType="VARCHAR" />
+    <result column="MAT_IND" property="matInd" jdbcType="VARCHAR" />
+    <result column="MAT_TYP" property="matTyp" jdbcType="VARCHAR" />
+    <result column="MAT_GRUP" property="matGrup" jdbcType="VARCHAR" />
+    <result column="UNT" property="unt" jdbcType="VARCHAR" />
+    <result column="BRGEW1" property="brgew1" jdbcType="VARCHAR" />
+    <result column="NTGEW1" property="ntgew1" jdbcType="VARCHAR" />
+    <result column="GEWEI1" property="gewei1" jdbcType="VARCHAR" />
+    <result column="VOLUM1" property="volum1" jdbcType="VARCHAR" />
+    <result column="VOLEH1" property="voleh1" jdbcType="VARCHAR" />
+    <result column="EANTP1" property="eantp1" jdbcType="VARCHAR" />
+    <result column="EAN111" property="ean111" jdbcType="VARCHAR" />
+    <result column="PROD_GRUP" property="prodGrup" jdbcType="VARCHAR" />
+    <result column="PROCESSID" property="processid" jdbcType="VARCHAR" />
+    <result column="PROCOMP" property="procomp" jdbcType="VARCHAR" />
+    <result column="APLY_USR" property="aplyUsr" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="VARCHAR" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+    <result column="MAT_DESC" property="matDesc" jdbcType="VARCHAR" />
+    <result column="CO_MATGROUP" property="coMatgroup" jdbcType="VARCHAR" />
+    <result column="BSTME" property="bstme" jdbcType="VARCHAR"/>
+    <result column="VABME" property="vabme" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MAT_ID, MAT_COD, MAT_IND, MAT_TYP, MAT_GRUP, UNT, BRGEW1, NTGEW1, GEWEI1, VOLUM1, 
+    VOLEH1, EANTP1, EAN111, PROD_GRUP, PROCESSID, PROCOMP, APLY_USR, CRT_TIM, DEL_FLG, MAT_DESC, CO_MATGROUP,BSTME,
+    VABME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_MATERIEL
+    where MAT_ID = #{matId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_MATERIEL
+    where MAT_ID = #{matId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.Materiel" >
+    <selectKey resultType="java.lang.Long" keyProperty="matId" order="BEFORE" >
+      select MATERIEL_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_MATERIEL (MAT_ID, MAT_COD, MAT_IND, 
+      MAT_TYP, MAT_GRUP, UNT, 
+      BRGEW1, NTGEW1, GEWEI1, 
+      VOLUM1, VOLEH1, EANTP1, 
+      EAN111, PROD_GRUP, PROCESSID, 
+      PROCOMP, APLY_USR, CRT_TIM, 
+      DEL_FLG, MAT_DESC, CO_MATGROUP,BSTME,VABME)
+    values (#{matId,jdbcType=DECIMAL}, #{matCod,jdbcType=VARCHAR}, #{matInd,jdbcType=VARCHAR}, 
+      #{matTyp,jdbcType=VARCHAR}, #{matGrup,jdbcType=VARCHAR}, #{unt,jdbcType=VARCHAR}, 
+      #{brgew1,jdbcType=VARCHAR}, #{ntgew1,jdbcType=VARCHAR}, #{gewei1,jdbcType=VARCHAR}, 
+      #{volum1,jdbcType=VARCHAR}, #{voleh1,jdbcType=VARCHAR}, #{eantp1,jdbcType=VARCHAR}, 
+      #{ean111,jdbcType=VARCHAR}, #{prodGrup,jdbcType=VARCHAR}, #{processid,jdbcType=VARCHAR}, 
+      #{procomp,jdbcType=VARCHAR}, #{aplyUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=VARCHAR}, 
+      #{delFlg,jdbcType=CHAR}, #{matDesc,jdbcType=VARCHAR}, #{coMatgroup,jdbcType=VARCHAR},
+    #{bstme,jdbcType=VARCHAR},#{vabme,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.Materiel" >
+    <selectKey resultType="java.lang.Long" keyProperty="matId" order="BEFORE" >
+      select MATERIEL_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_MATERIEL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      MAT_ID,
+      <if test="matCod != null" >
+        MAT_COD,
+      </if>
+      <if test="matInd != null" >
+        MAT_IND,
+      </if>
+      <if test="matTyp != null" >
+        MAT_TYP,
+      </if>
+      <if test="matGrup != null" >
+        MAT_GRUP,
+      </if>
+      <if test="unt != null" >
+        UNT,
+      </if>
+      <if test="brgew1 != null" >
+        BRGEW1,
+      </if>
+      <if test="ntgew1 != null" >
+        NTGEW1,
+      </if>
+      <if test="gewei1 != null" >
+        GEWEI1,
+      </if>
+      <if test="volum1 != null" >
+        VOLUM1,
+      </if>
+      <if test="voleh1 != null" >
+        VOLEH1,
+      </if>
+      <if test="eantp1 != null" >
+        EANTP1,
+      </if>
+      <if test="ean111 != null" >
+        EAN111,
+      </if>
+      <if test="prodGrup != null" >
+        PROD_GRUP,
+      </if>
+      <if test="processid != null" >
+        PROCESSID,
+      </if>
+      <if test="procomp != null" >
+        PROCOMP,
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+      <if test="matDesc != null" >
+        MAT_DESC,
+      </if>
+      <if test="coMatgroup != null" >
+        CO_MATGROUP,
+      </if>
+      <if test="bstme != null" >
+        BSTME,
+      </if>
+      <if test="vabme != null" >
+        VABME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{matId,jdbcType=DECIMAL},
+      <if test="matCod != null" >
+        #{matCod,jdbcType=VARCHAR},
+      </if>
+      <if test="matInd != null" >
+        #{matInd,jdbcType=VARCHAR},
+      </if>
+      <if test="matTyp != null" >
+        #{matTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="matGrup != null" >
+        #{matGrup,jdbcType=VARCHAR},
+      </if>
+      <if test="unt != null" >
+        #{unt,jdbcType=VARCHAR},
+      </if>
+      <if test="brgew1 != null" >
+        #{brgew1,jdbcType=VARCHAR},
+      </if>
+      <if test="ntgew1 != null" >
+        #{ntgew1,jdbcType=VARCHAR},
+      </if>
+      <if test="gewei1 != null" >
+        #{gewei1,jdbcType=VARCHAR},
+      </if>
+      <if test="volum1 != null" >
+        #{volum1,jdbcType=VARCHAR},
+      </if>
+      <if test="voleh1 != null" >
+        #{voleh1,jdbcType=VARCHAR},
+      </if>
+      <if test="eantp1 != null" >
+        #{eantp1,jdbcType=VARCHAR},
+      </if>
+      <if test="ean111 != null" >
+        #{ean111,jdbcType=VARCHAR},
+      </if>
+      <if test="prodGrup != null" >
+        #{prodGrup,jdbcType=VARCHAR},
+      </if>
+      <if test="processid != null" >
+        #{processid,jdbcType=VARCHAR},
+      </if>
+      <if test="procomp != null" >
+        #{procomp,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        #{aplyUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="matDesc != null" >
+        #{matDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="coMatgroup != null" >
+        #{coMatgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="bstme != null" >
+        #{bstme,jdbcType=VARCHAR},
+      </if>
+      <if test="vabme != null" >
+        #{vabme,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.Materiel" >
+    update T_MATERIEL
+    <set >
+      <if test="matCod != null" >
+        MAT_COD = #{matCod,jdbcType=VARCHAR},
+      </if>
+      <if test="matInd != null" >
+        MAT_IND = #{matInd,jdbcType=VARCHAR},
+      </if>
+      <if test="matTyp != null" >
+        MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+      </if>
+      <if test="matGrup != null" >
+        MAT_GRUP = #{matGrup,jdbcType=VARCHAR},
+      </if>
+      <if test="unt != null" >
+        UNT = #{unt,jdbcType=VARCHAR},
+      </if>
+      <if test="brgew1 != null" >
+        BRGEW1 = #{brgew1,jdbcType=VARCHAR},
+      </if>
+      <if test="ntgew1 != null" >
+        NTGEW1 = #{ntgew1,jdbcType=VARCHAR},
+      </if>
+      <if test="gewei1 != null" >
+        GEWEI1 = #{gewei1,jdbcType=VARCHAR},
+      </if>
+      <if test="volum1 != null" >
+        VOLUM1 = #{volum1,jdbcType=VARCHAR},
+      </if>
+      <if test="voleh1 != null" >
+        VOLEH1 = #{voleh1,jdbcType=VARCHAR},
+      </if>
+      <if test="eantp1 != null" >
+        EANTP1 = #{eantp1,jdbcType=VARCHAR},
+      </if>
+      <if test="ean111 != null" >
+        EAN111 = #{ean111,jdbcType=VARCHAR},
+      </if>
+      <if test="prodGrup != null" >
+        PROD_GRUP = #{prodGrup,jdbcType=VARCHAR},
+      </if>
+      <if test="processid != null" >
+        PROCESSID = #{processid,jdbcType=VARCHAR},
+      </if>
+      <if test="procomp != null" >
+        PROCOMP = #{procomp,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR = #{aplyUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="matDesc != null" >
+        MAT_DESC = #{matDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="coMatgroup != null" >
+        CO_MATGROUP = #{coMatgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="bstme != null" >
+        BSTME = #{bstme,jdbcType=VARCHAR},
+      </if>
+      <if test="vabme != null" >
+        VABME = #{vabme,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MAT_ID = #{matId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.Materiel" >
+    update T_MATERIEL
+    set MAT_COD = #{matCod,jdbcType=VARCHAR},
+      MAT_IND = #{matInd,jdbcType=VARCHAR},
+      MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+      MAT_GRUP = #{matGrup,jdbcType=VARCHAR},
+      UNT = #{unt,jdbcType=VARCHAR},
+      BRGEW1 = #{brgew1,jdbcType=VARCHAR},
+      NTGEW1 = #{ntgew1,jdbcType=VARCHAR},
+      GEWEI1 = #{gewei1,jdbcType=VARCHAR},
+      VOLUM1 = #{volum1,jdbcType=VARCHAR},
+      VOLEH1 = #{voleh1,jdbcType=VARCHAR},
+      EANTP1 = #{eantp1,jdbcType=VARCHAR},
+      EAN111 = #{ean111,jdbcType=VARCHAR},
+      PROD_GRUP = #{prodGrup,jdbcType=VARCHAR},
+      PROCESSID = #{processid,jdbcType=VARCHAR},
+      PROCOMP = #{procomp,jdbcType=VARCHAR},
+      APLY_USR = #{aplyUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=VARCHAR},
+      DEL_FLG = #{delFlg,jdbcType=CHAR},
+      MAT_DESC = #{matDesc,jdbcType=VARCHAR},
+      CO_MATGROUP = #{coMatgroup,jdbcType=VARCHAR},
+      BSTME = #{bstme,jdbcType=VARCHAR},
+      VABME = #{vabme,jdbcType=VARCHAR}
+    where MAT_ID = #{matId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="selectByMatcod" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_MATERIEL
+    where MAT_COD = #{matCod, jdbcType=VARCHAR}
+  </select>
+
+  <!-- 按条件查找物料列表 -->
+  <select id="selectByConditions" parameterType="java.util.Map"
+          resultMap="BaseResultMap">
+    SELECT * FROM (
+    SELECT A.*,ROWNUM RN
+    FROM (
+    SELECT *
+    FROM T_MATERIEL
+    WHERE 1 = 1
+    <if test="matCod != null" >
+      AND MAT_COD = #{matCod,jdbcType=VARCHAR}
+    </if>
+    <if test="matInd != null" >
+      AND MAT_IND = #{matInd,jdbcType=VARCHAR}
+    </if>
+    <if test="matTyp != null" >
+      AND MAT_TYP = #{matTyp,jdbcType=VARCHAR}
+    </if>
+    <if test="matGrup != null" >
+      AND MAT_GRUP = #{matGrup,jdbcType=VARCHAR}
+    </if>
+    <if test="unt != null" >
+      AND UNT = #{unt,jdbcType=VARCHAR}
+    </if>
+    <if test="brgew1 != null" >
+      AND BRGEW1 = #{brgew1,jdbcType=VARCHAR}
+    </if>
+    <if test="ntgew1 != null" >
+      AND NTGEW1 = #{ntgew1,jdbcType=VARCHAR}
+    </if>
+    <if test="gewei1 != null" >
+      AND GEWEI1 = #{gewei1,jdbcType=VARCHAR}
+    </if>
+    <if test="volum1 != null" >
+      AND VOLUM1 = #{volum1,jdbcType=VARCHAR}
+    </if>
+    <if test="voleh1 != null" >
+      AND VOLEH1 = #{voleh1,jdbcType=VARCHAR}
+    </if>
+    <if test="eantp1 != null" >
+      AND EANTP1 = #{eantp1,jdbcType=VARCHAR}
+    </if>
+    <if test="ean111 != null" >
+      AND EAN111 = #{ean111,jdbcType=VARCHAR}
+    </if>
+    <if test="prodGrup != null" >
+      AND PROD_GRUP = #{prodGrup,jdbcType=VARCHAR}
+    </if>
+    <if test="processid != null" >
+      AND PROCESSID = #{processid,jdbcType=VARCHAR}
+    </if>
+    <if test="procomp != null" >
+      AND PROCOMP = #{procomp,jdbcType=VARCHAR}
+    </if>
+    <if test="aplyUsr != null" >
+      AND APLY_USR = #{aplyUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null" >
+      AND CRT_TIM = #{crtTim,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlg != null" >
+      AND DEL_FLG = #{delFlg,jdbcType=CHAR}
+    </if>
+    <if test="matDesc != null" >
+      AND MAT_DESC LIKE CONCAT(CONCAT('%',#{matDesc,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="coMatgroup != null" >
+      AND CO_MATGROUP = #{coMatgroup,jdbcType=VARCHAR}
+    </if>
+    <if test="bstme != null" >
+      AND BSTME = #{bstme,jdbcType=VARCHAR}
+    </if>
+    <if test="vabme != null" >
+      AND VABME = #{vabme,jdbcType=VARCHAR}
+    </if>
+    ) A
+    WHERE
+    <choose>
+      <when test="limit > 0">
+        ROWNUM &lt;= #{limit}
+      </when>
+      <otherwise>
+        ROWNUM &lt;= 10000
+      </otherwise>
+    </choose>
+    ) TL
+    WHERE RN &gt;=#{start}
+  </select>
+
+  <select id="countOfMap" parameterType="java.util.Map"
+          resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM T_MATERIEL
+    WHERE 1 = 1
+    <if test="matCod != null" >
+      AND MAT_COD = #{matCod,jdbcType=VARCHAR}
+    </if>
+    <if test="matInd != null" >
+      AND MAT_IND = #{matInd,jdbcType=VARCHAR}
+    </if>
+    <if test="matTyp != null" >
+      AND MAT_TYP = #{matTyp,jdbcType=VARCHAR}
+    </if>
+    <if test="matGrup != null" >
+      AND MAT_GRUP = #{matGrup,jdbcType=VARCHAR}
+    </if>
+    <if test="unt != null" >
+      AND UNT = #{unt,jdbcType=VARCHAR}
+    </if>
+    <if test="brgew1 != null" >
+      AND BRGEW1 = #{brgew1,jdbcType=VARCHAR}
+    </if>
+    <if test="ntgew1 != null" >
+      AND NTGEW1 = #{ntgew1,jdbcType=VARCHAR}
+    </if>
+    <if test="gewei1 != null" >
+      AND GEWEI1 = #{gewei1,jdbcType=VARCHAR}
+    </if>
+    <if test="volum1 != null" >
+      AND VOLUM1 = #{volum1,jdbcType=VARCHAR}
+    </if>
+    <if test="voleh1 != null" >
+      AND VOLEH1 = #{voleh1,jdbcType=VARCHAR}
+    </if>
+    <if test="eantp1 != null" >
+      AND EANTP1 = #{eantp1,jdbcType=VARCHAR}
+    </if>
+    <if test="ean111 != null" >
+      AND EAN111 = #{ean111,jdbcType=VARCHAR}
+    </if>
+    <if test="prodGrup != null" >
+      AND PROD_GRUP = #{prodGrup,jdbcType=VARCHAR}
+    </if>
+    <if test="processid != null" >
+      AND PROCESSID = #{processid,jdbcType=VARCHAR}
+    </if>
+    <if test="procomp != null" >
+      AND PROCOMP = #{procomp,jdbcType=VARCHAR}
+    </if>
+    <if test="aplyUsr != null" >
+      AND APLY_USR = #{aplyUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null" >
+      AND CRT_TIM = #{crtTim,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlg != null" >
+      AND DEL_FLG = #{delFlg,jdbcType=CHAR}
+    </if>
+    <if test="matDesc != null" >
+      AND MAT_DESC LIKE CONCAT(CONCAT('%',#{matDesc,jdbcType=VARCHAR}),'%')
+    </if>
+    <if test="coMatgroup != null" >
+      AND CO_MATGROUP = #{coMatgroup,jdbcType=VARCHAR}
+    </if>
+    <if test="bstme != null" >
+      AND BSTME = #{bstme,jdbcType=VARCHAR}
+    </if>
+    <if test="vabme != null" >
+      AND VABME = #{vabme,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrWdotInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrWdotInfo" >
+    <id column="APLY_ID" property="aplyId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" 			property="splrId" 			jdbcType="DECIMAL" />
+    <result column="WDOT_ORG" 			property="wdotOrg" 			jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, SPLR_ID, WDOT_ORG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_WDOT_INFO
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_WDOT_INFO
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteBySplrIdAndOrg" parameterType="java.util.Map" >
+    delete from T_SPLR_WDOT_INFO
+    where SPLR_ID = #{splrId} AND WDOT_ORG = #{aplyOrg}
+  </delete>
+  
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrWdotInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_WDOT_INFO_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_WDOT_INFO (APLY_ID, SPLR_ID, WDOT_ORG)
+    values (#{aplyId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{wdotOrg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrWdotInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_WDOT_INFO_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_WDOT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      APLY_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="wdotOrg != null" >
+        WDOT_ORG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aplyId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="wdotOrg != null" >
+        #{wdotOrg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrWdotInfo" >
+    update T_SPLR_WDOT_INFO
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="wdotOrg != null" >
+        WDOT_ORG = #{wdotOrg,jdbcType=DECIMAL}
+      </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrWdotInfo" >
+    update T_SPLR_WDOT_INFO
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      WDOT_ORG = #{wdotOrg,jdbcType=VARCHAR}
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  
+  
+</mapper>

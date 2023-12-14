@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.AptDefMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.AptDef" >
+    <id column="APT_DEF_ID" property="aptDefId" jdbcType="DECIMAL" />
+    <result column="APT_TYP" property="aptTyp" jdbcType="CHAR" />
+    <result column="APT_NAM" property="aptNam" jdbcType="VARCHAR" />
+    <result column="CRT_USR" property="crtUsr" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="VARCHAR" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+    <result column="DEF_FLG" property="defFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APT_DEF_ID, APT_TYP, APT_NAM, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM, DEF_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_APT_DEF
+    where APT_DEF_ID = #{aptDefId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_APT_DEF
+    where APT_DEF_ID = #{aptDefId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.AptDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="aptDefId" order="BEFORE" >
+      select APT_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_APT_DEF (APT_DEF_ID, APT_TYP, APT_NAM, 
+      CRT_USR, CRT_TIM, MOD_USR, 
+      MOD_TIM, DEF_FLG)
+    values (#{aptDefId,jdbcType=DECIMAL}, #{aptTyp,jdbcType=CHAR}, #{aptNam,jdbcType=VARCHAR}, 
+      #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, 
+      #{modTim,jdbcType=TIMESTAMP}, #{defFlg,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.AptDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="aptDefId" order="BEFORE" >
+      select APT_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_APT_DEF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      APT_DEF_ID,
+      <if test="aptTyp != null" >
+        APT_TYP,
+      </if>
+      <if test="aptNam != null" >
+        APT_NAM,
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aptDefId,jdbcType=DECIMAL},
+      <if test="aptTyp != null" >
+        #{aptTyp,jdbcType=CHAR},
+      </if>
+      <if test="aptNam != null" >
+        #{aptNam,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUsr != null" >
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="defFlg != null" >
+        #{defFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.AptDef" >
+    update T_APT_DEF
+    <set >
+      <if test="aptTyp != null" >
+        APT_TYP = #{aptTyp,jdbcType=CHAR},
+      </if>
+      <if test="aptNam != null" >
+        APT_NAM = #{aptNam,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG = #{defFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where APT_DEF_ID = #{aptDefId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.AptDef" >
+    update T_APT_DEF
+    set APT_TYP = #{aptTyp,jdbcType=CHAR},
+      APT_NAM = #{aptNam,jdbcType=VARCHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      DEF_FLG = #{defFlg,jdbcType=CHAR}
+    where APT_DEF_ID = #{aptDefId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrAptModAplyMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrAptModAply" >
+    <id column="APLY_ID" property="aplyId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="APT_ID" property="aptId" jdbcType="DECIMAL" />
+    <result column="APT_FLD" property="aptFld" jdbcType="VARCHAR" />
+    <result column="FLD_VAL" property="fldVal" jdbcType="VARCHAR" />
+    <result column="APLY_USR" property="aplyUsr" jdbcType="DECIMAL" />
+    <result column="APLY_TIM" property="aplyTim" jdbcType="TIMESTAMP" />
+    <result column="ADT_USR" property="adtUsr" jdbcType="DECIMAL" />
+    <result column="ADT_TIM" property="adtTim" jdbcType="TIMESTAMP" />
+    <result column="ADT_STS" property="adtSts" jdbcType="CHAR" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, SPLR_ID, APT_ID, APT_FLD, FLD_VAL, APLY_USR, APLY_TIM, ADT_USR, ADT_TIM, 
+    ADT_STS, DEL_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_APT_MOD_APLY
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_APT_MOD_APLY
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrAptModAply" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_APT_MOD_APLY_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_APT_MOD_APLY (APLY_ID, SPLR_ID, APT_ID, 
+      APT_FLD, FLD_VAL, APLY_USR, 
+      APLY_TIM, ADT_USR, ADT_TIM, 
+      ADT_STS, DEL_FLG)
+    values (#{aplyId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{aptId,jdbcType=DECIMAL}, 
+      #{aptFld,jdbcType=VARCHAR}, #{fldVal,jdbcType=VARCHAR}, #{aplyUsr,jdbcType=DECIMAL}, 
+      #{aplyTim,jdbcType=TIMESTAMP}, #{adtUsr,jdbcType=DECIMAL}, #{adtTim,jdbcType=TIMESTAMP}, 
+      #{adtSts,jdbcType=CHAR}, #{delFlg,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrAptModAply" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_APT_MOD_APLY_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_APT_MOD_APLY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      APLY_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="aptId != null" >
+        APT_ID,
+      </if>
+      <if test="aptFld != null" >
+        APT_FLD,
+      </if>
+      <if test="fldVal != null" >
+        FLD_VAL,
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR,
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM,
+      </if>
+      <if test="adtUsr != null" >
+        ADT_USR,
+      </if>
+      <if test="adtTim != null" >
+        ADT_TIM,
+      </if>
+      <if test="adtSts != null" >
+        ADT_STS,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aplyId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="aptId != null" >
+        #{aptId,jdbcType=DECIMAL},
+      </if>
+      <if test="aptFld != null" >
+        #{aptFld,jdbcType=VARCHAR},
+      </if>
+      <if test="fldVal != null" >
+        #{fldVal,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adtUsr != null" >
+        #{adtUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="adtTim != null" >
+        #{adtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adtSts != null" >
+        #{adtSts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrAptModAply" >
+    update T_SPLR_APT_MOD_APLY
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="aptId != null" >
+        APT_ID = #{aptId,jdbcType=DECIMAL},
+      </if>
+      <if test="aptFld != null" >
+        APT_FLD = #{aptFld,jdbcType=VARCHAR},
+      </if>
+      <if test="fldVal != null" >
+        FLD_VAL = #{fldVal,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adtUsr != null" >
+        ADT_USR = #{adtUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="adtTim != null" >
+        ADT_TIM = #{adtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adtSts != null" >
+        ADT_STS = #{adtSts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrAptModAply" >
+    update T_SPLR_APT_MOD_APLY
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      APT_ID = #{aptId,jdbcType=DECIMAL},
+      APT_FLD = #{aptFld,jdbcType=VARCHAR},
+      FLD_VAL = #{fldVal,jdbcType=VARCHAR},
+      APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      ADT_USR = #{adtUsr,jdbcType=DECIMAL},
+      ADT_TIM = #{adtTim,jdbcType=TIMESTAMP},
+      ADT_STS = #{adtSts,jdbcType=CHAR},
+      DEL_FLG = #{delFlg,jdbcType=CHAR}
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+</mapper>

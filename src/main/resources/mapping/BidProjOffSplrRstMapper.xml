@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.BidProjOffSplrRstMapper">
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.BidProjOffSplrRst">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="SPLR_ID" jdbcType="DECIMAL" property="splrId" />
+    <result column="PROJ_ID" jdbcType="DECIMAL" property="projId" />
+    <result column="PROJ_NAM" jdbcType="VARCHAR" property="projNam" />
+    <result column="MAT_COD" jdbcType="VARCHAR" property="matCod" />
+    <result column="SPLR_NAM" jdbcType="VARCHAR" property="splrNam" />
+    <result column="MAT_NAM" jdbcType="VARCHAR" property="matNam" />
+    <result column="MAT_UNT" jdbcType="CHAR" property="matUnt" />
+    <result column="PCHS_NUM" jdbcType="VARCHAR" property="pchsNum" />
+    <result column="AWD_AMT" jdbcType="DECIMAL" property="awdAmt" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="EFF_FLG" jdbcType="CHAR" property="effFlg" />
+    <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr" />
+    <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim" />
+    <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr" />
+    <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SPLR_ID, PROJ_ID, PROJ_NAM, MAT_COD, SPLR_NAM, MAT_NAM, MAT_UNT, PCHS_NUM, AWD_AMT, 
+    MEMO, EFF_FLG, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_BID_PROJ_OFF_SPLR_RST
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_BID_PROJ_OFF_SPLR_RST
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.BidProjOffSplrRst">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      select BID_PROJ_OFF_SPLR_RST_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_BID_PROJ_OFF_SPLR_RST (ID, SPLR_ID, PROJ_ID, 
+      PROJ_NAM, MAT_COD, SPLR_NAM, 
+      MAT_NAM, MAT_UNT, PCHS_NUM, 
+      AWD_AMT, MEMO, EFF_FLG, 
+      CRT_USR, CRT_TIM, MOD_USR, 
+      MOD_TIM)
+    values (#{id,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{projId,jdbcType=DECIMAL}, 
+      #{projNam,jdbcType=VARCHAR}, #{matCod,jdbcType=VARCHAR}, #{splrNam,jdbcType=VARCHAR}, 
+      #{matNam,jdbcType=VARCHAR}, #{matUnt,jdbcType=CHAR}, #{pchsNum,jdbcType=VARCHAR},
+      #{awdAmt,jdbcType=DECIMAL}, #{memo,jdbcType=VARCHAR}, #{effFlg,jdbcType=CHAR}, 
+      #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, 
+      #{modTim,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.BidProjOffSplrRst">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      select BID_PROJ_OFF_SPLR_RST_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_BID_PROJ_OFF_SPLR_RST
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="splrId != null">
+        SPLR_ID,
+      </if>
+      <if test="projId != null">
+        PROJ_ID,
+      </if>
+      <if test="projNam != null">
+        PROJ_NAM,
+      </if>
+      <if test="matCod != null">
+        MAT_COD,
+      </if>
+      <if test="splrNam != null">
+        SPLR_NAM,
+      </if>
+      <if test="matNam != null">
+        MAT_NAM,
+      </if>
+      <if test="matUnt != null">
+        MAT_UNT,
+      </if>
+      <if test="pchsNum != null">
+        PCHS_NUM,
+      </if>
+      <if test="awdAmt != null">
+        AWD_AMT,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG,
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR,
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null">
+        MOD_USR,
+      </if>
+      <if test="modTim != null">
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=DECIMAL},
+      <if test="splrId != null">
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="projId != null">
+        #{projId,jdbcType=DECIMAL},
+      </if>
+      <if test="projNam != null">
+        #{projNam,jdbcType=VARCHAR},
+      </if>
+      <if test="matCod != null">
+        #{matCod,jdbcType=VARCHAR},
+      </if>
+      <if test="splrNam != null">
+        #{splrNam,jdbcType=VARCHAR},
+      </if>
+      <if test="matNam != null">
+        #{matNam,jdbcType=VARCHAR},
+      </if>
+      <if test="matUnt != null">
+        #{matUnt,jdbcType=CHAR},
+      </if>
+      <if test="pchsNum != null">
+        #{pchsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="awdAmt != null">
+        #{awdAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null">
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.BidProjOffSplrRst">
+    update T_BID_PROJ_OFF_SPLR_RST
+    <set>
+      <if test="splrId != null">
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="projId != null">
+        PROJ_ID = #{projId,jdbcType=DECIMAL},
+      </if>
+      <if test="projNam != null">
+        PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+      </if>
+      <if test="matCod != null">
+        MAT_COD = #{matCod,jdbcType=VARCHAR},
+      </if>
+      <if test="splrNam != null">
+        SPLR_NAM = #{splrNam,jdbcType=VARCHAR},
+      </if>
+      <if test="matNam != null">
+        MAT_NAM = #{matNam,jdbcType=VARCHAR},
+      </if>
+      <if test="matUnt != null">
+        MAT_UNT = #{matUnt,jdbcType=CHAR},
+      </if>
+      <if test="pchsNum != null">
+        PCHS_NUM = #{pchsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="awdAmt != null">
+        AWD_AMT = #{awdAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="memo != null">
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.BidProjOffSplrRst">
+    update T_BID_PROJ_OFF_SPLR_RST
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      PROJ_ID = #{projId,jdbcType=DECIMAL},
+      PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+      MAT_COD = #{matCod,jdbcType=VARCHAR},
+      SPLR_NAM = #{splrNam,jdbcType=VARCHAR},
+      MAT_NAM = #{matNam,jdbcType=VARCHAR},
+      MAT_UNT = #{matUnt,jdbcType=CHAR},
+      PCHS_NUM = #{pchsNum,jdbcType=VARCHAR},
+      AWD_AMT = #{awdAmt,jdbcType=DECIMAL},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    SELECT * FROM (
+    SELECT A.*,ROWNUM RN
+    FROM (
+    SELECT *
+    FROM T_BID_PROJ_OFF_SPLR_RST
+    WHERE EFF_FLG = 1
+    <if test="splrId != null">
+      AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+    </if>
+    <if test="projId != null">
+      AND PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </if>
+    <if test="projNam != null">
+      AND PROJ_NAM = #{projNam,jdbcType=VARCHAR}
+    </if>
+    <if test="matCod != null">
+      AND MAT_COD = #{matCod,jdbcType=VARCHAR}
+    </if>
+    <if test="splrNam != null">
+      AND SPLR_NAM = #{splrNam,jdbcType=VARCHAR}
+    </if>
+    <if test="matNam != null">
+      AND MAT_NAM = #{matNam,jdbcType=VARCHAR}
+    </if>
+    <if test="matUnt != null">
+      AND MAT_UNT = #{matUnt,jdbcType=CHAR}
+    </if>
+    <if test="pchsNum != null">
+      AND PCHS_NUM = #{pchsNum,jdbcType=VARCHAR}
+    </if>
+    <if test="awdAmt != null">
+      AND AWD_AMT = #{awdAmt,jdbcType=DECIMAL}
+    </if>
+    <if test="memo != null">
+      AND MEMO = #{memo,jdbcType=VARCHAR}
+    </if>
+    <if test="crtUsr != null">
+      AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null">
+      AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="modUsr != null">
+      AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="modTim != null">
+      AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    </if>
+    ORDER BY ID ASC
+    ) A
+    WHERE
+    <choose>
+      <when test="limit > 0">
+        ROWNUM &lt;= #{limit}
+      </when>
+      <otherwise>
+        ROWNUM &lt;= 10000
+      </otherwise>
+    </choose>
+    )  TL
+    WHERE RN &gt;=#{start}
+  </select>
+</mapper>

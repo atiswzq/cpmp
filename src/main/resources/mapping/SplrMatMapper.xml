@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrMatMapper">
+	<resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrMat">
+		<id column="SPLR_MAT_ID" property="splrMatId" jdbcType="DECIMAL" />
+		<result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+		<result column="MAT_ID" property="matId" jdbcType="DECIMAL" />
+		<result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+		<result column="CRT_USR" property="crtUsr" jdbcType="CHAR" />
+		<result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+		<result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+		<result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		SPLR_MAT_ID, SPLR_ID, MAT_ID, DEL_FLG, CRT_USR, CRT_TIM,
+		MOD_USR, MOD_TIM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_MAT
+		where SPLR_MAT_ID = #{splrMatId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		T_SPLR_MAT
+		where SPLR_MAT_ID = #{splrMatId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrMat">
+		<selectKey resultType="java.lang.Long" keyProperty="splrMatId"
+			order="BEFORE">
+			select SPLR_MAT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_MAT (SPLR_MAT_ID, SPLR_ID, MAT_ID,
+		DEL_FLG, CRT_USR,
+		CRT_TIM,
+		MOD_USR, MOD_TIM)
+		values (#{splrMatId,jdbcType=DECIMAL},
+		#{splrId,jdbcType=DECIMAL},
+		#{matId,jdbcType=DECIMAL},
+		#{delFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=CHAR},
+		#{crtTim,jdbcType=TIMESTAMP},
+		#{modUsr,jdbcType=DECIMAL},
+		#{modTim,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrMat">
+		<selectKey resultType="java.lang.Long" keyProperty="splrMatId"
+			order="BEFORE">
+			select SPLR_MAT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_MAT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			SPLR_MAT_ID,
+			<if test="splrId != null">
+				SPLR_ID,
+			</if>
+			<if test="matId != null">
+				MAT_ID,
+			</if>
+			<if test="delFlg != null">
+				DEL_FLG,
+			</if>
+			<if test="crtUsr != null">
+				CRT_USR,
+			</if>
+			<if test="crtTim != null">
+				CRT_TIM,
+			</if>
+			<if test="modUsr != null">
+				MOD_USR,
+			</if>
+			<if test="modTim != null">
+				MOD_TIM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{splrMatId,jdbcType=DECIMAL},
+			<if test="splrId != null">
+				#{splrId,jdbcType=DECIMAL},
+			</if>
+			<if test="matId != null">
+				#{matId,jdbcType=DECIMAL},
+			</if>
+			<if test="delFlg != null">
+				#{delFlg,jdbcType=CHAR},
+			</if>
+			<if test="crtUsr != null">
+				#{crtUsr,jdbcType=CHAR},
+			</if>
+			<if test="crtTim != null">
+				#{crtTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modUsr != null">
+				#{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				#{modTim,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrMat">
+		update T_SPLR_MAT
+		<set>
+			<if test="splrId != null">
+				SPLR_ID = #{splrId,jdbcType=DECIMAL},
+			</if>
+			<if test="matId != null">
+				MAT_ID = #{matId,jdbcType=DECIMAL},
+			</if>
+			<if test="delFlg != null">
+				DEL_FLG = #{delFlg,jdbcType=CHAR},
+			</if>
+			<if test="crtUsr != null">
+				CRT_USR = #{crtUsr,jdbcType=CHAR},
+			</if>
+			<if test="crtTim != null">
+				CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modUsr != null">
+				MOD_USR = #{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where SPLR_MAT_ID = #{splrMatId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrMat">
+		update T_SPLR_MAT
+		set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+		MAT_ID =
+		#{matId,jdbcType=DECIMAL},
+		DEL_FLG = #{delFlg,jdbcType=CHAR},
+		CRT_USR =
+		#{crtUsr,jdbcType=CHAR},
+		CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+		MOD_USR = #{modUsr,jdbcType=DECIMAL},
+		MOD_TIM =
+		#{modTim,jdbcType=TIMESTAMP}
+		where SPLR_MAT_ID =
+		#{splrMatId,jdbcType=DECIMAL}
+	</update>
+
+	<resultMap id="SplrBaseResultMap" type="cn.cofco.cpmp.entity.Splr">
+		<id column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+		<result column="PTNR_ID" property="ptnrId" jdbcType="VARCHAR" />
+		<result column="PTNR_COD" property="ptnrCod" jdbcType="VARCHAR" />
+		<result column="ACNT_GRUP" property="acntGrup" jdbcType="VARCHAR" />
+		<result column="FULL_NAM" property="fullNam" jdbcType="VARCHAR" />
+		<result column="SHORT_NAM" property="shortNam" jdbcType="VARCHAR" />
+		<result column="RGST_ADDR" property="rgstAddr" jdbcType="VARCHAR" />
+		<result column="POST_COD" property="postCod" jdbcType="VARCHAR" />
+		<result column="COUNTRY" property="country" jdbcType="CHAR" />
+		<result column="REGION" property="region" jdbcType="CHAR" />
+		<result column="CITY" property="city" jdbcType="CHAR" />
+		<result column="DISTRICT" property="district" jdbcType="CHAR" />
+		<result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+		<result column="TEL_EX" property="telEx" jdbcType="VARCHAR" />
+		<result column="MOB" property="mob" jdbcType="VARCHAR" />
+		<result column="FAX" property="fax" jdbcType="VARCHAR" />
+		<result column="FAX_EX" property="faxEx" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="PTNR_TYP" property="ptnrTyp" jdbcType="CHAR" />
+		<result column="HAS_CREDIT_CODE" property="hasCreditCode"
+			jdbcType="CHAR" />
+		<result column="TAX_COD" property="taxCod" jdbcType="VARCHAR" />
+		<result column="DBUSI_LICE" property="dbusiLice" jdbcType="VARCHAR" />
+		<result column="ORG_COD" property="orgCod" jdbcType="VARCHAR" />
+		<result column="CRDT_COD" property="crdtCod" jdbcType="VARCHAR" />
+		<result column="IDST1" property="idst1" jdbcType="VARCHAR" />
+		<result column="IDST2" property="idst2" jdbcType="VARCHAR" />
+		<result column="IDST" property="idst" jdbcType="VARCHAR" />
+		<result column="OPR_RNG" property="oprRng" jdbcType="VARCHAR" />
+		<result column="REG_CPTL" property="regCptl" jdbcType="VARCHAR" />
+		<result column="REG_TIM" property="regTim" jdbcType="TIMESTAMP" />
+		<result column="CPN_NTR" property="cpnNtr" jdbcType="CHAR" />
+		<result column="LGL_USER" property="lglUser" jdbcType="VARCHAR" />
+		<result column="LGL_IDNT_CAD" property="lglIdntCad" jdbcType="VARCHAR" />
+		<result column="TRDE_PTNR" property="trdePtnr" jdbcType="VARCHAR" />
+		<result column="IS_KEY_ACNT" property="isKeyAcnt" jdbcType="CHAR" />
+		<result column="SUPR_GRUP" property="suprGrup" jdbcType="VARCHAR" />
+		<result column="PARENT_CPN" property="parentCpn" jdbcType="VARCHAR" />
+		<result column="CTRL_USR" property="ctrlUsr" jdbcType="VARCHAR" />
+		<result column="OLD_COD" property="oldCod" jdbcType="VARCHAR" />
+		<result column="CLASSIFICATION" property="classification"
+			jdbcType="VARCHAR" />
+		<result column="SPLR_STS" property="splrSts" jdbcType="CHAR" />
+		<result column="SPLR_LEVL" property="splrLevl" jdbcType="CHAR" />
+		<result column="CRT_USR" property="crtUsr" jdbcType="DECIMAL" />
+		<result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+		<result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+		<result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+		<result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+	</resultMap>
+	<!-- 根据物料类型返回供应商列表 -->
+	<select id="getSplrByMatTyp" resultMap="SplrBaseResultMap"
+		parameterType="java.lang.String">
+		select TS.* from (select TSM.SPLR_ID from T_SPLR_MAT TSM left join
+		T_MATERIEL TM
+		on TSM.MAT_ID = TM.MAT_ID where 1=1
+		<if test="matTyp != null">
+			AND TM.CO_MATGROUP LIKE CONCAT(#{matTyp,jdbcType=VARCHAR},'%')
+		</if>
+		group by TSM.SPLR_ID) T left join T_SPLR TS on T.SPLR_ID = TS.SPLR_ID WHERE TS.SPLR_STS IN (${splrSts})
+	</select>
+
+	<!-- 供应商数据批量插入 -->
+	<insert id="inserts" parameterType="java.util.List">
+		INSERT INTO T_SPLR_MAT(
+		<include refid="Base_Column_List" />
+		)
+		select SPLR_MAT_SEQ.NEXTVAL as SPLR_MAT_ID, TSA.* from(
+		<foreach collection="list" item="item" index="index"
+				 separator="union all">
+			select
+			#{item.splrId,jdbcType=DECIMAL},
+			#{item.matId,jdbcType=DECIMAL},
+			#{item.delFlg,jdbcType=CHAR},
+			#{item.crtUsr,jdbcType=CHAR},
+			#{item.crtTim,jdbcType=TIMESTAMP},
+			#{item.modUsr,jdbcType=DECIMAL},
+			#{item.modTim,jdbcType=TIMESTAMP}
+			from dual
+		</foreach>
+		) TSA
+	</insert>
+
+	<!-- 查询物料类型列表 -->
+	<select id="matType" resultType="java.lang.String">
+		SELECT T_MATERIEL.MAT_TYP FROM T_MATERIEL GROUP BY T_MATERIEL.MAT_TYP
+	</select>
+
+	<!-- 按条件查找供应商供货物料 -->
+	<select id="selectByCondition" parameterType="java.util.Map"
+			resultMap="BaseResultMap">
+		SELECT * FROM (
+		SELECT A.*,ROWNUM RN
+		FROM (
+		SELECT *
+		FROM T_SPLR_MAT
+		WHERE 1 =
+		1
+		<if test="splrId != null">
+			AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+		<if test="matId != null">
+			AND MAT_ID = #{matId,jdbcType=DECIMAL}
+		</if>
+		<if test="delFlg != null">
+			AND DEL_FLG = #{delFlg,jdbcType=CHAR}
+		</if>
+		<if test="crtUsr != null">
+			AND CRT_USR = #{crtUsr,jdbcType=CHAR}
+		</if>
+		<if test="crtTim != null">
+			AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+		</if>
+		<if test="modUsr != null">
+			AND MOD_USR = #{modUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="modTim != null">
+			AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+		</if> ORDER BY SPLR_ID DESC
+		) A
+		WHERE
+		<choose>
+			<when test="limit > 0">
+				ROWNUM &lt;= #{limit}
+			</when>
+			<otherwise>
+				ROWNUM &lt;= 10000
+			</otherwise>
+		</choose>
+		) TL
+		WHERE RN &gt;=#{start}
+	</select>
+</mapper>

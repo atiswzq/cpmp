@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrChrmInfoMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrChrmInfo" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="CHRM_ICON" property="chrmIcon" jdbcType="VARCHAR" />
+    <result column="ITDC" property="itdc" jdbcType="VARCHAR" />
+    <result column="UPLD_USR" property="upldUsr" jdbcType="DECIMAL" />
+    <result column="UPLD_TIM" property="upldTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+    <result column="ICON_TITLE" property="iconTitle" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    ID, SPLR_ID, CHRM_ICON,  ITDC, UPLD_USR, UPLD_TIM, MOD_USR, MOD_TIM, DEL_FLG, ICON_TITLE
+  </sql>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrChrmInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+      select SPLR_CHRM_INFO_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_CHRM_INFO (ID, SPLR_ID, CHRM_ICON, 
+      ITDC, UPLD_USR, UPLD_TIM, 
+      MOD_USR, MOD_TIM, DEL_FLG, ICON_TITLE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{chrmIcon,jdbcType=VARCHAR}, 
+      #{itdc,jdbcType=VARCHAR}, #{upldUsr,jdbcType=DECIMAL}, #{upldTim,jdbcType=TIMESTAMP}, 
+      #{modUsr,jdbcType=DECIMAL}, #{modTim,jdbcType=TIMESTAMP}, #{delFlg,jdbcType=CHAR}, #{iconTitle,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrChrmInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+      select SPLR_CHRM_INFO_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_CHRM_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="chrmIcon != null" >
+        CHRM_ICON,
+      </if>
+      <if test="itdc != null" >
+        ITDC,
+      </if>
+      <if test="upldUsr != null" >
+        UPLD_USR,
+      </if>
+      <if test="upldTim != null" >
+        UPLD_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+      <if test="iconTitle != null" >
+        ICON_TITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="chrmIcon != null" >
+        #{chrmIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="itdc != null" >
+        #{itdc,jdbcType=VARCHAR},
+      </if>
+      <if test="upldUsr != null" >
+        #{upldUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="upldTim != null" >
+        #{upldTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="iconTitle != null" >
+      	#{iconTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateSelective" parameterType="cn.cofco.cpmp.entity.SplrChrmInfo" >
+    update T_SPLR_CHRM_INFO
+    <set>
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="chrmIcon != null" >
+        CHRM_ICON = #{chrmIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="itdc != null" >
+        ITDC = #{itdc,jdbcType=VARCHAR},
+      </if>
+      <if test="upldUsr != null" >
+        UPLD_USR = #{upldUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="upldTim != null" >
+        UPLD_TIM = #{upldTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="iconTitle != null" >
+      	ICON_TITLE = #{iconTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_SPLR_CHRM_INFO
+    where DEL_FLG = 0
+    <if test="splrId != null" >
+      AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+    </if>
+  </select>
+  
+  <resultMap id="ChrmResultMap" type="cn.cofco.cpmp.splr.dto.SplrChrmDto" >
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="CHRM_ICON" property="chrmIcon" jdbcType="VARCHAR" />
+    <result column="SPLR_NAM" property="splrNam" jdbcType="VARCHAR" />
+    <result column="ICON_TITLE" property="iconTitle" jdbcType="VARCHAR" />
+    <result column="ITDC" property="itdc" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectForChrm" resultMap="ChrmResultMap">
+    select TSCI.SPLR_ID, TSCI.CHRM_ICON, TSCI.ICON_TITLE, TSCI.ITDC, TS.FULL_NAM SPLR_NAM from T_SPLR_CHRM TSC left join T_SPLR TS on TS.SPLR_ID = TSC.SPLR_ID 
+    left join T_SPLR_CHRM_INFO TSCI on TSC.SPLR_ID = TSCI.SPLR_ID WHERE TSC.DEF_FLG = '0'
+  </select>
+  
+  <delete id="delete" >
+  	delete from T_SPLR_CHRM_INFO where 1=1
+  	<if test="id != null" >
+      AND ID = #{id,jdbcType=DECIMAL}
+    </if>
+  </delete>
+</mapper>

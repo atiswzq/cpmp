@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.BnkCodParmMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.BnkCodParm" >
+    <id column="BNK_COD" property="bnkCod" jdbcType="VARCHAR" />
+    <result column="BNK_NAM" property="bnkNam" jdbcType="VARCHAR" />
+    <result column="BNK_CNTY" property="bnkCnty" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BNK_COD, BNK_NAM, BNK_CNTY, CRT_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_BNK_COD_PARM
+    where BNK_COD = #{bnkCod,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_BNK_COD_PARM
+    where BNK_COD = #{bnkCod,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.BnkCodParm" >
+    insert into T_BNK_COD_PARM (BNK_COD, BNK_NAM, BNK_CNTY, 
+      CRT_TIM)
+    values (#{bnkCod,jdbcType=VARCHAR}, #{bnkNam,jdbcType=VARCHAR}, #{bnkCnty,jdbcType=VARCHAR}, 
+      #{crtTim,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.BnkCodParm" >
+    insert into T_BNK_COD_PARM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bnkCod != null" >
+        BNK_COD,
+      </if>
+      <if test="bnkNam != null" >
+        BNK_NAM,
+      </if>
+      <if test="bnkCnty != null" >
+        BNK_CNTY,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bnkCod != null" >
+        #{bnkCod,jdbcType=VARCHAR},
+      </if>
+      <if test="bnkNam != null" >
+        #{bnkNam,jdbcType=VARCHAR},
+      </if>
+      <if test="bnkCnty != null" >
+        #{bnkCnty,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.BnkCodParm" >
+    update T_BNK_COD_PARM
+    <set >
+      <if test="bnkNam != null" >
+        BNK_NAM = #{bnkNam,jdbcType=VARCHAR},
+      </if>
+      <if test="bnkCnty != null" >
+        BNK_CNTY = #{bnkCnty,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BNK_COD = #{bnkCod,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.BnkCodParm" >
+    update T_BNK_COD_PARM
+    set BNK_NAM = #{bnkNam,jdbcType=VARCHAR},
+      BNK_CNTY = #{bnkCnty,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+    where BNK_COD = #{bnkCod,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByBnkNam" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_BNK_COD_PARM WHERE ROWNUM &lt;= '101'
+    <if test="bnkNam != null">
+      and BNK_NAM LIKE CONCAT(CONCAT('%',#{bnkNam,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+</mapper>

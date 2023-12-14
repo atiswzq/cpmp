@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrAdmtSplMatMapper">
+	<resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrAdmtSplMat">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="HEADER_ID" property="headerId" jdbcType="DECIMAL" />
+		<result column="MAT_ID" property="matId" jdbcType="DECIMAL" />
+		<result column="MAT_COD" property="matCod" jdbcType="VARCHAR" />
+		<result column="MAT_NAM" property="matNam" jdbcType="VARCHAR" />
+		<result column="MAT_SPFT" property="matSpft" jdbcType="VARCHAR" />
+		<result column="MAT_UNT" property="matUnt" jdbcType="VARCHAR" />
+		<result column="MAT_IND" property="matInd" jdbcType="CHAR" />
+		<result column="MAT_TYP_NAM" property="matTypNam" jdbcType="VARCHAR" />
+		<result column="MAT_TYP_COD" property="matTypCod" jdbcType="CHAR" />
+		<result column="MAT_DSCB" property="matDscb" jdbcType="VARCHAR" />
+		<result column="PROD_GRUP" property="prodGrup" jdbcType="CHAR" />
+		<result column="MAT_GRUP" property="matGrup" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, HEADER_ID, MAT_ID,MAT_COD, MAT_NAM, MAT_SPFT,MAT_UNT,MAT_IND, MAT_TYP_NAM,
+		MAT_TYP_COD, MAT_DSCB, PROD_GRUP,MAT_GRUP
+	</sql>
+
+	<insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrAdmtSplMat">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="BEFORE">
+			select SPLR_ADMT_SPL_MAT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_ADMT_SPL_MAT (ID, HEADER_ID, MAT_ID,
+		MAT_COD,
+		MAT_NAM, MAT_SPFT,
+		MAT_UNT, MAT_IND, MAT_TYP_NAM,
+		MAT_TYP_COD, MAT_DSCB,
+		PROD_GRUP,
+		MAT_GRUP)
+		values (#{id,jdbcType=DECIMAL},
+		#{headerId,jdbcType=DECIMAL},
+		#{matId,jdbcType=DECIMAL},
+		#{matCod,jdbcType=VARCHAR}, #{matNam,jdbcType=VARCHAR},
+		#{matSpft,jdbcType=VARCHAR},
+		#{matUnt,jdbcType=VARCHAR},
+		#{matInd,jdbcType=CHAR},
+		#{matTypNam,jdbcType=VARCHAR},
+		#{matTypCod,jdbcType=CHAR}, #{matDscb,jdbcType=VARCHAR},
+		#{prodGrup,jdbcType=CHAR},
+		#{matGrup,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrAdmtSplMat">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="BEFORE">
+			select SPLR_ADMT_SPL_MAT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_ADMT_SPL_MAT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			ID,
+			<if test="headerId != null">
+				HEADER_ID,
+			</if>
+			<if test="matId != null">
+				MAT_ID,
+			</if>
+			<if test="matCod != null">
+				MAT_COD,
+			</if>
+			<if test="matNam != null">
+				MAT_NAM,
+			</if>
+			<if test="matSpft != null">
+				MAT_SPFT,
+			</if>
+			<if test="matUnt != null">
+				MAT_UNT,
+			</if>
+			<if test="matInd != null">
+				MAT_IND,
+			</if>
+			<if test="matTypNam != null">
+				MAT_TYP_NAM,
+			</if>
+			<if test="matTypCod != null">
+				MAT_TYP_COD,
+			</if>
+			<if test="matDscb != null">
+				MAT_DSCB,
+			</if>
+			<if test="prodGrup != null">
+				PROD_GRUP,
+			</if>
+			<if test="matGrup != null">
+				MAT_GRUP,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id,jdbcType=DECIMAL},
+			<if test="headerId != null">
+				#{headerId,jdbcType=DECIMAL},
+			</if>
+			<if test="matId != null">
+				#{matId,jdbcType=DECIMAL},
+			</if>
+			<if test="matCod != null">
+				#{matCod,jdbcType=VARCHAR},
+			</if>
+			<if test="matNam != null">
+				#{matNam,jdbcType=VARCHAR},
+			</if>
+			<if test="matSpft != null">
+				#{matSpft,jdbcType=VARCHAR},
+			</if>
+			<if test="matUnt != null">
+				#{matUnt,jdbcType=VARCHAR},
+			</if>
+			<if test="matInd != null">
+				#{matInd,jdbcType=CHAR},
+			</if>
+			<if test="matTypNam != null">
+				#{matTypNam,jdbcType=VARCHAR},
+			</if>
+			<if test="matTypCod != null">
+				#{matTypCod,jdbcType=CHAR},
+			</if>
+			<if test="matDscb != null">
+				#{matDscb,jdbcType=VARCHAR},
+			</if>
+			<if test="prodGrup != null">
+				#{prodGrup,jdbcType=CHAR},
+			</if>
+			<if test="matGrup != null">
+				#{matGrup,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 批量插入数据 -->
+	<insert id="inserts" parameterType="java.util.List">
+		INSERT INTO T_SPLR_ADMT_SPL_MAT(
+		<include refid="Base_Column_List" />
+		)
+		select SPLR_ADMT_SPL_MAT_SEQ.NEXTVAL as ID,TSASM.* from(
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			select
+			#{item.headerId,jdbcType=DECIMAL},
+			#{item.matId,jdbcType=DECIMAL},
+			#{item.matCod,jdbcType=VARCHAR},
+			#{item.matNam,jdbcType=VARCHAR},
+			#{item.matSpft,jdbcType=VARCHAR},
+			#{item.matUnt,jdbcType=VARCHAR},
+			#{item.matInd,jdbcType=CHAR},
+			#{item.matTypNam,jdbcType=VARCHAR},
+			#{item.matTypCod,jdbcType=CHAR},
+			#{item.matDscb,jdbcType=VARCHAR},
+			#{item.prodGrup,jdbcType=CHAR},
+			#{item.matGrup,jdbcType=VARCHAR}
+			from dual
+		</foreach>
+		) TSASM
+	</insert>
+
+</mapper>

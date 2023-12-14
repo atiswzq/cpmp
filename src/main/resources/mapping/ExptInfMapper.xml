@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.ExptInfMapper">
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.ExptInf">
+    <id column="EXPT_ID" jdbcType="DECIMAL" property="exptId" />
+    <result column="EXPT_NAM" jdbcType="VARCHAR" property="exptNam" />
+    <result column="MOB_NBR" jdbcType="VARCHAR" property="mobNbr" />
+    <result column="EXPT_PSW" jdbcType="VARCHAR" property="exptPsw" />
+    <result column="EXPT_TTL" jdbcType="VARCHAR" property="exptTtl" />
+    <result column="MAT_TYPS" jdbcType="VARCHAR" property="matTyps" />
+    <result column="EFF_FLG" jdbcType="CHAR" property="effFlg" />
+    <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr" />
+    <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim" />
+    <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr" />
+    <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    EXPT_ID, EXPT_NAM, MOB_NBR, EXPT_PSW, EXPT_TTL, MAT_TYPS, EFF_FLG, CRT_USR, CRT_TIM, 
+    MOD_USR, MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_EXPT_INF
+    where EXPT_ID = #{exptId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from T_EXPT_INF
+    where EXPT_ID = #{exptId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.ExptInf">
+    <selectKey keyProperty="exptId" order="BEFORE" resultType="java.lang.Long">
+      select EXPT_INF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_EXPT_INF (EXPT_ID, EXPT_NAM, MOB_NBR, 
+      EXPT_PSW, EXPT_TTL, MAT_TYPS, 
+      EFF_FLG, CRT_USR, CRT_TIM, 
+      MOD_USR, MOD_TIM)
+    values (#{exptId,jdbcType=DECIMAL}, #{exptNam,jdbcType=VARCHAR}, #{mobNbr,jdbcType=VARCHAR}, 
+      #{exptPsw,jdbcType=VARCHAR}, #{exptTtl,jdbcType=VARCHAR}, #{matTyps,jdbcType=VARCHAR}, 
+      #{effFlg,jdbcType=CHAR}, #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, 
+      #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.ExptInf">
+    <selectKey keyProperty="exptId" order="BEFORE" resultType="java.lang.Long">
+      select EXPT_INF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_EXPT_INF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      EXPT_ID,
+      <if test="exptNam != null">
+        EXPT_NAM,
+      </if>
+      <if test="mobNbr != null">
+        MOB_NBR,
+      </if>
+      <if test="exptPsw != null">
+        EXPT_PSW,
+      </if>
+      <if test="exptTtl != null">
+        EXPT_TTL,
+      </if>
+      <if test="matTyps != null">
+        MAT_TYPS,
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG,
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR,
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null">
+        MOD_USR,
+      </if>
+      <if test="modTim != null">
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{exptId,jdbcType=DECIMAL},
+      <if test="exptNam != null">
+        #{exptNam,jdbcType=VARCHAR},
+      </if>
+      <if test="mobNbr != null">
+        #{mobNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="exptPsw != null">
+        #{exptPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="exptTtl != null">
+        #{exptTtl,jdbcType=VARCHAR},
+      </if>
+      <if test="matTyps != null">
+        #{matTyps,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null">
+        #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.ExptInf">
+    update T_EXPT_INF
+    <set>
+      <if test="exptNam != null">
+        EXPT_NAM = #{exptNam,jdbcType=VARCHAR},
+      </if>
+      <if test="mobNbr != null">
+        MOB_NBR = #{mobNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="exptPsw != null">
+        EXPT_PSW = #{exptPsw,jdbcType=VARCHAR},
+      </if>
+      <if test="exptTtl != null">
+        EXPT_TTL = #{exptTtl,jdbcType=VARCHAR},
+      </if>
+      <if test="matTyps != null">
+        MAT_TYPS = #{matTyps,jdbcType=VARCHAR},
+      </if>
+      <if test="effFlg != null">
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+      </if>
+      <if test="crtUsr != null">
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null">
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null">
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null">
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where EXPT_ID = #{exptId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.ExptInf">
+    update T_EXPT_INF
+    set EXPT_NAM = #{exptNam,jdbcType=VARCHAR},
+      MOB_NBR = #{mobNbr,jdbcType=VARCHAR},
+      EXPT_PSW = #{exptPsw,jdbcType=VARCHAR},
+      EXPT_TTL = #{exptTtl,jdbcType=VARCHAR},
+      MAT_TYPS = #{matTyps,jdbcType=VARCHAR},
+      EFF_FLG = #{effFlg,jdbcType=CHAR},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where EXPT_ID = #{exptId,jdbcType=DECIMAL}
+  </update>
+
+
+    <select id="countByMap" resultType="java.lang.Integer" parameterType="java.util.HashMap" >
+        SELECT count(1)
+        FROM T_EXPT_INF
+        WHERE 1 = 1
+        <if test="exptNam != null">
+            AND EXPT_NAM  like '%'|| #{exptNam,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="mobNbr != null">
+            AND MOB_NBR = #{mobNbr,jdbcType=VARCHAR}
+        </if>
+        <if test="exptTtl != null">
+            AND EXPT_TTL = #{exptTtl,jdbcType=VARCHAR}
+        </if>
+        <if test="matTyps != null">
+            AND MAT_TYPS = #{matTyps,jdbcType=VARCHAR}
+        </if>
+        <if test="matTyp != null">
+            AND (MAT_TYPS LIKE '%,'|| #{matTyp,jdbcType=VARCHAR} ||',%' OR MAT_TYPS LIKE #{matTyp,jdbcType=VARCHAR} ||',%' OR MAT_TYPS LIKE '%,'|| #{matTyp,jdbcType=VARCHAR})
+        </if>
+        <if test="effFlg != null">
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+    <select id="selectByMap" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+        SELECT *
+        FROM T_EXPT_INF
+        WHERE 1 = 1
+        <if test="exptNam != null">
+            AND EXPT_NAM  like '%'|| #{exptNam,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="mobNbr != null">
+            AND MOB_NBR = #{mobNbr,jdbcType=VARCHAR}
+        </if>
+        <if test="exptTtl != null">
+            AND EXPT_TTL = #{exptTtl,jdbcType=VARCHAR}
+        </if>
+        <if test="matTyps != null">
+            AND MAT_TYPS = #{matTyps,jdbcType=VARCHAR}
+        </if>
+        <if test="matTyp != null">
+            AND (MAT_TYPS LIKE '%,'|| #{matTyp,jdbcType=VARCHAR} ||',%' OR MAT_TYPS LIKE #{matTyp,jdbcType=VARCHAR} ||',%' OR MAT_TYPS LIKE '%,'|| #{matTyp,jdbcType=VARCHAR})
+        </if>
+        <if test="effFlg != null">
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit > 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        )  TL
+        WHERE RN &gt;=#{start}
+    </select>
+</mapper>

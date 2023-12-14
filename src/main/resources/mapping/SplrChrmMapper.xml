@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrChrmMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrChrm" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="SPLR_NAM" property="splrNam" jdbcType="VARCHAR" />
+    <result column="EFF_STAT" property="effStat" jdbcType="TIMESTAMP" />
+    <result column="EFF_END" property="effEnd" jdbcType="TIMESTAMP" />
+    <result column="CRT_USR" property="crtUsr" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_USR" property="modUsr" jdbcType="VARCHAR" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+    <result column="DEF_FLG" property="defFlg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SPLR_ID, SPLR_NAM, EFF_STAT, EFF_END, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM, DEF_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_CHRM
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_CHRM
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrChrm" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+      select SPLR_CHRM_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_CHRM (ID, SPLR_ID, SPLR_NAM, 
+      EFF_STAT, EFF_END, CRT_USR, 
+      CRT_TIM, MOD_USR, MOD_TIM, DEF_FLG
+      )
+    values (#{id,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{splrNam,jdbcType=VARCHAR}, 
+      #{effStat,jdbcType=TIMESTAMP}, #{effEnd,jdbcType=TIMESTAMP}, #{crtUsr,jdbcType=VARCHAR}, 
+      #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR}, #{modTim,jdbcType=TIMESTAMP}, #{defFlg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrChrm" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="BEFORE" >
+      select SPLR_CHRM_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_CHRM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="splrNam != null" >
+        SPLR_NAM,
+      </if>
+      <if test="effStat != null" >
+        EFF_STAT,
+      </if>
+      <if test="effEnd != null" >
+        EFF_END,
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{id,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="splrNam != null" >
+        #{splrNam,jdbcType=VARCHAR},
+      </if>
+      <if test="effStat != null" >
+        #{effStat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effEnd != null" >
+        #{effEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtUsr != null" >
+        #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="defFlg != null" >
+        #{defFlg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrChrm" >
+    update T_SPLR_CHRM
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="splrNam != null" >
+        SPLR_NAM = #{splrNam,jdbcType=VARCHAR},
+      </if>
+      <if test="effStat != null" >
+        EFF_STAT = #{effStat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effEnd != null" >
+        EFF_END = #{effEnd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="crtUsr != null" >
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG = #{defFlg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrChrm" >
+    update T_SPLR_CHRM
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      SPLR_NAM = #{splrNam,jdbcType=VARCHAR},
+      EFF_STAT = #{effStat,jdbcType=TIMESTAMP},
+      EFF_END = #{effEnd,jdbcType=TIMESTAMP},
+      CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_USR = #{modUsr,jdbcType=VARCHAR},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      DEF_FLG = #{defFlg,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <!-- 按条件查找供应商 -->
+  <select id="selectByConditions" parameterType="java.util.Map"
+          resultMap="BaseResultMap">
+    SELECT * FROM (
+    SELECT A.*,ROWNUM RN
+    FROM (
+    SELECT *
+    FROM T_SPLR_CHRM
+    WHERE 1 =
+    1
+    <if test="splrId != null" >
+      AND SPLR_ID = #{splrId,jdbcType=DECIMAL}
+    </if>
+    <if test="splrNam != null" >
+      AND SPLR_NAM = #{splrNam,jdbcType=VARCHAR}
+    </if>
+    <if test="effStat != null" >
+      AND EFF_STAT = #{effStat,jdbcType=TIMESTAMP}
+    </if>
+    <if test="effEnd != null" >
+      AND EFF_END = #{effEnd,jdbcType=TIMESTAMP}
+    </if>
+    <if test="crtUsr != null" >
+      AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="crtTim != null" >
+      AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="modUsr != null" >
+      AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+    </if>
+    <if test="modTim != null" >
+      AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    </if>
+    <if test="defFlg != null" >
+      AND DEF_FLG = #{defFlg,jdbcType=VARCHAR}
+    </if>
+    ) A
+    WHERE
+    <choose>
+      <when test="limit > 0">
+        ROWNUM &lt;= #{limit}
+      </when>
+      <otherwise>
+        ROWNUM &lt;= 10000
+      </otherwise>
+    </choose>
+    ) TL
+    WHERE RN &gt;=#{start}
+  </select>
+
+  <!-- 供应商数据批量插入 -->
+  <insert id="inserts" parameterType="java.util.List">
+    INSERT INTO T_SPLR_CHRM(
+    <include refid="Base_Column_List" />
+    )
+    select SPLR_CHRM_SEQ.NEXTVAL as ID, TSA.* from(
+    <foreach collection="list" item="item" index="index"
+             separator="union all">
+      select
+      #{item.splrId,jdbcType=DECIMAL},
+      #{item.splrNam,jdbcType=VARCHAR},
+      #{item.effStat,jdbcType=TIMESTAMP},
+      #{item.effEnd,jdbcType=TIMESTAMP},
+      #{item.crtUsr,jdbcType=VARCHAR},
+      #{item.crtTim,jdbcType=TIMESTAMP},
+      #{item.modUsr,jdbcType=VARCHAR},
+      #{item.modTim,jdbcType=TIMESTAMP},
+      #{item.defFlg,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) TSA
+  </insert>
+</mapper>

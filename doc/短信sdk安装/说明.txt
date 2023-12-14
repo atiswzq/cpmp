@@ -1,0 +1,2 @@
+1。确保mvn命令能正常工作
+2。双击 install sdk.bat 安装

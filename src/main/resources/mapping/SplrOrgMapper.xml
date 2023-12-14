@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrOrgMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrOrg" >
+    <id column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <id column="ORG_ID" property="orgId" jdbcType="DECIMAL" />
+    <result column="CRT_ID" property="crtId" jdbcType="DECIMAL" />
+    <result column="CRT_NAM" property="crtNam" jdbcType="VARCHAR" />
+    <result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_ID" property="modId" jdbcType="DECIMAL" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+    <result column="MOD_NAM" property="modNam" jdbcType="VARCHAR" />
+    <result column="SPLR_ORG_STS" property="splrOrgSts" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SPLR_ID, ORG_ID, CRT_ID, CRT_NAM, CRT_TIM, MOD_ID, MOD_TIM, MOD_NAM, SPLR_ORG_STS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="cn.cofco.cpmp.entity.SplrOrgKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_ORG
+    where SPLR_ID = #{splrId,jdbcType=DECIMAL}
+      and ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrOrgKey" >
+    delete from T_SPLR_ORG
+    where SPLR_ID = #{splrId,jdbcType=DECIMAL}
+      and ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrOrg" >
+    insert into T_SPLR_ORG (SPLR_ID, ORG_ID, CRT_ID, 
+      CRT_NAM, CRT_TIM, MOD_ID, 
+      MOD_TIM, MOD_NAM, SPLR_ORG_STS
+      )
+    values (#{splrId,jdbcType=DECIMAL}, #{orgId,jdbcType=DECIMAL}, #{crtId,jdbcType=DECIMAL}, 
+      #{crtNam,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, #{modId,jdbcType=DECIMAL}, 
+      #{modTim,jdbcType=TIMESTAMP}, #{modNam,jdbcType=VARCHAR}, #{splrOrgSts,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrOrg" >
+    insert into T_SPLR_ORG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="crtId != null" >
+        CRT_ID,
+      </if>
+      <if test="crtNam != null" >
+        CRT_NAM,
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM,
+      </if>
+      <if test="modId != null" >
+        MOD_ID,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+      <if test="modNam != null" >
+        MOD_NAM,
+      </if>
+      <if test="splrOrgSts != null" >
+        SPLR_ORG_STS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="crtId != null" >
+        #{crtId,jdbcType=DECIMAL},
+      </if>
+      <if test="crtNam != null" >
+        #{crtNam,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modId != null" >
+        #{modId,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modNam != null" >
+        #{modNam,jdbcType=VARCHAR},
+      </if>
+      <if test="splrOrgSts != null" >
+        #{splrOrgSts,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrOrg" >
+    update T_SPLR_ORG
+    <set >
+      <if test="crtId != null" >
+        CRT_ID = #{crtId,jdbcType=DECIMAL},
+      </if>
+      <if test="crtNam != null" >
+        CRT_NAM = #{crtNam,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTim != null" >
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modId != null" >
+        MOD_ID = #{modId,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modNam != null" >
+        MOD_NAM = #{modNam,jdbcType=VARCHAR},
+      </if>
+      <if test="splrOrgSts != null" >
+        SPLR_ORG_STS = #{splrOrgSts,jdbcType=CHAR},
+      </if>
+    </set>
+    where SPLR_ID = #{splrId,jdbcType=DECIMAL}
+      and ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrOrg" >
+    update T_SPLR_ORG
+    set CRT_ID = #{crtId,jdbcType=DECIMAL},
+      CRT_NAM = #{crtNam,jdbcType=VARCHAR},
+      CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+      MOD_ID = #{modId,jdbcType=DECIMAL},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      MOD_NAM = #{modNam,jdbcType=VARCHAR},
+      SPLR_ORG_STS = #{splrOrgSts,jdbcType=CHAR}
+    where SPLR_ID = #{splrId,jdbcType=DECIMAL}
+      and ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </update>
+</mapper>

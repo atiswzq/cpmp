@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrBkltMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrBklt" >
+    <id column="APLY_ID" property="aplyId" jdbcType="DECIMAL" />
+    <result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+    <result column="APLY_CTT" property="aplyCtt" jdbcType="VARCHAR" />
+    <result column="APLY_USR" property="aplyUsr" jdbcType="DECIMAL" />
+    <result column="APLY_TIM" property="aplyTim" jdbcType="TIMESTAMP" />
+    <result column="APLY_STS" property="aplySts" jdbcType="CHAR" />
+    <result column="DEL_FLG" property="delFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APLY_ID, SPLR_ID, APLY_CTT, APLY_USR, APLY_TIM, APLY_STS, DEL_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_BKLT
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_BKLT
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrBklt" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_BKLT_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_BKLT (APLY_ID, SPLR_ID, APLY_CTT, 
+      APLY_USR, APLY_TIM, APLY_STS, 
+      DEL_FLG)
+    values (#{aplyId,jdbcType=DECIMAL}, #{splrId,jdbcType=DECIMAL}, #{aplyCtt,jdbcType=VARCHAR}, 
+      #{aplyUsr,jdbcType=DECIMAL}, #{aplyTim,jdbcType=TIMESTAMP}, #{aplySts,jdbcType=CHAR}, 
+      #{delFlg,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrBklt" >
+    <selectKey resultType="java.lang.Long" keyProperty="aplyId" order="BEFORE" >
+      select SPLR_BKLT_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_BKLT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      APLY_ID,
+      <if test="splrId != null" >
+        SPLR_ID,
+      </if>
+      <if test="aplyCtt != null" >
+        APLY_CTT,
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR,
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM,
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS,
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{aplyId,jdbcType=DECIMAL},
+      <if test="splrId != null" >
+        #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyCtt != null" >
+        #{aplyCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplySts != null" >
+        #{aplySts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        #{delFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrBklt" >
+    update T_SPLR_BKLT
+    <set >
+      <if test="splrId != null" >
+        SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyCtt != null" >
+        APLY_CTT = #{aplyCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="aplyUsr != null" >
+        APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="aplyTim != null" >
+        APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aplySts != null" >
+        APLY_STS = #{aplySts,jdbcType=CHAR},
+      </if>
+      <if test="delFlg != null" >
+        DEL_FLG = #{delFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrBklt" >
+    update T_SPLR_BKLT
+    set SPLR_ID = #{splrId,jdbcType=DECIMAL},
+      APLY_CTT = #{aplyCtt,jdbcType=VARCHAR},
+      APLY_USR = #{aplyUsr,jdbcType=DECIMAL},
+      APLY_TIM = #{aplyTim,jdbcType=TIMESTAMP},
+      APLY_STS = #{aplySts,jdbcType=CHAR},
+      DEL_FLG = #{delFlg,jdbcType=CHAR}
+    where APLY_ID = #{aplyId,jdbcType=DECIMAL}
+  </update>
+</mapper>

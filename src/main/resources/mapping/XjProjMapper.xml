@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cofco.cpmp.dao.XjProjMapper">
+    <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.XjProj">
+        <id column="PROJ_ID" jdbcType="DECIMAL" property="projId"/>
+        <result column="PROJ_NBR" jdbcType="VARCHAR" property="projNbr"/>
+        <result column="PROJ_NAM" jdbcType="VARCHAR" property="projNam"/>
+        <result column="PROJ_RSPS" jdbcType="VARCHAR" property="projRsps"/>
+        <result column="ORG_ID" jdbcType="DECIMAL" property="orgId"/>
+        <result column="BID_DPT_NAM" jdbcType="VARCHAR" property="bidDptNam"/>
+        <result column="BID_DPT_ADDR" jdbcType="VARCHAR" property="bidDptAddr"/>
+        <result column="CTCT" jdbcType="VARCHAR" property="ctct"/>
+        <result column="CTCT_TEL" jdbcType="VARCHAR" property="ctctTel"/>
+        <result column="PROJ_MEMO" jdbcType="VARCHAR" property="projMemo"/>
+        <result column="BID_RNG_TYP" jdbcType="CHAR" property="bidRngTyp"/>
+        <result column="MAT_TYP" jdbcType="VARCHAR" property="matTyp"/>
+        <result column="PROJ_STS" jdbcType="VARCHAR" property="projSts"/>
+        <result column="STS_UPD_TIM" jdbcType="TIMESTAMP" property="stsUpdTim"/>
+        <result column="BPM_FIN_SEQ" jdbcType="VARCHAR" property="bpmFinSeq"/>
+        <result column="BPM_RPL_SEQ" jdbcType="VARCHAR" property="bpmRplSeq"/>
+        <result column="OPEN_KEY" jdbcType="CHAR" property="openKey"/>
+        <result column="QOT_CNT_TYP" jdbcType="CHAR" property="qotCntTyp"/>
+        <result column="BID_OPEN_TIM" jdbcType="TIMESTAMP" property="bidOpenTim"/>
+        <result column="BID_END_TIM" jdbcType="TIMESTAMP" property="bidEndTim"/>
+        <result column="BID_END_MEMO" jdbcType="VARCHAR" property="bidEndMemo"/>
+        <result column="APP_RPL_MEMO" jdbcType="VARCHAR" property="appRplMemo"/>
+        <result column="BPM_RPL_ADT_MEMO" jdbcType="VARCHAR" property="bpmRplAdtMemo"/>
+        <result column="APP_AWD_MEMO" jdbcType="VARCHAR" property="appAwdMemo"/>
+        <result column="BPM_AWD_ADT_MEMO" jdbcType="VARCHAR" property="bpmAwdAdtMemo"/>
+        <result column="BID_NTC_PUB_FLG" jdbcType="CHAR" property="bidNtcPubFlg"/>
+        <result column="NTC_PUB_TIM" jdbcType="TIMESTAMP" property="ntcPubTim"/>
+        <result column="BID_RST_PUB_FLG" jdbcType="CHAR" property="bidRstPubFlg"/>
+        <result column="RST_PUB_TIM" jdbcType="TIMESTAMP" property="rstPubTim"/>
+        <result column="EFF_FLG" jdbcType="CHAR" property="effFlg"/>
+        <result column="CRT_USR" jdbcType="VARCHAR" property="crtUsr"/>
+        <result column="CRT_TIM" jdbcType="TIMESTAMP" property="crtTim"/>
+        <result column="MOD_USR" jdbcType="VARCHAR" property="modUsr"/>
+        <result column="MOD_TIM" jdbcType="TIMESTAMP" property="modTim"/>
+        <result column="CURR_TYP" jdbcType="VARCHAR" property="currTyp"/>
+        <result column="PUB_PRI_FLG" jdbcType="CHAR" property="pubPriFlg"/>
+        <result column="SUT_ORG_IDS" jdbcType="VARCHAR" property="sutOrgIds"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.cofco.cpmp.entity.XjProj">
+        <result column="RPL_NTC_INF" jdbcType="CLOB" property="rplNtcInf"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        PROJ_ID, PROJ_NBR, PROJ_NAM, PROJ_RSPS, ORG_ID, BID_DPT_NAM, BID_DPT_ADDR,
+        CTCT, CTCT_TEL, PROJ_MEMO, BID_RNG_TYP, MAT_TYP, PROJ_STS, STS_UPD_TIM,
+        BPM_FIN_SEQ, BPM_RPL_SEQ, OPEN_KEY, QOT_CNT_TYP, BID_OPEN_TIM, BID_END_TIM,
+        BID_END_MEMO, APP_RPL_MEMO, BPM_RPL_ADT_MEMO,
+        APP_AWD_MEMO, BPM_AWD_ADT_MEMO, BID_NTC_PUB_FLG, NTC_PUB_TIM, BID_RST_PUB_FLG, RST_PUB_TIM,
+        EFF_FLG, CRT_USR, CRT_TIM, MOD_USR, MOD_TIM, CURR_TYP, PUB_PRI_FLG, SUT_ORG_IDS
+    </sql>
+    <sql id="Blob_Column_List">
+        RPL_NTC_INF
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from T_XJ_PROJ
+        where PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from T_XJ_PROJ
+        where PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </delete>
+    <insert id="insert" parameterType="cn.cofco.cpmp.entity.XjProj">
+        <selectKey keyProperty="projId" order="BEFORE" resultType="java.lang.Long">
+            select XJ_PROJ_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ (PROJ_ID, PROJ_NBR, PROJ_NAM,
+        PROJ_RSPS, ORG_ID, BID_DPT_NAM,
+        BID_DPT_ADDR, CTCT,
+        CTCT_TEL, PROJ_MEMO, BID_RNG_TYP,
+        MAT_TYP, PROJ_STS, STS_UPD_TIM,
+        BPM_FIN_SEQ,
+        BPM_RPL_SEQ, OPEN_KEY, QOT_CNT_TYP,
+        BID_OPEN_TIM, BID_END_TIM, BID_END_MEMO,
+        APP_RPL_MEMO, BPM_RPL_ADT_MEMO, APP_AWD_MEMO,
+        BPM_AWD_ADT_MEMO,BID_NTC_PUB_FLG, NTC_PUB_TIM,
+        BID_RST_PUB_FLG, RST_PUB_TIM, EFF_FLG,
+        CRT_USR, CRT_TIM, MOD_USR,
+        MOD_TIM, CURR_TYP,
+        PUB_PRI_FLG, SUT_ORG_IDS,
+        RPL_NTC_INF)
+        values (#{projId,jdbcType=DECIMAL}, #{projNbr,jdbcType=VARCHAR}, #{projNam,jdbcType=VARCHAR},
+        #{projRsps,jdbcType=VARCHAR}, #{orgId,jdbcType=DECIMAL}, #{bidDptNam,jdbcType=VARCHAR},
+        #{bidDptAddr,jdbcType=VARCHAR}, #{ctct,jdbcType=VARCHAR},
+        #{ctctTel,jdbcType=VARCHAR}, #{projMemo,jdbcType=VARCHAR}, #{bidRngTyp,jdbcType=CHAR},
+        #{matTyp,jdbcType=VARCHAR}, #{projSts,jdbcType=VARCHAR}, #{stsUpdTim,jdbcType=TIMESTAMP},
+        #{bpmFinSeq,jdbcType=VARCHAR},
+        #{bpmRplSeq,jdbcType=VARCHAR}, #{openKey,jdbcType=CHAR}, #{qotCntTyp,jdbcType=CHAR},
+        #{bidOpenTim,jdbcType=TIMESTAMP}, #{bidEndTim,jdbcType=TIMESTAMP}, #{bidEndMemo,jdbcType=VARCHAR},
+        #{appRplMemo,jdbcType=VARCHAR}, #{bpmRplAdtMemo,jdbcType=VARCHAR}, #{appAwdMemo,jdbcType=VARCHAR},
+        #{bpmAwdAdtMemo,jdbcType=VARCHAR}, #{bidNtcPubFlg,jdbcType=CHAR}, #{ntcPubTim,jdbcType=TIMESTAMP},
+        #{bidRstPubFlg,jdbcType=CHAR}, #{rstPubTim,jdbcType=TIMESTAMP}, #{effFlg,jdbcType=CHAR},
+        #{crtUsr,jdbcType=VARCHAR}, #{crtTim,jdbcType=TIMESTAMP}, #{modUsr,jdbcType=VARCHAR},
+        #{modTim,jdbcType=TIMESTAMP}, #{currTyp,jdbcType=VARCHAR},
+        #{pubPriFlg,jdbcType=CHAR}, #{sutOrgIds,jdbcType=VARCHAR},
+        #{rplNtcInf,jdbcType=CLOB})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.XjProj">
+        <selectKey keyProperty="projId" order="BEFORE" resultType="java.lang.Long">
+            select XJ_PROJ_SEQ.NEXTVAL from dual
+        </selectKey>
+        insert into T_XJ_PROJ
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            PROJ_ID,
+            <if test="projNbr != null">
+                PROJ_NBR,
+            </if>
+            <if test="projNam != null">
+                PROJ_NAM,
+            </if>
+            <if test="projRsps != null">
+                PROJ_RSPS,
+            </if>
+            <if test="orgId != null">
+                ORG_ID,
+            </if>
+            <if test="bidDptNam != null">
+                BID_DPT_NAM,
+            </if>
+            <if test="bidDptAddr != null">
+                BID_DPT_ADDR,
+            </if>
+            <if test="ctct != null">
+                CTCT,
+            </if>
+            <if test="ctctTel != null">
+                CTCT_TEL,
+            </if>
+            <if test="projMemo != null">
+                PROJ_MEMO,
+            </if>
+            <if test="bidRngTyp != null">
+                BID_RNG_TYP,
+            </if>
+            <if test="matTyp != null">
+                MAT_TYP,
+            </if>
+            <if test="projSts != null">
+                PROJ_STS,
+            </if>
+            <if test="stsUpdTim != null">
+                STS_UPD_TIM,
+            </if>
+            <if test="bpmFinSeq != null">
+                BPM_FIN_SEQ,
+            </if>
+            <if test="bpmRplSeq != null">
+                BPM_RPL_SEQ,
+            </if>
+            <if test="openKey != null">
+                OPEN_KEY,
+            </if>
+            <if test="qotCntTyp != null">
+                QOT_CNT_TYP,
+            </if>
+            <if test="bidOpenTim != null">
+                BID_OPEN_TIM,
+            </if>
+            <if test="bidEndTim != null">
+                BID_END_TIM,
+            </if>
+            <if test="bidEndMemo != null">
+                BID_END_MEMO,
+            </if>
+            <if test="appRplMemo != null">
+                APP_RPL_MEMO,
+            </if>
+            <if test="bpmRplAdtMemo != null">
+                BPM_RPL_ADT_MEMO,
+            </if>
+            <if test="appAwdMemo != null">
+                APP_AWD_MEMO,
+            </if>
+            <if test="bpmAwdAdtMemo != null">
+                BPM_AWD_ADT_MEMO,
+            </if>
+            <if test="bidNtcPubFlg != null">
+                BID_NTC_PUB_FLG,
+            </if>
+            <if test="ntcPubTim != null">
+                NTC_PUB_TIM,
+            </if>
+            <if test="bidRstPubFlg != null">
+                BID_RST_PUB_FLG,
+            </if>
+            <if test="rstPubTim != null">
+                RST_PUB_TIM,
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG,
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR,
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM,
+            </if>
+            <if test="modUsr != null">
+                MOD_USR,
+            </if>
+            <if test="modTim != null">
+                MOD_TIM,
+            </if>
+            <if test="currTyp != null">
+                CURR_TYP,
+            </if>
+            <if test="pubPriFlg != null">
+                PUB_PRI_FLG,
+            </if>
+            <if test="sutOrgIds != null">
+                SUT_ORG_IDS,
+            </if>
+            <if test="rplNtcInf != null">
+                RPL_NTC_INF,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{projId,jdbcType=DECIMAL},
+            <if test="projNbr != null">
+                #{projNbr,jdbcType=VARCHAR},
+            </if>
+            <if test="projNam != null">
+                #{projNam,jdbcType=VARCHAR},
+            </if>
+            <if test="projRsps != null">
+                #{projRsps,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                #{orgId,jdbcType=DECIMAL},
+            </if>
+            <if test="bidDptNam != null">
+                #{bidDptNam,jdbcType=VARCHAR},
+            </if>
+            <if test="bidDptAddr != null">
+                #{bidDptAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="ctct != null">
+                #{ctct,jdbcType=VARCHAR},
+            </if>
+            <if test="ctctTel != null">
+                #{ctctTel,jdbcType=VARCHAR},
+            </if>
+            <if test="projMemo != null">
+                #{projMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bidRngTyp != null">
+                #{bidRngTyp,jdbcType=CHAR},
+            </if>
+            <if test="matTyp != null">
+                #{matTyp,jdbcType=VARCHAR},
+            </if>
+            <if test="projSts != null">
+                #{projSts,jdbcType=VARCHAR},
+            </if>
+            <if test="stsUpdTim != null">
+                #{stsUpdTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bpmFinSeq != null">
+                #{bpmFinSeq,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmRplSeq != null">
+                #{bpmRplSeq,jdbcType=VARCHAR},
+            </if>
+            <if test="openKey != null">
+                #{openKey,jdbcType=CHAR},
+            </if>
+            <if test="qotCntTyp != null">
+                #{qotCntTyp,jdbcType=CHAR},
+            </if>
+            <if test="bidOpenTim != null">
+                #{bidOpenTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidEndTim != null">
+                #{bidEndTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidEndMemo != null">
+                #{bidEndMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="appRplMemo != null">
+                #{appRplMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmRplAdtMemo != null">
+                #{bpmRplAdtMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="appAwdMemo != null">
+                #{appAwdMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmAwdAdtMemo != null">
+                #{bpmAwdAdtMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bidNtcPubFlg != null">
+                #{bidNtcPubFlg,jdbcType=CHAR},
+            </if>
+            <if test="ntcPubTim != null">
+                #{ntcPubTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidRstPubFlg != null">
+                #{bidRstPubFlg,jdbcType=CHAR},
+            </if>
+            <if test="rstPubTim != null">
+                #{rstPubTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effFlg != null">
+                #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                #{modTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="currTyp != null">
+                #{currTyp,jdbcType=VARCHAR},
+            </if>
+            <if test="pubPriFlg != null">
+                #{pubPriFlg,jdbcType=CHAR},
+            </if>
+            <if test="sutOrgIds != null">
+                #{sutOrgIds,jdbcType=VARCHAR},
+            </if>
+            <if test="rplNtcInf != null">
+                #{rplNtcInf,jdbcType=CLOB},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.XjProj">
+        update T_XJ_PROJ
+        <set>
+            <if test="projNbr != null">
+                PROJ_NBR = #{projNbr,jdbcType=VARCHAR},
+            </if>
+            <if test="projNam != null">
+                PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+            </if>
+            <if test="projRsps != null">
+                PROJ_RSPS = #{projRsps,jdbcType=VARCHAR},
+            </if>
+            <if test="orgId != null">
+                ORG_ID = #{orgId,jdbcType=DECIMAL},
+            </if>
+            <if test="bidDptNam != null">
+                BID_DPT_NAM = #{bidDptNam,jdbcType=VARCHAR},
+            </if>
+            <if test="bidDptAddr != null">
+                BID_DPT_ADDR = #{bidDptAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="ctct != null">
+                CTCT = #{ctct,jdbcType=VARCHAR},
+            </if>
+            <if test="ctctTel != null">
+                CTCT_TEL = #{ctctTel,jdbcType=VARCHAR},
+            </if>
+            <if test="projMemo != null">
+                PROJ_MEMO = #{projMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bidRngTyp != null">
+                BID_RNG_TYP = #{bidRngTyp,jdbcType=CHAR},
+            </if>
+            <if test="matTyp != null">
+                MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+            </if>
+            <if test="projSts != null">
+                PROJ_STS = #{projSts,jdbcType=VARCHAR},
+            </if>
+            <if test="stsUpdTim != null">
+                STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bpmFinSeq != null">
+                BPM_FIN_SEQ = #{bpmFinSeq,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmRplSeq != null">
+                BPM_RPL_SEQ = #{bpmRplSeq,jdbcType=VARCHAR},
+            </if>
+            <if test="openKey != null">
+                OPEN_KEY = #{openKey,jdbcType=CHAR},
+            </if>
+            <if test="qotCntTyp != null">
+                QOT_CNT_TYP = #{qotCntTyp,jdbcType=CHAR},
+            </if>
+            <if test="bidOpenTim != null">
+                BID_OPEN_TIM = #{bidOpenTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidEndTim != null">
+                BID_END_TIM = #{bidEndTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidEndMemo != null">
+                BID_END_MEMO = #{bidEndMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="appRplMemo != null">
+                APP_RPL_MEMO = #{appRplMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmRplAdtMemo != null">
+                BPM_RPL_ADT_MEMO = #{bpmRplAdtMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="appAwdMemo != null">
+                APP_AWD_MEMO = #{appAwdMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bpmAwdAdtMemo != null">
+                BPM_AWD_ADT_MEMO = #{bpmAwdAdtMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="bidNtcPubFlg != null">
+                BID_NTC_PUB_FLG = #{bidNtcPubFlg,jdbcType=CHAR},
+            </if>
+            <if test="ntcPubTim != null">
+                NTC_PUB_TIM = #{ntcPubTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bidRstPubFlg != null">
+                BID_RST_PUB_FLG = #{bidRstPubFlg,jdbcType=CHAR},
+            </if>
+            <if test="rstPubTim != null">
+                RST_PUB_TIM = #{rstPubTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effFlg != null">
+                EFF_FLG = #{effFlg,jdbcType=CHAR},
+            </if>
+            <if test="crtUsr != null">
+                CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="crtTim != null">
+                CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modUsr != null">
+                MOD_USR = #{modUsr,jdbcType=VARCHAR},
+            </if>
+            <if test="modTim != null">
+                MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+            </if>
+            <if test="currTyp != null">
+                CURR_TYP = #{currTyp,jdbcType=VARCHAR},
+            </if>
+            <if test="pubPriFlg != null">
+                PUB_PRI_FLG = #{pubPriFlg,jdbcType=CHAR},
+            </if>
+            <if test="sutOrgIds != null">
+                SUT_ORG_IDS = #{sutOrgIds,jdbcType=VARCHAR},
+            </if>
+            <if test="rplNtcInf != null">
+                RPL_NTC_INF = #{rplNtcInf,jdbcType=CLOB},
+            </if>
+        </set>
+        where PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.cofco.cpmp.entity.XjProj">
+        update T_XJ_PROJ
+        set PROJ_NBR = #{projNbr,jdbcType=VARCHAR},
+        PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+        PROJ_RSPS = #{projRsps,jdbcType=VARCHAR},
+        ORG_ID = #{orgId,jdbcType=DECIMAL},
+        BID_DPT_NAM = #{bidDptNam,jdbcType=VARCHAR},
+        BID_DPT_ADDR = #{bidDptAddr,jdbcType=VARCHAR},
+        CTCT = #{ctct,jdbcType=VARCHAR},
+        CTCT_TEL = #{ctctTel,jdbcType=VARCHAR},
+        PROJ_MEMO = #{projMemo,jdbcType=VARCHAR},
+        BID_RNG_TYP = #{bidRngTyp,jdbcType=CHAR},
+        MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+        PROJ_STS = #{projSts,jdbcType=VARCHAR},
+        STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP},
+        BPM_FIN_SEQ = #{bpmFinSeq,jdbcType=VARCHAR},
+        BPM_RPL_SEQ = #{bpmRplSeq,jdbcType=VARCHAR},
+        OPEN_KEY = #{openKey,jdbcType=CHAR},
+        QOT_CNT_TYP = #{qotCntTyp,jdbcType=CHAR},
+        BID_OPEN_TIM = #{bidOpenTim,jdbcType=TIMESTAMP},
+        BID_END_TIM = #{bidEndTim,jdbcType=TIMESTAMP},
+        BID_END_MEMO = #{bidEndMemo,jdbcType=VARCHAR},
+        APP_RPL_MEMO = #{appRplMemo,jdbcType=VARCHAR},
+        BPM_RPL_ADT_MEMO = #{bpmRplAdtMemo,jdbcType=VARCHAR},
+        APP_AWD_MEMO = #{appAwdMemo,jdbcType=VARCHAR},
+        BPM_AWD_ADT_MEMO = #{bpmAwdAdtMemo,jdbcType=VARCHAR},
+        BID_NTC_PUB_FLG = #{bidNtcPubFlg,jdbcType=CHAR},
+        NTC_PUB_TIM = #{ntcPubTim,jdbcType=TIMESTAMP},
+        BID_RST_PUB_FLG = #{bidRstPubFlg,jdbcType=CHAR},
+        RST_PUB_TIM = #{rstPubTim,jdbcType=TIMESTAMP},
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+        CURR_TYP = #{currTyp,jdbcType=VARCHAR},
+        PUB_PRI_FLG = #{pubPriFlg,jdbcType=CHAR},
+        SUT_ORG_IDS = #{sutOrgIds,jdbcType=VARCHAR},
+        RPL_NTC_INF = #{rplNtcInf,jdbcType=CLOB},
+        where PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.XjProj">
+        update T_XJ_PROJ
+        set PROJ_NBR = #{projNbr,jdbcType=VARCHAR},
+        PROJ_NAM = #{projNam,jdbcType=VARCHAR},
+        PROJ_RSPS = #{projRsps,jdbcType=VARCHAR},
+        ORG_ID = #{orgId,jdbcType=DECIMAL},
+        BID_DPT_NAM = #{bidDptNam,jdbcType=VARCHAR},
+        BID_DPT_ADDR = #{bidDptAddr,jdbcType=VARCHAR},
+        CTCT = #{ctct,jdbcType=VARCHAR},
+        CTCT_TEL = #{ctctTel,jdbcType=VARCHAR},
+        PROJ_MEMO = #{projMemo,jdbcType=VARCHAR},
+        BID_RNG_TYP = #{bidRngTyp,jdbcType=CHAR},
+        MAT_TYP = #{matTyp,jdbcType=VARCHAR},
+        PROJ_STS = #{projSts,jdbcType=VARCHAR},
+        STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP},
+        BPM_FIN_SEQ = #{bpmFinSeq,jdbcType=VARCHAR},
+        BPM_RPL_SEQ = #{bpmRplSeq,jdbcType=VARCHAR},
+        OPEN_KEY = #{openKey,jdbcType=CHAR},
+        QOT_CNT_TYP = #{qotCntTyp,jdbcType=CHAR},
+        BID_OPEN_TIM = #{bidOpenTim,jdbcType=TIMESTAMP},
+        BID_END_TIM = #{bidEndTim,jdbcType=TIMESTAMP},
+        BID_END_MEMO = #{bidEndMemo,jdbcType=VARCHAR},
+        APP_RPL_MEMO = #{appRplMemo,jdbcType=VARCHAR},
+        BPM_RPL_ADT_MEMO = #{bpmRplAdtMemo,jdbcType=VARCHAR},
+        APP_AWD_MEMO = #{appAwdMemo,jdbcType=VARCHAR},
+        BPM_AWD_ADT_MEMO = #{bpmAwdAdtMemo,jdbcType=VARCHAR},
+        BID_NTC_PUB_FLG = #{bidNtcPubFlg,jdbcType=CHAR},
+        NTC_PUB_TIM = #{ntcPubTim,jdbcType=TIMESTAMP},
+        BID_RST_PUB_FLG = #{bidRstPubFlg,jdbcType=CHAR},
+        RST_PUB_TIM = #{rstPubTim,jdbcType=TIMESTAMP},
+        EFF_FLG = #{effFlg,jdbcType=CHAR},
+        CRT_USR = #{crtUsr,jdbcType=VARCHAR},
+        CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+        MOD_USR = #{modUsr,jdbcType=VARCHAR},
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+        CURR_TYP = #{currTyp,jdbcType=VARCHAR},
+        PUB_PRI_FLG = #{pubPriFlg,jdbcType=CHAR},
+        SUT_ORG_IDS = #{sutOrgIds,jdbcType=VARCHAR}
+        where PROJ_ID = #{projId,jdbcType=DECIMAL}
+    </update>
+
+
+    <select id="countByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select
+        COUNT (1)
+        from (<include refid="selectPageTemplate"/>)
+    </select>
+
+    <sql id="selectOrgIdTemplate">
+        select t.id from umsdepartment t where t.dept_code ='3900'
+    </sql>
+
+    <sql id="selectPageTemplate">
+        SELECT *
+        FROM T_XJ_PROJ
+        WHERE 1 = 1
+        <if test="IsMCompany==1">
+            AND ORG_ID IN
+            (<include refid="selectOrgIdTemplate"/>)
+        </if>
+        <if test="IsMCompany==0">
+            AND ORG_ID NOT IN
+            (<include refid="selectOrgIdTemplate"/>)
+        </if>
+        <if test="projNbr != null">
+            AND PROJ_NBR LIKE '%'|| #{projNbr,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="projNam != null">
+            AND PROJ_NAM LIKE '%'|| #{projNam,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="projRsps != null">
+            AND PROJ_RSPS = #{projRsps,jdbcType=VARCHAR}
+        </if>
+        <if test="orgId != null">
+            AND ORG_ID = #{orgId,jdbcType=DECIMAL}
+        </if>
+        <if test="bidDptNam != null">
+            AND BID_DPT_NAM = #{bidDptNam,jdbcType=VARCHAR}
+        </if>
+        <if test="bidDptAddr != null">
+            AND BID_DPT_ADDR = #{bidDptAddr,jdbcType=VARCHAR}
+        </if>
+        <if test="ctct != null">
+            AND CTCT = #{ctct,jdbcType=VARCHAR}
+        </if>
+        <if test="ctctTel != null">
+            AND CTCT_TEL = #{ctctTel,jdbcType=VARCHAR}
+        </if>
+        <if test="projMemo != null">
+            AND PROJ_MEMO = #{projMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bidRngTyp != null">
+            AND BID_RNG_TYP = #{bidRngTyp,jdbcType=CHAR}
+        </if>
+        <if test="matTyp != null">
+            AND MAT_TYP = #{matTyp,jdbcType=VARCHAR}
+        </if>
+        <if test="projSts != null">
+            AND PROJ_STS = #{projSts,jdbcType=VARCHAR}
+        </if>
+        <if test="stsUpdTim != null">
+            AND STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bpmFinSeq != null">
+            AND BPM_FIN_SEQ = #{bpmFinSeq,jdbcType=VARCHAR}
+        </if>
+        <if test="bpmRplSeq != null">
+            AND BPM_RPL_SEQ = #{bpmRplSeq,jdbcType=VARCHAR}
+        </if>
+        <if test="openKey != null">
+            AND OPEN_KEY = #{openKey,jdbcType=CHAR}
+        </if>
+        <if test="qotCntTyp != null">
+            AND QOT_CNT_TYP = #{qotCntTyp,jdbcType=CHAR}
+        </if>
+        <if test="bidOpenTim != null">
+            AND BID_OPEN_TIM = #{bidOpenTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidEndTim != null">
+            AND BID_END_TIM = #{bidEndTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidEndMemo != null">
+            AND BID_END_MEMO = #{bidEndMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="appRplMemo != null">
+            AND APP_RPL_MEMO = #{appRplMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bpmRplAdtMemo != null">
+            AND BPM_RPL_ADT_MEMO = #{bpmRplAdtMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="appAwdMemo != null">
+            AND APP_AWD_MEMO = #{appAwdMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bpmAwdAdtMemo != null">
+            AND BPM_AWD_ADT_MEMO = #{bpmAwdAdtMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bidNtcPubFlg != null">
+            AND BID_NTC_PUB_FLG = #{bidNtcPubFlg,jdbcType=CHAR}
+        </if>
+        <if test="ntcPubTim != null">
+            AND NTC_PUB_TIM = #{ntcPubTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidRstPubFlg != null">
+            AND BID_RST_PUB_FLG = #{bidRstPubFlg,jdbcType=CHAR}
+        </if>
+        <if test="rstPubTim != null">
+            AND RST_PUB_TIM = #{rstPubTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="effFlg != null">
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidEndTimFrom != null">
+            AND BID_END_TIM &gt;= to_timestamp('${bidEndTimFrom,jdbcType=VARCHAR}','yyyy-mm-dd hh24:mi:ss')
+        </if>
+        <if test="bidEndTimTo != null">
+            AND BID_END_TIM &lt;= to_timestamp('${bidEndTimTo,jdbcType=VARCHAR}','yyyy-mm-dd hh24:mi:ss')
+        </if>
+        <if test="currTyp != null">
+            AND CURR_TYP = #{currTyp,jdbcType=VARCHAR}
+        </if>
+        <if test="pubPriFlg != null">
+            AND PUB_PRI_FLG = #{pubPriFlg,jdbcType=CHAR}
+        </if>
+        <if test="projStses != null">
+            AND PROJ_STS in
+            <foreach close=")" collection="projStses" index="index" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="orgIds != null">
+            AND ORG_ID in
+            <foreach close=")" collection="orgIds" index="index" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="crtTimBgnStr != null">
+            AND CRT_TIM &gt;= to_timestamp(#{crtTimBgnStr,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        </if>
+        <if test="crtTimEndStr != null">
+            AND CRT_TIM &lt;= to_timestamp(#{crtTimEndStr,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+        </if>
+        <if test="sutOrgIds != null">
+            AND SUT_ORG_IDS = #{sutOrgIds,jdbcType=VARCHAR}
+        </if>
+        <if test="desc != null and desc == 1">
+            ORDER BY PROJ_ID DESC
+        </if>
+    </sql>
+
+    <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM (
+        SELECT A.*,ROWNUM RN
+        FROM (
+            <include refid="selectPageTemplate"/>
+        ) A
+        WHERE
+        <choose>
+            <when test="limit &gt; 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+
+    <!-- 供应商根据条件分页查询线上招标项目列表 - 定向邀标 - 获取数量 -->
+    <select id="countByMapOfVctInvt" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM
+        (<include refid="selectPageTemplate1"/>)
+    </select>
+
+    <sql id="selectPageTemplate1">
+        SELECT B.* FROM (
+        SELECT *
+        FROM T_XJ_PROJ_SPLR_INVT
+        WHERE SPLR_ID = #{splrId,jdbcType=DECIMAL}
+        AND EFF_FLG = '1'
+        ) A
+        LEFT JOIN (
+        SELECT *
+        FROM T_XJ_PROJ
+        WHERE 1 = 1
+        <if test="IsMCompany==1">
+            AND ORG_ID IN
+            (<include refid="selectOrgIdTemplate"/>)
+        </if>
+        <if test="IsMCompany==0">
+            AND ORG_ID NOT IN
+            (<include refid="selectOrgIdTemplate"/>)
+        </if>
+        <if test="projNbr != null">
+            AND PROJ_NBR LIKE '%'|| #{projNbr,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="projNam != null">
+            AND PROJ_NAM LIKE '%'|| #{projNam,jdbcType=VARCHAR} ||'%'
+        </if>
+        <if test="projRsps != null">
+            AND PROJ_RSPS = #{projRsps,jdbcType=VARCHAR}
+        </if>
+        <if test="orgId != null">
+            AND ORG_ID = #{orgId,jdbcType=DECIMAL}
+        </if>
+        <if test="bidDptNam != null">
+            AND BID_DPT_NAM = #{bidDptNam,jdbcType=VARCHAR}
+        </if>
+        <if test="bidDptAddr != null">
+            AND BID_DPT_ADDR = #{bidDptAddr,jdbcType=VARCHAR}
+        </if>
+        <if test="ctct != null">
+            AND CTCT = #{ctct,jdbcType=VARCHAR}
+        </if>
+        <if test="ctctTel != null">
+            AND CTCT_TEL = #{ctctTel,jdbcType=VARCHAR}
+        </if>
+        <if test="projMemo != null">
+            AND PROJ_MEMO = #{projMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bidRngTyp != null">
+            AND BID_RNG_TYP = #{bidRngTyp,jdbcType=CHAR}
+        </if>
+        <if test="matTyp != null">
+            AND MAT_TYP = #{matTyp,jdbcType=VARCHAR}
+        </if>
+        <if test="projSts != null">
+            AND PROJ_STS = #{projSts,jdbcType=VARCHAR}
+        </if>
+        <if test="stsUpdTim != null">
+            AND STS_UPD_TIM = #{stsUpdTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bpmFinSeq != null">
+            AND BPM_FIN_SEQ = #{bpmFinSeq,jdbcType=VARCHAR}
+        </if>
+        <if test="bpmRplSeq != null">
+            AND BPM_RPL_SEQ = #{bpmRplSeq,jdbcType=VARCHAR}
+        </if>
+        <if test="openKey != null">
+            AND OPEN_KEY = #{openKey,jdbcType=CHAR}
+        </if>
+        <if test="qotCntTyp != null">
+            AND QOT_CNT_TYP = #{qotCntTyp,jdbcType=CHAR}
+        </if>
+        <if test="bidOpenTim != null">
+            AND BID_OPEN_TIM = #{bidOpenTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidEndTim != null">
+            AND BID_END_TIM = #{bidEndTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidEndMemo != null">
+            AND BID_END_MEMO = #{bidEndMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="appRplMemo != null">
+            AND APP_RPL_MEMO = #{appRplMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bpmRplAdtMemo != null">
+            AND BPM_RPL_ADT_MEMO = #{bpmRplAdtMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="appAwdMemo != null">
+            AND APP_AWD_MEMO = #{appAwdMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bpmAwdAdtMemo != null">
+            AND BPM_AWD_ADT_MEMO = #{bpmAwdAdtMemo,jdbcType=VARCHAR}
+        </if>
+        <if test="bidNtcPubFlg != null">
+            AND BID_NTC_PUB_FLG = #{bidNtcPubFlg,jdbcType=CHAR}
+        </if>
+        <if test="ntcPubTim != null">
+            AND NTC_PUB_TIM = #{ntcPubTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidRstPubFlg != null">
+            AND BID_RST_PUB_FLG = #{bidRstPubFlg,jdbcType=CHAR}
+        </if>
+        <if test="rstPubTim != null">
+            AND RST_PUB_TIM = #{rstPubTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="effFlg != null">
+            AND EFF_FLG = #{effFlg,jdbcType=CHAR}
+        </if>
+        <if test="crtUsr != null">
+            AND CRT_USR = #{crtUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="crtTim != null">
+            AND CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modUsr != null">
+            AND MOD_USR = #{modUsr,jdbcType=VARCHAR}
+        </if>
+        <if test="modTim != null">
+            AND MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+        </if>
+        <if test="bidEndTimFrom != null">
+            AND BID_END_TIM &gt;= to_timestamp('${bidEndTimFrom,jdbcType=VARCHAR}','yyyy-mm-dd hh24:mi:ss')
+        </if>
+        <if test="bidEndTimTo != null">
+            AND BID_END_TIM &lt;= to_timestamp('${bidEndTimTo,jdbcType=VARCHAR}','yyyy-mm-dd hh24:mi:ss')
+        </if>
+        <if test="currTyp != null">
+            AND CURR_TYP = #{currTyp,jdbcType=VARCHAR}
+        </if>
+        <if test="pubPriFlg != null">
+            AND PUB_PRI_FLG = #{pubPriFlg,jdbcType=CHAR}
+        </if>
+        <if test="projStses != null">
+            AND PROJ_STS in
+            <foreach close=")" collection="projStses" index="index" item="item" open="(" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="sutOrgIds != null">
+            AND SUT_ORG_IDS = #{sutOrgIds,jdbcType=VARCHAR}
+        </if>
+        <if test="desc != null and desc == '1'">
+            ORDER BY PROJ_ID DESC
+        </if>
+        ) B ON A.PROJ_ID = B.PROJ_ID
+        WHERE B.PROJ_ID IS NOT NULL
+    </sql>
+
+    <!-- 供应商根据条件分页查询线上招标项目列表 - 定向邀标 - 获取列表详细 -->
+    <select id="selectByMapOfVctInvt" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM (
+        SELECT T.*,ROWNUM RN
+        FROM (
+            <include refid="selectPageTemplate1"/>
+        ) T
+        WHERE
+        <choose>
+            <when test="limit &gt; 0">
+                ROWNUM &lt;= #{limit}
+            </when>
+            <otherwise>
+                ROWNUM &lt;= 10000
+            </otherwise>
+        </choose>
+        ) TL
+        WHERE RN &gt;=#{start}
+    </select>
+</mapper>

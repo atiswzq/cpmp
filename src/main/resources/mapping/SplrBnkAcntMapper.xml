@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrBnkAcntMapper">
+	<resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrBnkAcnt">
+		<id column="BNK_ACNT_ID" property="bnkAcntId" jdbcType="DECIMAL" />
+		<result column="BNK_ACNT_TYP" property="bnkAcntTyp" jdbcType="CHAR" />
+		<result column="SPLR_ID" property="splrId" jdbcType="DECIMAL" />
+		<result column="BNK_CNTY" property="bnkCnty" jdbcType="CHAR" />
+		<result column="BNK_COD" property="bnkCod" jdbcType="VARCHAR" />
+		<result column="BNK_NAM" property="bnkNam" jdbcType="VARCHAR" />
+		<result column="BNK_ACNT" property="bnkAcnt" jdbcType="VARCHAR" />
+		<result column="ACNT_NAM" property="acntNam" jdbcType="VARCHAR" />
+		<result column="SWIFT_COD" property="swiftCod" jdbcType="VARCHAR" />
+		<result column="DFT" property="dft" jdbcType="CHAR" />
+		<result column="BNK_ACNT_STS" property="bnkAcntSts" jdbcType="CHAR" />
+		<result column="DFF_FLG" property="dffFlg" jdbcType="CHAR" />
+		<result column="CRT_USR" property="crtUsr" jdbcType="DECIMAL" />
+		<result column="CRT_TIM" property="crtTim" jdbcType="TIMESTAMP" />
+		<result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+		<result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		BNK_ACNT_ID, BNK_ACNT_TYP, SPLR_ID, BNK_CNTY, BNK_COD,
+		BNK_NAM, BNK_ACNT,
+		ACNT_NAM, SWIFT_COD,
+		DFT, BNK_ACNT_STS, DFF_FLG,
+		CRT_USR, CRT_TIM, MOD_USR, MOD_TIM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_BNK_ACNT
+		where BNK_ACNT_ID = #{bnkAcntId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		T_SPLR_BNK_ACNT
+		where BNK_ACNT_ID = #{bnkAcntId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrBnkAcnt">
+		<selectKey resultType="java.lang.Long" keyProperty="bnkAcntId"
+			order="BEFORE">
+			select SPLR_BNK_ACNT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_BNK_ACNT (BNK_ACNT_ID, BNK_ACNT_TYP, SPLR_ID,
+		BNK_CNTY,
+		BNK_COD, BNK_NAM, BNK_ACNT,
+		ACNT_NAM, SWIFT_COD, DFT,
+		BNK_ACNT_STS, DFF_FLG, CRT_USR,
+		CRT_TIM, MOD_USR, MOD_TIM
+		)
+		values
+		(#{bnkAcntId,jdbcType=DECIMAL}, #{bnkAcntTyp,jdbcType=CHAR},
+		#{splrId,jdbcType=DECIMAL}, #{bnkCnty,jdbcType=CHAR},
+		#{bnkCod,jdbcType=VARCHAR}, #{bnkNam,jdbcType=VARCHAR},
+		#{bnkAcnt,jdbcType=VARCHAR},
+		#{acntNam,jdbcType=VARCHAR},
+		#{swiftCod,jdbcType=VARCHAR}, #{dft,jdbcType=CHAR},
+		#{bnkAcntSts,jdbcType=CHAR}, #{dffFlg,jdbcType=CHAR},
+		#{crtUsr,jdbcType=DECIMAL},
+		#{crtTim,jdbcType=TIMESTAMP},
+		#{modUsr,jdbcType=DECIMAL}, #{modTim,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrBnkAcnt">
+		<selectKey resultType="java.lang.Long" keyProperty="bnkAcntId"
+			order="BEFORE">
+			select SPLR_BNK_ACNT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into T_SPLR_BNK_ACNT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			BNK_ACNT_ID,
+			<if test="bnkAcntTyp != null">
+				BNK_ACNT_TYP,
+			</if>
+			<if test="splrId != null">
+				SPLR_ID,
+			</if>
+			<if test="bnkCnty != null">
+				BNK_CNTY,
+			</if>
+			<if test="bnkCod != null">
+				BNK_COD,
+			</if>
+			<if test="bnkNam != null">
+				BNK_NAM,
+			</if>
+			<if test="bnkAcnt != null">
+				BNK_ACNT,
+			</if>
+			<if test="acntNam != null">
+				ACNT_NAM,
+			</if>
+			<if test="swiftCod != null">
+				SWIFT_COD,
+			</if>
+			<if test="dft != null">
+				DFT,
+			</if>
+			<if test="bnkAcntSts != null">
+				BNK_ACNT_STS,
+			</if>
+			<if test="dffFlg != null">
+				DFF_FLG,
+			</if>
+			<if test="crtUsr != null">
+				CRT_USR,
+			</if>
+			<if test="crtTim != null">
+				CRT_TIM,
+			</if>
+			<if test="modUsr != null">
+				MOD_USR,
+			</if>
+			<if test="modTim != null">
+				MOD_TIM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{bnkAcntId,jdbcType=DECIMAL},
+			<if test="bnkAcntTyp != null">
+				#{bnkAcntTyp,jdbcType=CHAR},
+			</if>
+			<if test="splrId != null">
+				#{splrId,jdbcType=DECIMAL},
+			</if>
+			<if test="bnkCnty != null">
+				#{bnkCnty,jdbcType=CHAR},
+			</if>
+			<if test="bnkCod != null">
+				#{bnkCod,jdbcType=VARCHAR},
+			</if>
+			<if test="bnkNam != null">
+				#{bnkNam,jdbcType=VARCHAR},
+			</if>
+			<if test="bnkAcnt != null">
+				#{bnkAcnt,jdbcType=VARCHAR},
+			</if>
+			<if test="acntNam != null">
+				#{acntNam,jdbcType=VARCHAR},
+			</if>
+			<if test="swiftCod != null">
+				#{swiftCod,jdbcType=VARCHAR},
+			</if>
+			<if test="dft != null">
+				#{dft,jdbcType=CHAR},
+			</if>
+			<if test="bnkAcntSts != null">
+				#{bnkAcntSts,jdbcType=CHAR},
+			</if>
+			<if test="dffFlg != null">
+				#{dffFlg,jdbcType=CHAR},
+			</if>
+			<if test="crtUsr != null">
+				#{crtUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="crtTim != null">
+				#{crtTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modUsr != null">
+				#{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				#{modTim,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrBnkAcnt">
+		update T_SPLR_BNK_ACNT
+		<set>
+			<if test="bnkAcntTyp != null">
+				#{bnkAcntTyp,jdbcType=CHAR},
+			</if>
+			<if test="splrId != null">
+				SPLR_ID = #{splrId,jdbcType=DECIMAL},
+			</if>
+			<if test="bnkCnty != null">
+				BNK_CNTY = #{bnkCnty,jdbcType=CHAR},
+			</if>
+			<if test="bnkCod != null">
+				BNK_COD = #{bnkCod,jdbcType=VARCHAR},
+			</if>
+			<if test="bnkNam != null">
+				BNK_NAM = #{bnkNam,jdbcType=VARCHAR},
+			</if>
+			<if test="bnkAcnt != null">
+				BNK_ACNT = #{bnkAcnt,jdbcType=VARCHAR},
+			</if>
+			<if test="acntNam != null">
+				ACNT_NAM = #{acntNam,jdbcType=VARCHAR},
+			</if>
+			<if test="swiftCod != null">
+				SWIFT_COD = #{swiftCod,jdbcType=VARCHAR},
+			</if>
+			<if test="dft != null">
+				DFT = #{dft,jdbcType=CHAR},
+			</if>
+			<if test="bnkAcntSts != null">
+				BNK_ACNT_STS = #{bnkAcntSts,jdbcType=CHAR},
+			</if>
+			<if test="dffFlg != null">
+				DFF_FLG = #{dffFlg,jdbcType=CHAR},
+			</if>
+			<if test="crtUsr != null">
+				CRT_USR = #{crtUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="crtTim != null">
+				CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modUsr != null">
+				MOD_USR = #{modUsr,jdbcType=DECIMAL},
+			</if>
+			<if test="modTim != null">
+				MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where BNK_ACNT_ID = #{bnkAcntId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrBnkAcnt">
+		update
+		T_SPLR_BNK_ACNT
+		set BNK_ACNT_TYP = #{bnkAcntTyp,jdbcType=CHAR},
+		SPLR_ID
+		= #{splrId,jdbcType=DECIMAL},
+		BNK_CNTY = #{bnkCnty,jdbcType=CHAR},
+		BNK_COD = #{bnkCod,jdbcType=VARCHAR},
+		BNK_NAM =
+		#{bnkNam,jdbcType=VARCHAR},
+		BNK_ACNT = #{bnkAcnt,jdbcType=VARCHAR},
+		ACNT_NAM = #{acntNam,jdbcType=VARCHAR},
+		SWIFT_COD =
+		#{swiftCod,jdbcType=VARCHAR},
+		DFT = #{dft,jdbcType=CHAR},
+		BNK_ACNT_STS =
+		#{bnkAcntSts,jdbcType=CHAR},
+		DFF_FLG = #{dffFlg,jdbcType=CHAR},
+		CRT_USR
+		= #{crtUsr,jdbcType=DECIMAL},
+		CRT_TIM = #{crtTim,jdbcType=TIMESTAMP},
+		MOD_USR = #{modUsr,jdbcType=DECIMAL},
+		MOD_TIM =
+		#{modTim,jdbcType=TIMESTAMP}
+		where BNK_ACNT_ID =
+		#{bnkAcntId,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectByConditions" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from T_SPLR_BNK_ACNT
+		where 1 = 1
+		<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+	</select>
+
+	<select id="selectByBnkConditions" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
+		SELECT * FROM (
+		SELECT A.*,ROWNUM RN
+		FROM (
+		SELECT *
+		FROM T_SPLR_BNK_ACNT
+		WHERE 1 = 1
+		<if test="bnkAcntTyp != null">
+			and BNK_ACNT_TYP = #{bnkAcntTyp,jdbcType=CHAR}
+		</if>
+		<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+		<if test="bnkCnty != null">
+			and BNK_CNTY = #{bnkCnty,jdbcType=CHAR}
+		</if>
+		<if test="bnkCod != null">
+			and BNK_COD = #{bnkCod,jdbcType=VARCHAR}
+		</if>
+		<if test="bnkNam != null">
+			and BNK_NAM = #{bnkNam,jdbcType=VARCHAR}
+		</if>
+		<if test="bnkAcnt != null">
+			and BNK_ACNT = #{bnkAcnt,jdbcType=VARCHAR}
+		</if>
+		<if test="acntNam != null">
+			and ACNT_NAM = #{acntNam,jdbcType=VARCHAR}
+		</if>
+		<if test="swiftCod != null">
+			and SWIFT_COD = #{swiftCod,jdbcType=VARCHAR}
+		</if>
+		<if test="dft != null">
+			and DFT = #{dft,jdbcType=CHAR}
+		</if>
+		<if test="bnkAcntSts != null">
+			and BNK_ACNT_STS = #{bnkAcntSts,jdbcType=CHAR}
+		</if>
+		<if test="dffFlg != null">
+			and DFF_FLG = #{dffFlg,jdbcType=CHAR}
+		</if>
+		<if test="crtUsr != null">
+			and CRT_USR = #{crtUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="crtTim != null">
+			and CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+		</if>
+		<if test="modUsr != null">
+			and MOD_USR = #{modUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="modTim != null">
+			and MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+		</if>
+		) A
+		WHERE
+		<choose>
+			<when test="limit > 0">
+				ROWNUM &lt;= #{limit}
+			</when>
+			<otherwise>
+				ROWNUM &lt;= 10000
+			</otherwise>
+		</choose>
+		) TL
+		WHERE RN &gt;=#{start}
+	</select>
+
+	<select id="countOfMap" parameterType="java.util.Map"
+		resultType="java.lang.Integer">
+		SELECT count(1)
+		FROM T_SPLR
+		WHERE 1 = 1
+		<if test="bnkAcntTyp != null">
+			and BNK_ACNT_TYP = #{bnkAcntTyp,jdbcType=CHAR}
+		</if>
+		<if test="splrId != null">
+			and SPLR_ID = #{splrId,jdbcType=DECIMAL}
+		</if>
+		<if test="bnkCnty != null">
+			and BNK_CNTY = #{bnkCnty,jdbcType=CHAR}
+		</if>
+		<if test="bnkCod != null">
+			and BNK_COD = #{bnkCod,jdbcType=VARCHAR}
+		</if>
+		<if test="bnkNam != null">
+			and BNK_NAM = #{bnkNam,jdbcType=VARCHAR}
+		</if>
+		<if test="bnkAcnt != null">
+			and BNK_ACNT = #{bnkAcnt,jdbcType=VARCHAR}
+		</if>
+		<if test="acntNam != null">
+			and ACNT_NAM = #{acntNam,jdbcType=VARCHAR}
+		</if>
+		<if test="swiftCod != null">
+			and SWIFT_COD = #{swiftCod,jdbcType=VARCHAR}
+		</if>
+		<if test="dft != null">
+			and DFT = #{dft,jdbcType=CHAR}
+		</if>
+		<if test="bnkAcntSts != null">
+			and BNK_ACNT_STS = #{bnkAcntSts,jdbcType=CHAR}
+		</if>
+		<if test="dffFlg != null">
+			and DFF_FLG = #{dffFlg,jdbcType=CHAR}
+		</if>
+		<if test="crtUsr != null">
+			and CRT_USR = #{crtUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="crtTim != null">
+			and CRT_TIM = #{crtTim,jdbcType=TIMESTAMP}
+		</if>
+		<if test="modUsr != null">
+			and MOD_USR = #{modUsr,jdbcType=DECIMAL}
+		</if>
+		<if test="modTim != null">
+			and MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+
+	<!-- 银行信息批量插入 -->
+	<insert id="inserts" parameterType="java.util.List">
+		INSERT INTO T_SPLR_BNK_ACNT(
+		<include refid="Base_Column_List" />
+		)
+		select SPLR_BNK_ACNT_SEQ.NEXTVAL as BNK_ACNT_ID, TSA.* from(
+		<foreach collection="list" item="item" index="index"
+			separator="union all">
+			select
+			#{item.bnkAcntTyp,jdbcType=CHAR},
+			#{item.splrId,jdbcType=DECIMAL}, 
+			#{item.bnkCnty,jdbcType=CHAR},
+			#{item.bnkCod,jdbcType=VARCHAR}, 
+			#{item.bnkNam,jdbcType=VARCHAR},
+			#{item.bnkAcnt,jdbcType=VARCHAR},
+			#{item.acntNam,jdbcType=VARCHAR},
+			#{item.swiftCod,jdbcType=VARCHAR}, 
+			#{item.dft,jdbcType=CHAR},
+			#{item.bnkAcntSts,jdbcType=CHAR}, 
+			#{item.dffFlg,jdbcType=CHAR},
+			#{item.crtUsr,jdbcType=DECIMAL},
+			#{item.crtTim,jdbcType=TIMESTAMP},
+			#{item.modUsr,jdbcType=DECIMAL}, 
+			#{item.modTim,jdbcType=TIMESTAMP}
+			from dual
+		</foreach>
+		) TSA
+	</insert>
+	
+	<delete id="deleteBySplrId" parameterType="java.lang.Long">
+		delete from
+		T_SPLR_BNK_ACNT
+		where SPLR_ID = #{splrId,jdbcType=DECIMAL}
+	</delete>
+</mapper>

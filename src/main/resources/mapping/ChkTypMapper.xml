@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.ChkTypMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.ChkTyp" >
+    <id column="CHK_TYP_ID" property="chkTypId" jdbcType="DECIMAL" />
+    <result column="CHK_TYP_NAM" property="chkTypNam" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CHK_TYP_ID, CHK_TYP_NAM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CHK_TYP
+    where CHK_TYP_ID = #{chkTypId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_CHK_TYP
+    where CHK_TYP_ID = #{chkTypId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.ChkTyp" >
+    <selectKey resultType="java.lang.Long" keyProperty="chkTypId" order="BEFORE" >
+      select CHK_TYP_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_CHK_TYP (CHK_TYP_ID, CHK_TYP_NAM)
+    values (#{chkTypId,jdbcType=DECIMAL}, #{chkTypNam,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.ChkTyp" >
+    <selectKey resultType="java.lang.Long" keyProperty="chkTypId" order="BEFORE" >
+      select CHK_TYP_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_CHK_TYP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      CHK_TYP_ID,
+      <if test="chkTypNam != null" >
+        CHK_TYP_NAM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{chkTypId,jdbcType=DECIMAL},
+      <if test="chkTypNam != null" >
+        #{chkTypNam,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.ChkTyp" >
+    update T_CHK_TYP
+    <set >
+      <if test="chkTypNam != null" >
+        CHK_TYP_NAM = #{chkTypNam,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CHK_TYP_ID = #{chkTypId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.ChkTyp" >
+    update T_CHK_TYP
+    set CHK_TYP_NAM = #{chkTypNam,jdbcType=VARCHAR}
+    where CHK_TYP_ID = #{chkTypId,jdbcType=DECIMAL}
+  </update>
+</mapper>

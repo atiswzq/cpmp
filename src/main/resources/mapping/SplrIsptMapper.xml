@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.SplrIsptMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.SplrIspt" >
+    <id column="ISPT_ID" property="isptId" jdbcType="DECIMAL" />
+    <result column="ISPT_CTT" property="isptCtt" jdbcType="VARCHAR" />
+    <result column="ISPT_NAM" property="isptNam" jdbcType="VARCHAR" />
+    <result column="UPLD_USR" property="upldUsr" jdbcType="DECIMAL" />
+    <result column="UPLD_TIM" property="upldTim" jdbcType="TIMESTAMP" />
+    <result column="ISPT_TPY" property="isptTpy" jdbcType="CHAR" />
+    <result column="DFF_FLG" property="dffFlg" jdbcType="CHAR" />
+    <result column="MOD_USR" property="modUsr" jdbcType="DECIMAL" />
+    <result column="MOD_TIM" property="modTim" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ISPT_ID, ISPT_CTT, ISPT_NAM, UPLD_USR, UPLD_TIM, ISPT_TPY, DFF_FLG, MOD_USR, MOD_TIM
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SPLR_ISPT
+    where ISPT_ID = #{isptId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_SPLR_ISPT
+    where ISPT_ID = #{isptId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.SplrIspt" >
+    <selectKey resultType="java.lang.Long" keyProperty="isptId" order="BEFORE" >
+      select SPLR_ISPT_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ISPT (ISPT_ID, ISPT_CTT, ISPT_NAM, 
+      UPLD_USR, UPLD_TIM, ISPT_TPY, 
+      DFF_FLG, MOD_USR, MOD_TIM
+      )
+    values (#{isptId,jdbcType=DECIMAL}, #{isptCtt,jdbcType=VARCHAR}, #{isptNam,jdbcType=VARCHAR}, 
+      #{upldUsr,jdbcType=DECIMAL}, #{upldTim,jdbcType=TIMESTAMP}, #{isptTpy,jdbcType=CHAR}, 
+      #{dffFlg,jdbcType=CHAR}, #{modUsr,jdbcType=DECIMAL}, #{modTim,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.SplrIspt" >
+    <selectKey resultType="java.lang.Long" keyProperty="isptId" order="BEFORE" >
+      select SPLR_ISPT_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_SPLR_ISPT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ISPT_ID,
+      <if test="isptCtt != null" >
+        ISPT_CTT,
+      </if>
+      <if test="isptNam != null" >
+        ISPT_NAM,
+      </if>
+      <if test="upldUsr != null" >
+        UPLD_USR,
+      </if>
+      <if test="upldTim != null" >
+        UPLD_TIM,
+      </if>
+      <if test="isptTpy != null" >
+        ISPT_TPY,
+      </if>
+      <if test="dffFlg != null" >
+        DFF_FLG,
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR,
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{isptId,jdbcType=DECIMAL},
+      <if test="isptCtt != null" >
+        #{isptCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="isptNam != null" >
+        #{isptNam,jdbcType=VARCHAR},
+      </if>
+      <if test="upldUsr != null" >
+        #{upldUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="upldTim != null" >
+        #{upldTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isptTpy != null" >
+        #{isptTpy,jdbcType=CHAR},
+      </if>
+      <if test="dffFlg != null" >
+        #{dffFlg,jdbcType=CHAR},
+      </if>
+      <if test="modUsr != null" >
+        #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.SplrIspt" >
+    update T_SPLR_ISPT
+    <set >
+      <if test="isptCtt != null" >
+        ISPT_CTT = #{isptCtt,jdbcType=VARCHAR},
+      </if>
+      <if test="isptNam != null" >
+        ISPT_NAM = #{isptNam,jdbcType=VARCHAR},
+      </if>
+      <if test="upldUsr != null" >
+        UPLD_USR = #{upldUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="upldTim != null" >
+        UPLD_TIM = #{upldTim,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isptTpy != null" >
+        ISPT_TPY = #{isptTpy,jdbcType=CHAR},
+      </if>
+      <if test="dffFlg != null" >
+        DFF_FLG = #{dffFlg,jdbcType=CHAR},
+      </if>
+      <if test="modUsr != null" >
+        MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      </if>
+      <if test="modTim != null" >
+        MOD_TIM = #{modTim,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ISPT_ID = #{isptId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.SplrIspt" >
+    update T_SPLR_ISPT
+    set ISPT_CTT = #{isptCtt,jdbcType=VARCHAR},
+      ISPT_NAM = #{isptNam,jdbcType=VARCHAR},
+      UPLD_USR = #{upldUsr,jdbcType=DECIMAL},
+      UPLD_TIM = #{upldTim,jdbcType=TIMESTAMP},
+      ISPT_TPY = #{isptTpy,jdbcType=CHAR},
+      DFF_FLG = #{dffFlg,jdbcType=CHAR},
+      MOD_USR = #{modUsr,jdbcType=DECIMAL},
+      MOD_TIM = #{modTim,jdbcType=TIMESTAMP}
+    where ISPT_ID = #{isptId,jdbcType=DECIMAL}
+  </update>
+</mapper>

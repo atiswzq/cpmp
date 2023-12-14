@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cofco.cpmp.dao.ChkDefMapper" >
+  <resultMap id="BaseResultMap" type="cn.cofco.cpmp.entity.ChkDef" >
+    <id column="CHK_DEF_ID" property="chkDefId" jdbcType="DECIMAL" />
+    <result column="CHK_TYP_ID" property="chkTypId" jdbcType="DECIMAL" />
+    <result column="CHK_NAM" property="chkNam" jdbcType="VARCHAR" />
+    <result column="CHK_EXPN" property="chkExpn" jdbcType="VARCHAR" />
+    <result column="CHK_RNG" property="chkRng" jdbcType="CHAR" />
+    <result column="CHK_DPT" property="chkDpt" jdbcType="VARCHAR" />
+    <result column="DEF_FLG" property="defFlg" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CHK_DEF_ID, CHK_TYP_ID, CHK_NAM, CHK_EXPN, CHK_RNG, CHK_DPT, DEF_FLG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CHK_DEF
+    where CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from T_CHK_DEF
+    where CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cn.cofco.cpmp.entity.ChkDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="chkDefId" order="BEFORE" >
+      select CHK_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_CHK_DEF (CHK_DEF_ID, CHK_TYP_ID, CHK_NAM, 
+      CHK_EXPN, CHK_RNG, CHK_DPT, 
+      DEF_FLG)
+    values (#{chkDefId,jdbcType=DECIMAL}, #{chkTypId,jdbcType=DECIMAL}, #{chkNam,jdbcType=VARCHAR}, 
+      #{chkExpn,jdbcType=VARCHAR}, #{chkRng,jdbcType=CHAR}, #{chkDpt,jdbcType=VARCHAR}, 
+      #{defFlg,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cofco.cpmp.entity.ChkDef" >
+    <selectKey resultType="java.lang.Long" keyProperty="chkDefId" order="BEFORE" >
+      select CHK_DEF_SEQ.NEXTVAL from dual
+    </selectKey>
+    insert into T_CHK_DEF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      CHK_DEF_ID,
+      <if test="chkTypId != null" >
+        CHK_TYP_ID,
+      </if>
+      <if test="chkNam != null" >
+        CHK_NAM,
+      </if>
+      <if test="chkExpn != null" >
+        CHK_EXPN,
+      </if>
+      <if test="chkRng != null" >
+        CHK_RNG,
+      </if>
+      <if test="chkDpt != null" >
+        CHK_DPT,
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{chkDefId,jdbcType=DECIMAL},
+      <if test="chkTypId != null" >
+        #{chkTypId,jdbcType=DECIMAL},
+      </if>
+      <if test="chkNam != null" >
+        #{chkNam,jdbcType=VARCHAR},
+      </if>
+      <if test="chkExpn != null" >
+        #{chkExpn,jdbcType=VARCHAR},
+      </if>
+      <if test="chkRng != null" >
+        #{chkRng,jdbcType=CHAR},
+      </if>
+      <if test="chkDpt != null" >
+        #{chkDpt,jdbcType=VARCHAR},
+      </if>
+      <if test="defFlg != null" >
+        #{defFlg,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cofco.cpmp.entity.ChkDef" >
+    update T_CHK_DEF
+    <set >
+      <if test="chkTypId != null" >
+        CHK_TYP_ID = #{chkTypId,jdbcType=DECIMAL},
+      </if>
+      <if test="chkNam != null" >
+        CHK_NAM = #{chkNam,jdbcType=VARCHAR},
+      </if>
+      <if test="chkExpn != null" >
+        CHK_EXPN = #{chkExpn,jdbcType=VARCHAR},
+      </if>
+      <if test="chkRng != null" >
+        CHK_RNG = #{chkRng,jdbcType=CHAR},
+      </if>
+      <if test="chkDpt != null" >
+        CHK_DPT = #{chkDpt,jdbcType=VARCHAR},
+      </if>
+      <if test="defFlg != null" >
+        DEF_FLG = #{defFlg,jdbcType=CHAR},
+      </if>
+    </set>
+    where CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cofco.cpmp.entity.ChkDef" >
+    update T_CHK_DEF
+    set CHK_TYP_ID = #{chkTypId,jdbcType=DECIMAL},
+      CHK_NAM = #{chkNam,jdbcType=VARCHAR},
+      CHK_EXPN = #{chkExpn,jdbcType=VARCHAR},
+      CHK_RNG = #{chkRng,jdbcType=CHAR},
+      CHK_DPT = #{chkDpt,jdbcType=VARCHAR},
+      DEF_FLG = #{defFlg,jdbcType=CHAR}
+    where CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL}
+  </update>
+
+  <!-- 根据模板定义id查找考察表模板 -->
+  <resultMap id="ChkTempResultMap" type="cn.cofco.cpmp.entity.ChkTempItem" >
+    <id column="KPI_TYP_ORDER" property="kpiTypOrder" jdbcType="DECIMAL" />
+    <result column="CHK_NAM" property="chkNam" jdbcType="VARCHAR" />
+    <result column="KPI_TYP_NAM" property="kpiTypNam" jdbcType="VARCHAR" />
+    <result column="KPI_TYP_WGT" property="kpiTypWgt" jdbcType="DECIMAL" />
+    <result column="DSPY_ORDER" property="dspyOrder" jdbcType="DECIMAL" />
+    <result column="KPI_ID" property="kpiId" jdbcType="DECIMAL" />
+    <result column="KPI_NAM" property="kpiNam" jdbcType="VARCHAR" />
+    <result column="KPI_WGT" property="kpiWgt" jdbcType="DECIMAL" />
+  </resultMap>
+
+  <select id="selectChkTempById" resultMap="ChkTempResultMap" parameterType="java.lang.Long" >
+    SELECT TKTD.DSPY_ORDER KPI_TYP_ORDER, TCD.CHK_NAM, TKD.KPI_ID, TKTD.KPI_TYP_NAM, TKTD.KPI_TYP_WGT, TCI.DSPY_ORDER, TKD.KPI_NAM, TKD.KPI_WGT
+    FROM T_CHK_DEF TCD LEFT JOIN T_CHK_ITEM TCI ON TCD.CHK_DEF_ID = TCI.CHK_DEF_ID
+    LEFT JOIN T_KPI_DEF TKD ON TCI.KPI_ID = TKD.KPI_ID
+    LEFT JOIN T_KPI_TYP_DEF TKTD ON TKTD.KPI_TYP_ID = TKD.KPI_TYP_ID
+    WHERE 1 = 1
+    <if test="chkDefId != null" >
+      AND TCD.CHK_DEF_ID = #{chkDefId,jdbcType=DECIMAL}
+    </if>
+    ORDER BY TCI.DSPY_ORDER
+  </select>
+</mapper>

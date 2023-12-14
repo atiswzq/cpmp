@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_SRM2ECC_PO_OUT" targetNamespace="jt:bpm:demo" xmlns:p1="jt:bpm:demo" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:documentation/>
+    <wsp:UsingPolicy wsdl:required="true"/>
+    <wsp:Policy wsu:Id="OP_SI_SRM2ECC_PO_OUT"/>
+    <wsdl:types>
+        <xsd:schema targetNamespace="jt:bpm:demo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="jt:bpm:demo">
+            <xsd:element name="MT_SRM2ECC_PO_REQ" type="DT_SRM2ECC_PO_REQ"/>
+            <xsd:element name="MT_SRM2ECC_PO_RESP" type="DT_SRM2ECC_PO_RESP"/>
+            <xsd:complexType name="DT_SRM2ECC_PO_REQ">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">56ed4f1c4ce411e799710000003df19e</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="EBELN" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">4a7acfedbb9711e6bde1a0a8cd0d1999</xsd:appinfo>
+                            <xsd:documentation>采购订单号</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BUKRS" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f44bbaf0bd1a11e6bcfaa0a8cd0d1999</xsd:appinfo>
+                            <xsd:documentation>公司代码</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="ITEM" minOccurs="0" maxOccurs="unbounded">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">2e585b5ebd1b11e69eaca0a8cd0d1999</xsd:appinfo>
+                            <xsd:documentation>行项目</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element name="POSNR" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:appinfo source="http://sap.com/xi/TextID">bc5509cc4ce411e7bf1b00ffdef5f13a</xsd:appinfo>
+                                        <xsd:documentation>订单行项目</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                                <xsd:element name="MENGE" type="xsd:string" minOccurs="0">
+                                    <xsd:annotation>
+                                        <xsd:appinfo source="http://sap.com/xi/TextID">bc5509cd4ce411e7a42300ffdef5f13a</xsd:appinfo>
+                                        <xsd:documentation>数量</xsd:documentation>
+                                    </xsd:annotation>
+                                </xsd:element>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DT_SRM2ECC_PO_RESP">
+                <xsd:annotation>
+                    <xsd:appinfo source="http://sap.com/xi/VersionID">d720d01b4ce411e78eea0000003df19e</xsd:appinfo>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="EV_TYPE" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">4a7acfedbb9711e6bde1a0a8cd0d1999</xsd:appinfo>
+                            <xsd:documentation>接收状态(S,成功，E,失败)</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="EV_MESSAGE" type="xsd:string" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:appinfo source="http://sap.com/xi/TextID">f44bbaf0bd1a11e6bcfaa0a8cd0d1999</xsd:appinfo>
+                            <xsd:documentation>消息文本</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="MT_SRM2ECC_PO_REQ">
+        <wsdl:documentation/>
+        <wsdl:part name="MT_SRM2ECC_PO_REQ" element="p1:MT_SRM2ECC_PO_REQ"/>
+    </wsdl:message>
+    <wsdl:message name="MT_SRM2ECC_PO_RESP">
+        <wsdl:documentation/>
+        <wsdl:part name="MT_SRM2ECC_PO_RESP" element="p1:MT_SRM2ECC_PO_RESP"/>
+    </wsdl:message>
+    <wsdl:portType name="SI_SRM2ECC_PO_OUT">
+        <wsdl:documentation/>
+        <wsdl:operation name="SI_SRM2ECC_PO_OUT">
+            <wsdl:documentation/>
+            <wsp:Policy>
+                <wsp:PolicyReference URI="#OP_SI_SRM2ECC_PO_OUT"/>
+            </wsp:Policy>
+            <wsdl:input message="p1:MT_SRM2ECC_PO_REQ"/>
+            <wsdl:output message="p1:MT_SRM2ECC_PO_RESP"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SI_SRM2ECC_PO_OUTBinding" type="p1:SI_SRM2ECC_PO_OUT">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        <wsdl:operation name="SI_SRM2ECC_PO_OUT">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            <wsdl:input>
+                <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SI_SRM2ECC_PO_OUTService">
+        <wsdl:port name="HTTP_Port" binding="p1:SI_SRM2ECC_PO_OUTBinding">
+            <soap:address location="http://hqpiadev01.cofco.com:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZTEST&amp;receiverParty=&amp;receiverService=&amp;interface=SI_SRM2ECC_PO_OUT&amp;interfaceNamespace=jt%3Abpm%3Ademo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        </wsdl:port>
+        <wsdl:port name="HTTPS_Port" binding="p1:SI_SRM2ECC_PO_OUTBinding">
+            <soap:address location="https://hqpiadev01.cofco.com:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=ZTEST&amp;receiverParty=&amp;receiverService=&amp;interface=SI_SRM2ECC_PO_OUT&amp;interfaceNamespace=jt%3Abpm%3Ademo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

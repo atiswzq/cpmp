@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN"> <!-- 这个status是控制系统信息的输出级别 -->
+
+	<Properties>
+		<!-- 是否打印所在的行号(对性能影响比较大) -->
+		<property name="enable_log_location">true</property>
+		<!--<property name="default_pattern">-->
+			<!--<![CDATA[-->
+			<!--"%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"-->
+			<!--]]>-->
+		<!--</property>-->
+		<property name="default_pattern">
+		  <![CDATA[[%p][%t][%d{yyyy-MM-dd HH:mm:ss}][%C] - %m%n]]>
+		</property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">  <!-- 将日志信息从控制台输出 -->
+			<PatternLayout pattern="[%p][%d{yyyy-MM-dd HH:mm:ss}][%C] - %m%n" />
+		</Console>
+		<RollingFile name="sys_file" fileName="logs/cpmp_sys.log"
+			filePattern="logs/cpmp_sys.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="busi_file" fileName="logs/cpmp_busi.log"
+			filePattern="logs/cpmp_busi.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="portal_mng" fileName="logs/portal_mng.log"
+					 filePattern="logs/portal_mng.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="bid_online_mng" fileName="logs/bid_online_mng.log"
+					 filePattern="logs/bid_online_mng.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="splr_self_mng" fileName="logs/splr_self_mng.log"
+					 filePattern="logs/splr_self_mng.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="bid_offline_mng" fileName="logs/bid_offline_mng.log"
+					 filePattern="logs/bid_offline_mng.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="splr_mng" fileName="logs/splr_mng.log"
+					 filePattern="logs/splr_mng.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="splr" fileName="logs/splr.log"
+					 filePattern="logs/splr.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+		<RollingFile name="expt_mng" fileName="logs/expt_mng.log"
+					 filePattern="logs/expt_mng.log.%d{yyyy-MM-dd}.gz">
+			<PatternLayout pattern="${default_pattern}" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+			<DefaultRolloverStrategy min="1" max="24" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<logger name="cn.cofco.cpmp.dao" level="TRACE" additivity="false">
+			<AppenderRef ref="Console"/>
+		</logger>
+		<AsyncLogger name="sys" level="info" additivity="false"
+			includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="sys_file" />
+		</AsyncLogger>
+		<AsyncLogger name="busi" level="info" additivity="false"
+			includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="busi_file" />
+		</AsyncLogger>
+		<AsyncLogger name="portal_mng" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="portal_mng" />
+		</AsyncLogger>
+		<AsyncLogger name="bid_online_mng" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="bid_online_mng" />
+		</AsyncLogger>
+		<AsyncLogger name="splr_self_mng" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="splr_self_mng" />
+		</AsyncLogger>
+		<AsyncLogger name="bid_offline_mng" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="bid_offline_mng" />
+		</AsyncLogger>
+		<AsyncLogger name="splr_mng" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="splr_mng" />
+		</AsyncLogger>
+		<AsyncLogger name="splr" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="splr" />
+		</AsyncLogger>
+		<AsyncLogger name="expt_mng" level="debug" additivity="false"
+					 includeLocation="${enable_log_location}">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="expt_mng" />
+		</AsyncLogger>
+
+		<root level="info">
+		</root>
+	</Loggers>
+</Configuration>
